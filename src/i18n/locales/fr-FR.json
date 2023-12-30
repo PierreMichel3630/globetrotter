@@ -1,0 +1,219 @@
+{
+  "appname": "Itinéraire de ma vie",
+  "header": {
+    "account": {
+      "hi": "Bonjour",
+      "parameter": "Mes paramètres",
+      "statistics": "Mes Statistiques",
+      "logout": "Déconnexion"
+    },
+    "login": "Se Connecter"
+  },
+  "commun": {
+    "login": "Se Connecter",
+    "register": "S'Inscrire",
+    "getstarted": "Lancez-vous",
+    "backhome": "Retour Accueil",
+    "welcome": "Bienvenue",
+    "welcomemessage": "Globetrotter est une map interative vous permettant de répertorier tous vos voyages, avoir des statistiques dessus, les partager ou comparer avec vos amis.",
+    "all": "Tous",
+    "addtravel": "Ajouter un voyage",
+    "addcountry": "Ajouter un pays",
+    "validate": "Valider",
+    "cancel": "Annuler",
+    "createdthe": "inscrit depuis le {{value}}",
+    "error": "Oups une erreur est survenue. Veuillez ressayer",
+    "myfriends": "Mes amis",
+    "myrequests": "Mes demandes",
+    "myinvitation": "Mes invitations",
+    "return": "Retour",
+    "timeintravel": "Passés en voyage",
+    "mostvisitedcountries": "Pays les + visités",
+    "countriesvisited": "Pays visités",
+    "countriesnotvisited": "Pays non visités",
+    "year_one": "{{count}} an",
+    "year_other": "{{count}} ans",
+    "month_one": "{{count}} mois",
+    "month_other": "{{count}} mois",
+    "day_one": "{{count}} jour",
+    "day_other": "{{count}} jours",
+    "world": "Monde",
+    "search": "Rechercher",
+    "travel_one": "{{count}} voyage",
+    "travel_other": "{{count}} voyages",
+    "travelcount_zero": "Voyage",
+    "travelcount_one": "{{count}} Voyage",
+    "travelcount_other": "{{count}} Voyages",
+    "flag": "Drapeau",
+    "continent": "Continent",
+    "continentsvisited": "Continents visités",
+    "capital": "Capital",
+    "population": "Population",
+    "area": "Superficie",
+    "currency": "Monnaie",
+    "or": "Ou",
+    "adjacentcountry": "Pays Frontalier",
+    "inshort": "En Bref",
+    "country": "Pays",
+    "countries": "Pays",
+    "areaunite": "km2",
+    "superficyunite": "hab/km2",
+    "travels": "Voyages",
+    "information": "Information",
+    "map": "Carte",
+    "statistics": "Statistique",
+    "timeline": "Timeline",
+    "friends": "Amis",
+    "explore": "Explorer",
+    "back": "Retour",
+    "delete": "Supprimer",
+    "account": "Compte",
+    "logout": "Déconnexion",
+    "settings": "Paramètres",
+    "yourstravels": "Vos Voyages"
+  },
+  "filter": {
+    "travel": "Voyage",
+    "country": "Pays",
+    "all": "Tous"
+  },
+  "continent": {
+    "asia": "Asie",
+    "africa": "Afrique",
+    "northamerica": "Amérique du Nord",
+    "southamerica": "Amérique du Sud",
+    "europe": "Europe",
+    "oceania": "Océanie"
+  },
+  "pages": {
+    "forgotpassword": {
+      "title": "Mot de passe oublié"
+    },
+    "friend": {
+      "title": "Mes Amis"
+    },
+    "friendadd": {
+      "title": "Ajout d'amis"
+    },
+    "friendinvitation": {
+      "title": "Invitation d'amis"
+    },
+    "home": {
+      "title": "Accueil"
+    },
+    "timeline": {
+      "title": "Timeline"
+    },
+    "statistic": {
+      "title": "Statistique"
+    },
+    "menu": {
+      "title": "Menus"
+    },
+    "map": {
+      "title": "Carte"
+    },
+    "explore": {
+      "title": "Explore"
+    },
+    "login": {
+      "title": "Connexion",
+      "hi": "Bienvenue",
+      "credential": "Entrez vos identifiants pour continuer"
+    },
+    "parameters": {
+      "title": "Mes paramètres",
+      "infoemail": "Une confirmation sur l'ancienne et nouvelle adresse mail sera nécessaire. Vérifiez vos spams."
+    },
+    "register": {
+      "title": "Inscription"
+    },
+    "resetpassword": {
+      "title": "Réinitialiser mot de passe"
+    }
+  },
+  "form": {
+    "login": {
+      "email": "Adresse email",
+      "password": "Mot de passe",
+      "rememberme": "Se souvenir de moi",
+      "createaccount": "Créer un compte",
+      "forgotpassword": "Mot de passe oublié ?",
+      "connect": "Se connecter",
+      "connectgoogle": "Se connecter via Google",
+      "connectmail": "Se connecter via adresse mail",
+      "haveaccount": "Vous n'avez pas de compte ?",
+      "requiredpassword": "Veuillez saisir un mot de passe",
+      "requiredmail": "Veuillez saisir une adresse mail",
+      "formatmail": "Veuillez saisir une adresse mail valide",
+      "errorconnect": "L'adresse email ou le mot de passe est erroné"
+    },
+    "register": {
+      "username": "Nom d'utilisateur *",
+      "email": "Adresse email *",
+      "password": "Mot de passe *",
+      "createaccount": "Créer un compte",
+      "createaccountemail": "Créer un compte via adresse mail",
+      "createaccountgoogle": "Créer un compte via Google",
+      "continue": "Continuer",
+      "requiredusername": "Veuillez saisir un nom d'utilisateur",
+      "uniqueusername": "Nom d'utilisateur déjà pris",
+      "requiredpassword": "Veuillez saisir un mot de passe",
+      "minpassword": "Veuillez saisir un mot de passe de plus de 6 caractères",
+      "requiredmail": "Veuillez saisir une adresse mail",
+      "formatmail": "Veuillez saisir une adresse mail valide",
+      "alreadyaccount": "Déjà un compte ?",
+      "connect": "Connectez-vous"
+    },
+    "forgotpassword": {
+      "forgotpassword": "Mot de passe oublié ?",
+      "email": "Adresse email *",
+      "createaccount": "Créer un compte",
+      "continue": "Continuer",
+      "requiredmail": "Veuillez saisir une adresse mail",
+      "formatmail": "Veuillez saisir une adresse mail valide",
+      "modality": "Veuillez saisir l'adresse e-mail utilisée lors de votre inscription. Vous recevrez un e-mail contenant les instructions à suivre pour réinitialiser votre mot de passe.",
+      "connection": "Connexion",
+      "notforget": "Se souvenir de votre mot de passe ?",
+      "successsendmail": "Email envoyé",
+      "limitsendemail": "Veuillez attendre 60s avant de renvoyer un email"
+    },
+    "resetpassword": {
+      "resetpassword": "Réinitialiser votre mot de passe",
+      "password": "Mot de passe *",
+      "confirmpassword": "Confirmation du mot de passe *",
+      "continue": "Continuer",
+      "passwordmatch": "Les mots de passe doivent correspondre",
+      "requiredpassword": "Veuillez saisir un mot de passe",
+      "minpassword": "Veuillez saisir un mot de passe de plus de 6 caractères"
+    },
+    "createtravel": {
+      "title": "Ajouter un voyage",
+      "name": "Nom *",
+      "country": "Pays *",
+      "startdate": "Date de début *",
+      "enddate": "Date de fin *",
+      "requiredname": "Veuillez saisir un nom",
+      "requiredstartdate": "Veuillez saisir une date de début",
+      "requiredenddate": "Veuillez saisir une date de fin",
+      "typeerrordate": "Veuillez saisir une date valide",
+      "typeerrorcountry": "Veuillez sélectionner un pays"
+    }
+  },
+  "information": {
+    "visibilityon": "Votre profil est visible pour tout le monde.",
+    "visibilityoff": "Votre profil est uniquement visible pour vos amis"
+  },
+  "notification": {
+    "FRIENDREQUEST": {
+      "title": "Demande d'amis",
+      "text": "{{username}} vous demande en amis"
+    }
+  },
+  "unauthorized": {
+    "profile": "Vous devez être ami avec la personne pour accéder à son profil."
+  },
+  "alert": {
+    "notravelcountry": "Aucun voyage pour ce pays."
+  }
+}
