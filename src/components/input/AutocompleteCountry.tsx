@@ -7,14 +7,16 @@ import { sortByName } from "src/utils/sort";
 
 interface Props {
   error?: string;
-  label: string;
+  label?: string;
+  placeholder?: string;
   value: Country | null;
   onChange: (value: Country | null) => void;
-  onBlur: () => void;
+  onBlur?: () => void;
 }
 export const AutocompleteCountry = ({
   error,
   label,
+  placeholder,
   value,
   onChange,
   onBlur,
@@ -59,7 +61,8 @@ export const AutocompleteCountry = ({
       renderInput={(params) => (
         <TextField
           {...params}
-          label={label}
+          label={label ?? ""}
+          placeholder={placeholder ?? ""}
           inputProps={{
             ...params.inputProps,
             autoComplete: "new-password",

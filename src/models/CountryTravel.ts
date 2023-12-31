@@ -24,4 +24,6 @@ export interface CountryTravelUpdate {
   id: number;
   country: number;
   travel: number;
+  startdate: Date | null;
+  enddate: Date | null;
 }

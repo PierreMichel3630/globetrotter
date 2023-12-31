@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { important, px } from "csx";
+import { Link } from "react-router-dom";
 
 import rank1 from "src/assets/rank/rank1.png";
 import rank2 from "src/assets/rank/rank2.png";
@@ -63,6 +64,7 @@ interface PropsArray {
     icon: string;
     label: string;
     value: string | number;
+    to?: string;
   }>;
 }
 
@@ -114,7 +116,7 @@ export const CardRecapArray = ({ title, values }: PropsArray) => {
         <Grid item xs={12}>
           <List dense>
             {values.map((el, index) => (
-              <ListItem key={index} disablePadding>
+              <ListItem key={index} disablePadding component={Link} to={el.to}>
                 <ListItemIcon>{getIcon(index)}</ListItemIcon>
                 <ListItemIcon>
                   <Avatar alt="flag" src={el.icon} />

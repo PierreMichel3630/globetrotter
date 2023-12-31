@@ -19,7 +19,6 @@ interface PropsVisited {
 
 export const CardCountryVisited = ({ country }: PropsVisited) => {
   const { t } = useTranslation();
-  const { selectCountry } = useApp();
   return (
     <Paper
       sx={{
@@ -30,7 +29,8 @@ export const CardCountryVisited = ({ country }: PropsVisited) => {
         alignItems: "flex-end",
         cursor: "pointer",
       }}
-      onClick={() => selectCountry(country)}
+      component={Link}
+      to={`?country=${country.id}`}
     >
       <Grid container spacing={1}>
         <Grid item sx={{ display: "flex", justifyContent: "center" }}>
@@ -98,7 +98,7 @@ export const CardCountryAdjacent = ({ country }: PropsAdj) => {
             src={country.flag}
             style={{
               maxWidth: percent(100),
-              maxHeight: px(80),
+              maxHeight: px(60),
             }}
           />
         </Grid>

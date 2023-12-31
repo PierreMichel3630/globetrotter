@@ -13,28 +13,17 @@ type Props = {
 
 const AppContext = createContext<{
   continents: Array<Continent>;
-  continent: Continent | null;
-  selectContinent: (value: Continent | null) => void;
   countries: Array<Country>;
-  country: Country | null;
   countriesVisited: Array<CountryVisited>;
-  selectCountry: (value: Country | null) => void;
   travels: Array<Travel>;
-  travel: Travel | null;
-  selectTravel: (value: Travel | null) => void;
-  addTravel: () => void;
+  refreshTravel: () => void;
 }>({
   continents: [],
   continent: null,
-  selectContinent: (value: Continent | null) => {},
   countries: [],
-  country: null,
   countriesVisited: [],
-  selectCountry: (value: Country | null) => {},
   travels: [],
-  travel: null,
-  selectTravel: (value: Travel | null) => {},
-  addTravel: () => {},
+  refreshTravel: () => {},
 });
 
 export const useApp = () => useContext(AppContext);
@@ -42,11 +31,8 @@ export const useApp = () => useContext(AppContext);
 export const AppProvider = ({ children }: Props) => {
   const { user } = useAuth();
   const [continents, setContinents] = useState<Array<Continent>>([]);
-  const [continent, setContinent] = useState<Continent | null>(null);
   const [countries, setCountries] = useState<Array<Country>>([]);
-  const [country, setCountry] = useState<Country | null>(null);
   const [travels, setTravels] = useState<Array<Travel>>([]);
-  const [travel, setTravel] = useState<Travel | null>(null);
   const [countriesVisited, setCountriesVisited] = useState<
     Array<CountryVisited>
   >([]);
@@ -86,7 +72,7 @@ export const AppProvider = ({ children }: Props) => {
     });
   };
 
-  const addTravel = () => {
+  const refreshTravel = () => {
     getTravels();
   };
 
@@ -108,41 +94,14 @@ export const AppProvider = ({ children }: Props) => {
     getTravels();
   }, [user]);
 
-  useEffect(() => {
-    if (country) {
-      setContinent(null);
-      setTravel(null);
-    }
-  }, [country]);
-
-  useEffect(() => {
-    if (continent) {
-      setCountry(null);
-      setTravel(null);
-    }
-  }, [continent]);
-
-  useEffect(() => {
-    if (travel) {
-      setCountry(null);
-      setContinent(null);
-    }
-  }, [travel]);
-
   return (
     <AppContext.Provider
       value={{
         continents,
-        continent,
-        selectContinent: setContinent,
         countries,
-        country,
         countriesVisited,
-        selectCountry: setCountry,
         travels,
-        travel,
-        selectTravel: setTravel,
-        addTravel,
+        refreshTravel,
       }}
     >
       {children}

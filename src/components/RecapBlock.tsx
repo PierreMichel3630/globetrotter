@@ -58,6 +58,7 @@ export const RecapBlock = () => {
           timeLabel.day > 0 ? t("commun.day", { count: timeLabel.day }) : ""
         }`,
         number: time,
+        to: `/country/${country.id}`,
       };
     })
     .sort(sortByNumber);

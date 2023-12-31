@@ -9,29 +9,40 @@ import {
 } from "@mui/material";
 import { DateField } from "@mui/x-date-pickers";
 import { useFormik } from "formik";
+import moment, { Moment } from "moment";
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { insertCountryTravel, insertTravel } from "src/api/globetrotter";
+import {
+  insertCountryTravel,
+  insertTravel,
+  updateCountryTravel,
+  updateTravel,
+} from "src/api/globetrotter";
 import { MessageSnackbar } from "src/components/Snackbar";
 import { AutocompleteCountry } from "src/components/input/AutocompleteCountry";
 import { useApp } from "src/context/AppProvider";
-import { CountryTravelInsert } from "src/models/CountryTravel";
-import { TravelInsert } from "src/models/Travel";
+import {
+  CountryTravelInsert,
+  CountryTravelUpdate,
+} from "src/models/CountryTravel";
+import { Travel, TravelInsert, TravelUpdate } from "src/models/Travel";
 import { Country } from "src/models/country/Country";
 import * as Yup from "yup";
 
 interface CountryTravelForm {
+  id?: number;
   country: Country | null;
-  startdate: Date | null;
-  enddate: Date | null;
+  startdate: Moment | null;
+  enddate: Moment | null;
 }
 
 interface Props {
   onValid: () => void;
+  travel?: Travel;
 }
-export const TravelForm = ({ onValid }: Props) => {
+export const TravelForm = ({ travel, onValid }: Props) => {
   const { t } = useTranslation();
-  const { addTravel } = useApp();
+  const { refreshTravel, countries } = useApp();
 
   const [message, setMessage] = useState("");
 
@@ -39,23 +50,33 @@ export const TravelForm = ({ onValid }: Props) => {
     name: string;
     countries: Array<CountryTravelForm>;
   } = {
-    name: "",
-    countries: [{ country: null, startdate: null, enddate: null }],
+    name: travel ? travel.name : "",
+    countries: travel
+      ? travel.countries.map((el) => {
+          const country = countries.find((c) => c.id === el.country);
+          return {
+            id: el.id,
+            country: country ?? null,
+            startdate: moment(el.startdate),
+            enddate: moment(el.enddate),
+          };
+        })
+      : [{ country: null, startdate: null, enddate: null }],
   };
 
   const validationSchema = Yup.object().shape({
-    name: Yup.mixed().required(t("form.createtravel.requiredname")),
+    name: Yup.mixed().required(t("form.createmodifytravel.requiredname")),
     countries: Yup.array().of(
       Yup.object().shape({
         country: Yup.mixed()
-          .required(t("form.createtravel.typeerrorcountry"))
-          .typeError(t("form.createtravel.typeerrorcountry")),
+          .required(t("form.createmodifytravel.typeerrorcountry"))
+          .typeError(t("form.createmodifytravel.typeerrorcountry")),
         startdate: Yup.date()
-          .required(t("form.createtravel.requiredstartdate"))
-          .typeError(t("form.createtravel.typeerrordate")),
+          .required(t("form.createmodifytravel.requiredstartdate"))
+          .typeError(t("form.createmodifytravel.typeerrordate")),
         enddate: Yup.date()
-          .required(t("form.createtravel.requiredenddate"))
-          .typeError(t("form.createtravel.typeerrordate")),
+          .required(t("form.createmodifytravel.requiredenddate"))
+          .typeError(t("form.createmodifytravel.typeerrordate")),
       })
     ),
   });
@@ -65,31 +86,81 @@ export const TravelForm = ({ onValid }: Props) => {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       try {
-        const travelInsert: TravelInsert = {
-          name: values.name,
-          enddate: null,
-          startdate: null,
-        };
-        insertTravel(travelInsert).then((res) => {
-          const travel = res.data;
-          if (travel !== null) {
-            const promises = values.countries.map((country) => {
-              const countryInsert: CountryTravelInsert = {
-                country: country.country!.id,
-                travel: travel.id,
-                startdate: country.startdate,
-                enddate: country.enddate,
-              };
-              return insertCountryTravel(countryInsert);
-            });
-            Promise.all(promises).then(() => {
-              addTravel();
-              onValid();
-            });
-          } else {
-            setMessage(t("commun.error"));
-          }
-        });
+        if (travel) {
+          console.log(values);
+          const travelUpdate: TravelUpdate = {
+            id: travel.id,
+            name: values.name,
+            enddate: null,
+            startdate: null,
+          };
+
+          updateTravel(travelUpdate).then((res) => {
+            const travel = res.data;
+            console.log(travel);
+            if (travel !== null) {
+              console.log(values.countries);
+              const promises = values.countries.map((country) => {
+                if (country.id) {
+                  const countryUpdate: CountryTravelUpdate = {
+                    id: country.id,
+                    country: country.country!.id,
+                    travel: travel.id,
+                    startdate: country.startdate
+                      ? country.startdate.toDate()
+                      : null,
+                    enddate: country.enddate ? country.enddate.toDate() : null,
+                  };
+                  return updateCountryTravel(countryUpdate);
+                } else {
+                  const countryInsert: CountryTravelInsert = {
+                    country: country.country!.id,
+                    travel: travel.id,
+                    startdate: country.startdate
+                      ? country.startdate.toDate()
+                      : null,
+                    enddate: country.enddate ? country.enddate.toDate() : null,
+                  };
+                  return insertCountryTravel(countryInsert);
+                }
+              });
+              Promise.all(promises).then(() => {
+                refreshTravel();
+                onValid();
+              });
+            } else {
+              setMessage(t("commun.error"));
+            }
+          });
+        } else {
+          const travelInsert: TravelInsert = {
+            name: values.name,
+            enddate: null,
+            startdate: null,
+          };
+          insertTravel(travelInsert).then((res) => {
+            const travel = res.data;
+            if (travel !== null) {
+              const promises = values.countries.map((country) => {
+                const countryInsert: CountryTravelInsert = {
+                  country: country.country!.id,
+                  travel: travel.id,
+                  startdate: country.startdate
+                    ? country.startdate.toDate()
+                    : null,
+                  enddate: country.enddate ? country.enddate.toDate() : null,
+                };
+                return insertCountryTravel(countryInsert);
+              });
+              Promise.all(promises).then(() => {
+                refreshTravel();
+                onValid();
+              });
+            } else {
+              setMessage(t("commun.error"));
+            }
+          });
+        }
       } catch (err) {
         setMessage(t("commun.error"));
       }
@@ -105,7 +176,7 @@ export const TravelForm = ({ onValid }: Props) => {
             error={Boolean(formik.touched.name && formik.errors.name)}
           >
             <InputLabel htmlFor="name-input">
-              {t("form.createtravel.name")}
+              {t("form.createmodifytravel.name")}
             </InputLabel>
             <OutlinedInput
               id="name-input"
@@ -114,7 +185,7 @@ export const TravelForm = ({ onValid }: Props) => {
               name="name"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              label={t("form.createtravel.name")}
+              label={t("form.createmodifytravel.name")}
               inputProps={{}}
             />
             {formik.touched.name && formik.errors.name && (
@@ -161,7 +232,7 @@ export const TravelForm = ({ onValid }: Props) => {
               )}
               <Grid item xs={12}>
                 <AutocompleteCountry
-                  label={t("form.createtravel.country")}
+                  label={t("form.createmodifytravel.country")}
                   value={country.country}
                   onChange={(value) => {
                     formik.setFieldValue(
@@ -178,7 +249,7 @@ export const TravelForm = ({ onValid }: Props) => {
               </Grid>
               <Grid item xs={12}>
                 <DateField
-                  label={t("form.createtravel.startdate")}
+                  label={t("form.createmodifytravel.startdate")}
                   value={country.startdate}
                   onChange={(value) => {
                     formik.setFieldValue(
@@ -203,7 +274,7 @@ export const TravelForm = ({ onValid }: Props) => {
               </Grid>
               <Grid item xs={12}>
                 <DateField
-                  label={t("form.createtravel.enddate")}
+                  label={t("form.createmodifytravel.enddate")}
                   value={country.enddate}
                   onChange={(value) => {
                     formik.setFieldValue(`countries[${index}].enddate`, value);

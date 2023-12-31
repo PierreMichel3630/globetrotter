@@ -9,7 +9,7 @@ import { CardTravel } from "./card/CardTravel";
 import { CreateTravelModal } from "./modal/CreateTravelModal";
 
 import FlightIcon from "@mui/icons-material/Flight";
-import { sortByName, sortByStartDate } from "src/utils/sort";
+import { sortByName, sortTravelByDate } from "src/utils/sort";
 
 export const DefaultBlock = () => {
   const { t } = useTranslation();
@@ -69,7 +69,7 @@ export const DefaultBlock = () => {
         </Grid>
         {tab === 0 ? (
           <>
-            {[...travels].sort(sortByStartDate).map((travel) => (
+            {[...travels].sort(sortTravelByDate).map((travel) => (
               <Grid item xs={12} key={travel.id}>
                 <CardTravel travel={travel} />
               </Grid>

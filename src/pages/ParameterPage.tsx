@@ -1,10 +1,9 @@
 import {
   Alert,
   AlertColor,
+  Box,
   Button,
-  Container,
   Grid,
-  Tooltip,
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -13,23 +12,25 @@ import { BaseInput } from "src/components/Input";
 import { useAuth } from "src/context/AuthProviderSupabase";
 
 import DoneIcon from "@mui/icons-material/Done";
-import { updateProfil } from "src/api/supabase/profile";
-import { MessageSnackbar } from "src/components/Snackbar";
-import { Profile } from "src/models/Profile";
-import { updateUser } from "src/api/supabase/user";
-import { AvatarSelector } from "src/components/avatar/AvatarSelector";
-import { VisibilityAccountSwitch } from "src/components/Switch";
-import HelpIcon from "@mui/icons-material/Help";
 import { Helmet } from "react-helmet-async";
+import { updateProfil } from "src/api/supabase/profile";
+import { updateUser } from "src/api/supabase/user";
+import { MessageSnackbar } from "src/components/Snackbar";
+import { AvatarSelector } from "src/components/avatar/AvatarSelector";
+import { Profile } from "src/models/Profile";
+import { AutocompleteCountry } from "src/components/input/AutocompleteCountry";
+import { Country } from "src/models/country/Country";
+import { useApp } from "src/context/AppProvider";
 
 export const ParameterPage = () => {
   const { t } = useTranslation();
+  const { countries } = useApp();
   const { user, profile, setProfile } = useAuth();
   const [username, setUsername] = useState("");
+  const [originCountry, setOriginCountry] = useState<Country | null>(null);
   const [email, setEmail] = useState("");
   const [isEmailChange, setIsEmailChange] = useState(false);
   const [avatar, setAvatar] = useState<string | null>(null);
-  const [isPublic, setIsPublic] = useState(false);
 
   const [message, setMessage] = useState("");
   const [severity, setSeverity] = useState<AlertColor>("error");
@@ -37,6 +38,8 @@ export const ParameterPage = () => {
   useEffect(() => {
     if (profile) {
       setUsername(profile.username);
+      const country = countries.find((el) => el.id === profile.country);
+      setOriginCountry(country ?? null);
     }
   }, [profile]);
 
@@ -84,7 +87,6 @@ export const ParameterPage = () => {
   useEffect(() => {
     if (profile) {
       setAvatar(profile.avatar);
-      setIsPublic(profile.ispublic);
     }
   }, [profile]);
 
@@ -106,19 +108,17 @@ export const ParameterPage = () => {
     }
   };
 
-  const changeVisibility = async (value: boolean) => {
+  const changeOriginCountry = async (value: Country | null) => {
     if (user) {
-      const newProfil = { id: user.id, ispublic: value };
+      const newProfil = { id: user.id, country: value ? value.id : null };
       const { data, error } = await updateProfil(newProfil);
       if (error) {
         setSeverity("error");
         setMessage(t("commun.error"));
       } else {
-        setIsPublic(value);
         setSeverity("success");
-        setMessage(t("alert.updatevisibilitysuccess"));
+        setMessage(t("alert.updatecountrysuccess"));
         setProfile(data as Profile);
-        setIsPublic(value);
       }
     } else {
       setSeverity("error");
@@ -127,7 +127,7 @@ export const ParameterPage = () => {
   };
 
   return (
-    <Container maxWidth="md">
+    <Box sx={{ p: 2 }}>
       <Helmet>
         <title>{`${t("pages.parameters.title")} - ${t("appname")}`}</title>
       </Helmet>
@@ -153,7 +153,6 @@ export const ParameterPage = () => {
                 startIcon={<DoneIcon />}
                 fullWidth
                 onClick={() => changeUsername()}
-                color="secondary"
                 size="small"
               >
                 {t("commun.validate")}
@@ -182,7 +181,6 @@ export const ParameterPage = () => {
                 startIcon={<DoneIcon />}
                 fullWidth
                 onClick={() => changeEmail()}
-                color="secondary"
                 size="small"
               >
                 {t("commun.validate")}
@@ -207,29 +205,16 @@ export const ParameterPage = () => {
         </Grid>
         <Grid item xs={12}>
           <Grid container spacing={1} alignItems="center">
-            <Grid
-              item
-              xs={12}
-              md={6}
-              sx={{ display: "flex", alignItems: "center", gap: 2 }}
-            >
-              <Typography variant="h4">
-                {t("commun.visibiliteaccount")}
-              </Typography>
-              <Tooltip
-                title={
-                  isPublic
-                    ? t("information.visibilityon")
-                    : t("information.visibilityoff")
-                }
-              >
-                <HelpIcon sx={{ width: 20, height: 20, cursor: "pointer" }} />
-              </Tooltip>
+            <Grid item xs={12} md={4}>
+              <Typography variant="h4">{t("commun.origincountry")}</Typography>
             </Grid>
-            <Grid item xs={12} md={6}>
-              <VisibilityAccountSwitch
-                value={isPublic}
-                onChange={changeVisibility}
+            <Grid item xs={12} md={8}>
+              <AutocompleteCountry
+                placeholder={t("pages.parameters.selectorigincountry")}
+                value={originCountry}
+                onChange={(value) => {
+                  changeOriginCountry(value);
+                }}
               />
             </Grid>
           </Grid>
@@ -242,6 +227,6 @@ export const ParameterPage = () => {
         message={message}
         severity={severity}
       />
-    </Container>
+    </Box>
   );
 };

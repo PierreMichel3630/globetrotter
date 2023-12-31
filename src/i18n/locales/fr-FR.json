@@ -26,7 +26,11 @@
     "myfriends": "Mes amis",
     "myrequests": "Mes demandes",
     "myinvitation": "Mes invitations",
+    "email": "Adresse email",
+    "avatar": "Avatar",
     "return": "Retour",
+    "myparameters": "Mes Paramètres",
+    "username": "Nom d'utilisateur",
     "timeintravel": "Passés en voyage",
     "mostvisitedcountries": "Pays les + visités",
     "countriesvisited": "Pays visités",
@@ -70,7 +74,11 @@
     "account": "Compte",
     "logout": "Déconnexion",
     "settings": "Paramètres",
-    "yourstravels": "Vos Voyages"
+    "yourstravels": "Vos Voyages",
+    "origincountry": "Pays d'origine",
+    "modify": "Modifier",
+    "yes": "Oui",
+    "no": "Non"
   },
   "filter": {
     "travel": "Voyage",
@@ -123,6 +131,7 @@
     },
     "parameters": {
       "title": "Mes paramètres",
+      "selectorigincountry": "Sélectionner un pays d'origine",
       "infoemail": "Une confirmation sur l'ancienne et nouvelle adresse mail sera nécessaire. Vérifiez vos spams."
     },
     "register": {
@@ -187,8 +196,9 @@
       "requiredpassword": "Veuillez saisir un mot de passe",
       "minpassword": "Veuillez saisir un mot de passe de plus de 6 caractères"
     },
-    "createtravel": {
-      "title": "Ajouter un voyage",
+    "createmodifytravel": {
+      "titlecreate": "Ajouter un voyage",
+      "titlemodify": "Modifier un voyage",
       "name": "Nom *",
       "country": "Pays *",
       "startdate": "Date de début *",
@@ -214,6 +224,17 @@
     "profile": "Vous devez être ami avec la personne pour accéder à son profil."
   },
   "alert": {
-    "notravelcountry": "Aucun voyage pour ce pays."
+    "notravelcountry": "Aucun voyage pour ce pays.",
+    "updateavatarsuccess": "Votre modification d'avatar à été pris en compte.",
+    "updatecountrysuccess": "Votre modification de pays à été pris en compte.",
+    "updatevisibilitysuccess": "Votre modification à été pris en compte.",
+    "updateusernamesuccess": "Votre modification de nom d'utilisateur à été pris en compte.",
+    "sendfriendrequest": "Votre demande d'ami a été envoyé.",
+    "validatefriendrequest": "Demande d'ami validée.",
+    "refusefriendrequest": "Demande d'ami refusée.",
+    "updateemailsuccess": "Votre modification d'addresse mail est en cours. Veuillez confirmer sur votre ancien et nouveau email."
+  },
+  "modal": {
+    "deletemessage": "Êtes-vous sûr de voir supprimer {{name}} ?"
   }
 }

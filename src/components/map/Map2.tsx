@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import { percent } from "csx";
 import { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   ComposableMap,
   Geographies,
@@ -10,6 +11,7 @@ import {
 } from "react-simple-maps";
 import mapJson from "src/assets/map/countries-110m.json";
 import { useApp } from "src/context/AppProvider";
+import { useAuth } from "src/context/AuthProviderSupabase";
 import { Colors } from "src/style/Colors";
 
 interface Position {
@@ -17,18 +19,26 @@ interface Position {
   zoom: number;
 }
 export const Map2 = () => {
-  const {
-    travel,
-    country,
-    countries,
-    continent,
-    selectCountry,
-    countriesVisited,
-  } = useApp();
+  const { countries, travels, continents, countriesVisited } = useApp();
+  const { profile } = useAuth();
+  const navigate = useNavigate();
   const [position, setPosition] = useState<Position>({
     coordinates: [0, 28],
     zoom: 1,
   });
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const travel = searchParams.has("travel")
+    ? travels.find((el) => el.id === Number(searchParams.get("travel")))
+    : undefined;
+
+  const country = searchParams.has("country")
+    ? countries.find((el) => el.id === Number(searchParams.get("country")))
+    : undefined;
+
+  const continent = searchParams.has("continent")
+    ? continents.find((el) => el.id === Number(searchParams.get("continent")))
+    : undefined;
 
   useEffect(() => {
     if (continent) {
@@ -56,12 +66,16 @@ export const Map2 = () => {
   const handleGeographyClick = (geography: { id: number }) => {
     const country = countries.find((el) => el.ccn3 === geography.id);
     //  const centroid = projection.invert(path.centroid(geography));
-    selectCountry(country ?? null);
+    if (country) navigate(`?country=${country.id}`);
   };
 
   const handleMoveEnd = (position: Position) => {
     setPosition(position);
   };
+  const originCountry =
+    profile && profile.country
+      ? countries.find((el) => el.id === profile.country)
+      : undefined;
   const idCountries = countriesVisited.map((el) => el.ccn3);
   let idCountriesSelect: Array<number> = [];
   if (travel) {
@@ -102,20 +116,25 @@ export const Map2 = () => {
           <Geographies geography={mapJson}>
             {({ geographies }) => {
               return geographies.map((geo) => {
+                const isOriginCountry =
+                  originCountry && originCountry.ccn3 === geo.id;
                 const isVisit = idCountries.includes(geo.id);
                 const isSelect = idCountriesSelect.includes(geo.id);
+                let color: string = Colors.grey;
+                if (isSelect) {
+                  color = Colors.red;
+                } else if (isOriginCountry) {
+                  color = Colors.blue;
+                } else if (isVisit) {
+                  color = Colors.green;
+                }
+
                 return (
                   <Geography
                     onClick={() => handleGeographyClick(geo)}
                     key={geo.rsmKey}
                     geography={geo}
-                    fill={
-                      isSelect
-                        ? Colors.red
-                        : isVisit
-                        ? Colors.green
-                        : Colors.grey
-                    }
+                    fill={color}
                   />
                 );
               });

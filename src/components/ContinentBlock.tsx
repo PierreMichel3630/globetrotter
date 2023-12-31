@@ -1,12 +1,14 @@
 import { Box, Chip, Divider, Grid, Typography } from "@mui/material";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import { useApp } from "src/context/AppProvider";
+import { Continent } from "src/models/country/Continent";
 import { Colors } from "src/style/Colors";
+import { sortByName } from "src/utils/sort";
 import { formatNumber } from "src/utils/string";
 import { Carrousel } from "./Carrousel";
 import { CardCountryAdjacent } from "./card/CardCountry";
-import { Continent } from "src/models/country/Continent";
-import { useState } from "react";
 
 interface Props {
   continent: Continent;
@@ -14,7 +16,7 @@ interface Props {
 
 export const ContinentBlock = ({ continent }: Props) => {
   const { t } = useTranslation();
-  const { countriesVisited, countries, selectCountry } = useApp();
+  const { countriesVisited, countries } = useApp();
   const [filter, setFilter] = useState({
     all: true,
     visited: false,
@@ -188,15 +190,11 @@ export const ContinentBlock = ({ continent }: Props) => {
                 }
               />
             </Grid>
-            {countriesFilter.map((el) => (
-              <Grid
-                item
-                xs={4}
-                key={el.id}
-                sx={{ cursor: "pointer" }}
-                onClick={() => selectCountry(el)}
-              >
-                <CardCountryAdjacent country={el} />
+            {countriesFilter.sort(sortByName).map((el) => (
+              <Grid item xs={4} key={el.id}>
+                <Link to={`?country=${el.id}`}>
+                  <CardCountryAdjacent country={el} />
+                </Link>
               </Grid>
             ))}
           </Grid>

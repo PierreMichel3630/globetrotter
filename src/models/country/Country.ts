@@ -12,6 +12,7 @@ export interface Country {
   description: JsonLanguage;
   independent: boolean;
   ccn3: number;
+  cca3: string;
   position: [number, number];
   area: number;
   population: number;

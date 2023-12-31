@@ -16,19 +16,26 @@ import { useApp } from "src/context/AppProvider";
 import { sortByName } from "src/utils/sort";
 import { Helmet } from "react-helmet-async";
 import { Colors } from "src/style/Colors";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 export const MapPage = () => {
   const { t } = useTranslation();
-  const {
-    travel,
-    selectTravel,
-    country,
-    continents,
-    selectCountry,
-    continent,
-    selectContinent,
-  } = useApp();
+  const navigate = useNavigate();
+  const { travels, continents, countries } = useApp();
   const [inputValue, setInputValue] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const travel = searchParams.has("travel")
+    ? travels.find((el) => el.id === Number(searchParams.get("travel")))
+    : undefined;
+
+  const country = searchParams.has("country")
+    ? countries.find((el) => el.id === Number(searchParams.get("country")))
+    : undefined;
+
+  const continent = searchParams.has("continent")
+    ? continents.find((el) => el.id === Number(searchParams.get("continent")))
+    : undefined;
 
   useEffect(() => {
     const label = country
@@ -76,9 +83,7 @@ export const MapPage = () => {
                   sx={{ cursor: "pointer" }}
                   onClick={() => {
                     setInputValue("");
-                    selectCountry(null);
-                    selectContinent(null);
-                    selectTravel(null);
+                    navigate("/map");
                   }}
                 />
               )}
@@ -95,9 +100,7 @@ export const MapPage = () => {
                   sx={{ cursor: "pointer" }}
                   onClick={() => {
                     setInputValue("");
-                    selectCountry(null);
-                    selectContinent(null);
-                    selectTravel(null);
+                    navigate("/map");
                   }}
                 />
               )}
@@ -112,9 +115,9 @@ export const MapPage = () => {
                       <Chip
                         size="small"
                         label={continent.name.fra}
-                        onClick={() => {
-                          selectContinent(continent);
-                        }}
+                        component={Link}
+                        to={`?continent=${continent.id}`}
+                        sx={{ cursor: "pointer" }}
                       />
                     </Grid>
                   ))}

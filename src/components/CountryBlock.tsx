@@ -6,6 +6,7 @@ import { useApp } from "src/context/AppProvider";
 import { CountryTravel } from "src/models/CountryTravel";
 import { Country } from "src/models/country/Country";
 import { Colors } from "src/style/Colors";
+import { sortByName } from "src/utils/sort";
 import { formatNumber } from "src/utils/string";
 import { Carrousel } from "./Carrousel";
 import { LabelDiffArrayDate } from "./LabelDiffDate";
@@ -19,12 +20,7 @@ interface Props {
 
 export const CountryBlock = ({ country, isExplore = true }: Props) => {
   const { t } = useTranslation();
-  const { travels, countries, selectCountry } = useApp();
-
-  const onSelect = (code: number) => {
-    const country = countries.find((el) => el.ccn3 === code);
-    selectCountry(country ?? null);
-  };
+  const { travels } = useApp();
 
   const travelsCountry = travels.filter((travel) =>
     travel.countries.map((el) => el.country).includes(country.id)
@@ -232,25 +228,15 @@ export const CountryBlock = ({ country, isExplore = true }: Props) => {
                 {country.adjacentcountries.length})
               </Typography>
             </Grid>
-            {country.adjacentcountries.map((el) =>
-              isExplore ? (
-                <Grid item xs={4} key={el.id} sx={{ cursor: "pointer" }}>
-                  <Link to={`/country/${el.id}`}>
-                    <CardCountryAdjacent country={el} />
-                  </Link>
-                </Grid>
-              ) : (
-                <Grid
-                  item
-                  xs={4}
-                  key={el.id}
-                  sx={{ cursor: "pointer" }}
-                  onClick={() => onSelect(el.ccn3)}
+            {country.adjacentcountries.sort(sortByName).map((el) => (
+              <Grid item xs={6} key={el.id} sx={{ cursor: "pointer" }}>
+                <Link
+                  to={isExplore ? `/country/${el.id}` : `?country=${el.id}`}
                 >
                   <CardCountryAdjacent country={el} />
-                </Grid>
-              )
-            )}
+                </Link>
+              </Grid>
+            ))}
           </Grid>
         </Box>
       </Grid>
