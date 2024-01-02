@@ -19,7 +19,7 @@ interface Props {
 export const ListCountries = ({ value }: Props) => {
   const { countries } = useApp();
   return (
-    <List dense>
+    <List dense sx={{ p: 0 }}>
       {value.sort(sortByStartDateDesc).map((el, index) => {
         const country = countries.find((c) => c.id === el.country);
         const start = moment(el.startdate);

@@ -14,6 +14,7 @@ import { deleteTravelById } from "src/api/globetrotter";
 import { MessageSnackbar } from "./Snackbar";
 import { CreateTravelModal } from "./modal/CreateTravelModal";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "src/context/AuthProviderSupabase";
 
 interface Props {
   travel: Travel;
@@ -22,6 +23,7 @@ interface Props {
 export const TravelBlock = ({ travel }: Props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { user } = useAuth();
   const { refreshTravel } = useApp();
 
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
@@ -73,33 +75,35 @@ export const TravelBlock = ({ travel }: Props) => {
               <Typography variant="h4">
                 {t("commun.countriesvisited")} ({travel.countries.length})
               </Typography>
-            </Grid>
-            <Grid item xs={12}>
               <ListCountries value={travel.countries} />
             </Grid>
-            <Grid item xs={12}>
-              <Button
-                variant="contained"
-                startIcon={<EditIcon />}
-                fullWidth
-                onClick={() => setOpenModifyModal(true)}
-                size="small"
-              >
-                {t("commun.modify")}
-              </Button>
-            </Grid>
-            <Grid item xs={12}>
-              <Button
-                variant="contained"
-                startIcon={<DeleteIcon />}
-                fullWidth
-                color="error"
-                size="small"
-                onClick={() => setOpenConfirmModal(true)}
-              >
-                {t("commun.delete")}
-              </Button>
-            </Grid>
+            {user && travel.useruuid === user.id && (
+              <>
+                <Grid item xs={12}>
+                  <Button
+                    variant="contained"
+                    startIcon={<EditIcon />}
+                    fullWidth
+                    onClick={() => setOpenModifyModal(true)}
+                    size="small"
+                  >
+                    {t("commun.modify")}
+                  </Button>
+                </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    variant="contained"
+                    startIcon={<DeleteIcon />}
+                    fullWidth
+                    color="error"
+                    size="small"
+                    onClick={() => setOpenConfirmModal(true)}
+                  >
+                    {t("commun.delete")}
+                  </Button>
+                </Grid>
+              </>
+            )}
           </Grid>
         </Paper>
       </Grid>

@@ -12,24 +12,31 @@ import {
 import mapJson from "src/assets/map/countries-110m.json";
 import { useApp } from "src/context/AppProvider";
 import { useAuth } from "src/context/AuthProviderSupabase";
+import { CountryVisited } from "src/models/country/Country";
 import { Colors } from "src/style/Colors";
 
 interface Position {
   coordinates: Point;
   zoom: number;
 }
-export const Map2 = () => {
-  const { countries, travels, continents, countriesVisited } = useApp();
+
+interface Props {
+  countriesVisited: Array<CountryVisited>;
+  countriesVisitedFriends: Array<CountryVisited>;
+}
+export const Map = ({ countriesVisited, countriesVisitedFriends }: Props) => {
+  const { countries, travels, travelsFriends, continents } = useApp();
   const { profile } = useAuth();
   const navigate = useNavigate();
   const [position, setPosition] = useState<Position>({
     coordinates: [0, 28],
     zoom: 1,
   });
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
+  const allTravels = [...travels, ...travelsFriends];
   const travel = searchParams.has("travel")
-    ? travels.find((el) => el.id === Number(searchParams.get("travel")))
+    ? allTravels.find((el) => el.id === Number(searchParams.get("travel")))
     : undefined;
 
   const country = searchParams.has("country")
@@ -77,6 +84,7 @@ export const Map2 = () => {
       ? countries.find((el) => el.id === profile.country)
       : undefined;
   const idCountries = countriesVisited.map((el) => el.ccn3);
+  const idCountriesFriends = countriesVisitedFriends.map((el) => el.ccn3);
   let idCountriesSelect: Array<number> = [];
   if (travel) {
     const ids = travel.countries.map((el) => el.country);
@@ -103,7 +111,7 @@ export const Map2 = () => {
           height: percent(100),
           width: percent(100),
         }}
-        fill="black"
+        fill="transparent"
         stroke="white"
         strokeWidth={1}
       >
@@ -119,22 +127,37 @@ export const Map2 = () => {
                 const isOriginCountry =
                   originCountry && originCountry.ccn3 === geo.id;
                 const isVisit = idCountries.includes(geo.id);
+                const isVisitFriends = idCountriesFriends.includes(geo.id);
                 const isSelect = idCountriesSelect.includes(geo.id);
                 let color: string = Colors.grey;
                 if (isSelect) {
                   color = Colors.red;
                 } else if (isOriginCountry) {
                   color = Colors.blue;
+                } else if (isVisit && isVisitFriends) {
+                  color = Colors.purple;
                 } else if (isVisit) {
                   color = Colors.green;
+                } else if (isVisitFriends) {
+                  color = Colors.orange;
                 }
-
                 return (
                   <Geography
                     onClick={() => handleGeographyClick(geo)}
                     key={geo.rsmKey}
                     geography={geo}
                     fill={color}
+                    style={{
+                      default: {
+                        outline: "none",
+                      },
+                      hover: {
+                        outline: "none",
+                      },
+                      pressed: {
+                        outline: "none",
+                      },
+                    }}
                   />
                 );
               });

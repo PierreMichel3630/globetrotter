@@ -1,20 +1,12 @@
-import {
-  Avatar,
-  Grid,
-  IconButton,
-  InputBase,
-  Paper,
-  Typography,
-} from "@mui/material";
-import { percent } from "csx";
+import { IconButton, InputBase, Paper } from "@mui/material";
+import { percent, px } from "csx";
 import { useTranslation } from "react-i18next";
 
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ClearIcon from "@mui/icons-material/Clear";
 import SearchIcon from "@mui/icons-material/Search";
-import { PersonSearchElement } from "src/models/tmdb/person/PersonSearchElement";
-import { Colors } from "src/style/Colors";
-import { useContext } from "react";
-import { UserContext } from "src/App";
+import { useEffect, useRef, useState } from "react";
+import { SearchResult, SearchResultBlock } from "./SearchResultBlock";
 
 interface PropsBaseInput {
   value: string;
@@ -154,97 +146,69 @@ export const BasicSearchInput = ({
 );
 
 interface PropsAutocompleteInput {
+  isSelect: boolean;
   placeholder: string;
   value: string;
   onChange: (value: string) => void;
   clear: () => void;
-  onSelect: (value: PersonSearchElement) => void;
-  results: Array<PersonSearchElement>;
+  results: Array<SearchResult>;
 }
-
-export const AutocompleteInputPerson = ({
+export const AutocompleteInput = ({
+  isSelect,
   placeholder,
   value,
   clear,
   onChange,
-  onSelect,
   results,
 }: PropsAutocompleteInput) => {
-  const { mode } = useContext(UserContext);
+  const [focused, setFocused] = useState(false);
+  const onFocus = () => setFocused(true);
+  const unFocus = () => setFocused(false);
+  const ref = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        unFocus();
+      }
+    };
+    document.addEventListener("click", handleClickOutside, true);
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  }, []);
+
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative" }} ref={ref}>
       <Paper
-        variant="outlined"
+        elevation={3}
         sx={{
-          p: "2px 4px",
+          p: "4px 8px",
           display: "flex",
           alignItems: "center",
-          width: percent(100),
+          borderRadius: px(50),
         }}
       >
+        {isSelect && (
+          <ArrowBackIcon sx={{ cursor: "pointer" }} onClick={() => clear()} />
+        )}
         <InputBase
           sx={{ ml: 1, flex: 1 }}
           placeholder={placeholder}
           inputProps={{ "aria-label": placeholder }}
           value={value}
           onChange={(event) => onChange(event.target.value)}
+          onFocus={onFocus}
         />
+        <SearchIcon />
         {value !== "" && (
-          <IconButton
-            type="button"
-            size="small"
-            aria-label="clear"
-            onClick={() => clear()}
-          >
-            <ClearIcon sx={{ width: 15, height: 15 }} />
-          </IconButton>
+          <ClearIcon sx={{ cursor: "pointer" }} onClick={() => clear()} />
         )}
       </Paper>
-      {results.length > 0 && (
-        <Paper
-          variant="outlined"
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            width: percent(100),
-            zIndex: 2,
-            flexDirection: "column",
-            position: "absolute",
-          }}
-        >
-          {results.slice(0, 5).map((el) => (
-            <Grid
-              container
-              sx={{
-                cursor: "pointer",
-                p: 1,
-                "&:hover": {
-                  color:
-                    mode === "dark" ? Colors.lightgrey : Colors.greyDarkMode,
-                  backgroundColor:
-                    mode === "dark" ? Colors.greyDarkMode : Colors.lightgrey,
-                },
-              }}
-              alignItems="center"
-              onClick={() => onSelect(el)}
-              key={el.id}
-            >
-              <Grid item xs={3}>
-                {el.profile_path && el.profile_path !== "" ? (
-                  <Avatar
-                    alt={el.name}
-                    src={`https://image.tmdb.org/t/p/w45${el.profile_path}`}
-                  />
-                ) : (
-                  <Avatar alt={el.name}>{el.name.charAt(0)}</Avatar>
-                )}
-              </Grid>
-              <Grid item xs={9}>
-                <Typography variant="body1">{el.name}</Typography>
-              </Grid>
-            </Grid>
-          ))}
-        </Paper>
+      {results.length > 0 && focused && (
+        <SearchResultBlock
+          results={results}
+          onSelect={() => setFocused(false)}
+        />
       )}
     </div>
   );

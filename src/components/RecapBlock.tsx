@@ -63,22 +63,31 @@ export const RecapBlock = () => {
     })
     .sort(sortByNumber);
 
-  const timeInTravel = getTime(
-    countryMostVisited.reduce((acc, value) => acc + value.number, 0)
+  const timeInTravel = countryMostVisited.reduce(
+    (acc, value) => acc + value.number,
+    0
   );
-  const timeInTravelLabel = `${
-    timeInTravel.years > 0
-      ? t("commun.year", { count: timeInTravel.years })
-      : ""
-  } ${
-    timeInTravel.month > 0
-      ? t("commun.month", {
-          count: timeInTravel.month,
-        })
-      : ""
-  } ${
-    timeInTravel.day > 0 ? t("commun.day", { count: timeInTravel.day }) : ""
-  }`;
+
+  const timeInTravelMoment = getTime(timeInTravel);
+
+  const timeInTravelLabel =
+    timeInTravel === 0
+      ? `0 ${t("commun.day")}`
+      : `${
+          timeInTravelMoment.years > 0
+            ? t("commun.year", { count: timeInTravelMoment.years })
+            : ""
+        } ${
+          timeInTravelMoment.month > 0
+            ? t("commun.month", {
+                count: timeInTravelMoment.month,
+              })
+            : ""
+        } ${
+          timeInTravelMoment.day > 0
+            ? t("commun.day", { count: timeInTravelMoment.day })
+            : ""
+        }`;
 
   return (
     <Grid container spacing={1}>
@@ -110,12 +119,14 @@ export const RecapBlock = () => {
           icon={continentIcon}
         />
       </Grid>
-      <Grid item xs={12}>
-        <CardRecapArray
-          title={t("commun.mostvisitedcountries")}
-          values={countryMostVisited}
-        />
-      </Grid>
+      {countryMostVisited.length > 0 && (
+        <Grid item xs={12}>
+          <CardRecapArray
+            title={t("commun.mostvisitedcountries")}
+            values={countryMostVisited}
+          />
+        </Grid>
+      )}
     </Grid>
   );
 };

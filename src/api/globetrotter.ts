@@ -11,7 +11,10 @@ export const SUPABASE_COUNTRY_TRAVEL = "countrytravel";
 export const SUPABASE_GROUP_BY_TRAVEL = "groupbytravel";
 
 /* ------ TRAVEL -------*/
-export const selectTravels = () => supabase.from(SUPABASE_TRAVELS).select();
+export const selectTravels = () =>
+  supabase.from(SUPABASE_TRAVELS).select("*, useruuid!inner(*)");
+export const selectTravelsByUserUuid = (uuid: string) =>
+  supabase.from(SUPABASE_TRAVELS).select().eq("useruuid", uuid);
 
 export const updateTravel = (value: TravelUpdate) =>
   supabase

@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Divider,
   Grid,
@@ -12,20 +11,21 @@ import {
 } from "@mui/material";
 import { px } from "csx";
 import { Fragment } from "react";
+import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
+import { Link, useNavigate } from "react-router-dom";
 import { AvatarAccount } from "src/components/avatar/AvatarAccount";
 import { useAuth } from "src/context/AuthProviderSupabase";
 import { Colors } from "src/style/Colors";
 
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import BarChartIcon from "@mui/icons-material/BarChart";
+import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import ExploreIcon from "@mui/icons-material/Explore";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PeopleIcon from "@mui/icons-material/People";
 import SettingsIcon from "@mui/icons-material/Settings";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
-import { Link, useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
 
 export const MenuPage = () => {
   const navigate = useNavigate();
@@ -64,6 +64,12 @@ export const MenuPage = () => {
       to: "/friends",
     },
     {
+      value: "compare",
+      label: t("commun.compare"),
+      icon: <CompareArrowsIcon />,
+      to: "/compare",
+    },
+    {
       value: "setting",
       label: t("commun.settings"),
       icon: <SettingsIcon />,
@@ -77,45 +83,47 @@ export const MenuPage = () => {
   };
 
   return (
-    <Grid container>
+    <Grid
+      container
+      spacing={1}
+      justifyContent="center"
+      sx={{ textAlign: "center", mt: 1 }}
+    >
       <Helmet>
         <title>{`${t("pages.menu.title")} - ${t("appname")}`}</title>
       </Helmet>
       {user && profile && (
-        <Grid
-          item
-          xs={12}
-          sx={{
-            display: "flex",
-            gap: 2,
-            alignItems: "center",
-            flexDirection: "column",
-            p: 1,
-          }}
-        >
-          <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-            <AvatarAccount avatar={profile.avatar} size={70} />
-            <Box>
-              <Typography variant="h1">{profile.username}</Typography>
-              <Typography variant="body2" sx={{ color: Colors.grey }}>
-                {user.email}
-              </Typography>
-            </Box>
-          </Box>
-          <Button
-            variant="outlined"
-            startIcon={<LogoutIcon />}
-            sx={{
-              borderRadius: px(50),
-              color: Colors.grey,
-              borderColor: Colors.grey,
-              backgroundColor: Colors.white,
-            }}
-            onClick={disconnect}
-          >
-            {t("commun.logout")}
-          </Button>
-        </Grid>
+        <>
+          <Grid item>
+            <AvatarAccount avatar={profile.avatar} size={90} />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h1" sx={{ wordWrap: "break-word" }}>
+              {profile.username}
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{ wordWrap: "break-word", color: Colors.grey }}
+            >
+              {user.email}
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Button
+              variant="outlined"
+              startIcon={<LogoutIcon />}
+              sx={{
+                borderRadius: px(50),
+                color: Colors.grey,
+                borderColor: Colors.grey,
+                backgroundColor: Colors.white,
+              }}
+              onClick={disconnect}
+            >
+              {t("commun.logout")}
+            </Button>
+          </Grid>
+        </>
       )}
       <Grid item xs={12}>
         <List>

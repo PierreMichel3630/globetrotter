@@ -223,6 +223,17 @@ export const CountryBlock = ({ country, isExplore = true }: Props) => {
               <Divider />
             </Grid>
             <Grid item xs={12}>
+              <Typography variant="h4" component="span">
+                {t("commun.speaklanguages")} :{" "}
+              </Typography>
+              <Typography variant="body1" component="span">
+                {country.languages.map((el) => el.name.fra).join(", ")}
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Divider />
+            </Grid>
+            <Grid item xs={12}>
               <Typography variant="h4">
                 {t("commun.adjacentcountry")} (
                 {country.adjacentcountries.length})

@@ -7,6 +7,8 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import { ParameterPage } from "src/pages/ParameterPage";
 import { MenuPage } from "src/pages/MenuPage";
 import { NoLoginPage } from "src/pages/NoLoginPage";
+import { FriendPage } from "src/pages/FriendPage";
+import { ComparePage } from "src/pages/ComparePage";
 
 export const AppRoutes = [
   {
@@ -59,6 +61,26 @@ export const AppRoutes = [
   },
   {
     path: "/menu",
-    element: <MenuPage />,
+    element: (
+      <ProtectedRoute>
+        <MenuPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/friends",
+    element: (
+      <ProtectedRoute>
+        <FriendPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/compare",
+    element: (
+      <ProtectedRoute>
+        <ComparePage />
+      </ProtectedRoute>
+    ),
   },
 ];

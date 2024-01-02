@@ -87,7 +87,6 @@ export const TravelForm = ({ travel, onValid }: Props) => {
     onSubmit: async (values) => {
       try {
         if (travel) {
-          console.log(values);
           const travelUpdate: TravelUpdate = {
             id: travel.id,
             name: values.name,
@@ -97,9 +96,7 @@ export const TravelForm = ({ travel, onValid }: Props) => {
 
           updateTravel(travelUpdate).then((res) => {
             const travel = res.data;
-            console.log(travel);
             if (travel !== null) {
-              console.log(values.countries);
               const promises = values.countries.map((country) => {
                 if (country.id) {
                   const countryUpdate: CountryTravelUpdate = {

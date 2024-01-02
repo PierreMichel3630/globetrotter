@@ -1,4 +1,5 @@
 import {
+  blue,
   brown,
   green,
   grey,
@@ -23,6 +24,7 @@ export const Colors = {
   greyLightMode: "#5f748d",
 
   blue: lightBlue[200],
+  blue2: blue[400],
   green: green[400],
   teal: teal[300],
   lime: lime[400],

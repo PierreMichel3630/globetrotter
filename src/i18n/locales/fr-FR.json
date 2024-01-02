@@ -26,12 +26,18 @@
     "myfriends": "Mes amis",
     "myrequests": "Mes demandes",
     "myinvitation": "Mes invitations",
+    "noresultinvitation": "Aucune invitation en attente.",
+    "noresultrequest": "Aucune demande d'ami en attente.",
+    "noresultfriends": "Aucun ami.",
+    "notravelinform": "Aucun voyage renseigné.",
+    "day": "jour",
     "email": "Adresse email",
     "avatar": "Avatar",
     "return": "Retour",
     "myparameters": "Mes Paramètres",
     "username": "Nom d'utilisateur",
     "timeintravel": "Passés en voyage",
+    "timeintravelday": "Temps passés en voyage (en jours)",
     "mostvisitedcountries": "Pays les + visités",
     "countriesvisited": "Pays visités",
     "countriesnotvisited": "Pays non visités",
@@ -78,7 +84,19 @@
     "origincountry": "Pays d'origine",
     "modify": "Modifier",
     "yes": "Oui",
-    "no": "Non"
+    "no": "Non",
+    "addfriend": "Ajouter un amis",
+    "waitinvitation": "Invitations en attente",
+    "searchfriend": "Rechercher un ami via son nom d'utilisateur",
+    "noresult": "Aucun résultat ne correspond à votre recherche.",
+    "addtofriend": "Ajouter en ami",
+    "waitvalidation": "En attente de validation depuis le",
+    "refuse": "Refuser",
+    "compare": "Comparer",
+    "selectprofile": "Sélectionner un profil",
+    "speaklanguages": "Langues Parlées",
+    "onlyme": "Moi uniquement",
+    "meandfriends": "Moi et mes amis"
   },
   "filter": {
     "travel": "Voyage",
@@ -94,6 +112,9 @@
     "oceania": "Océanie"
   },
   "pages": {
+    "compare": {
+      "title": "Comparer"
+    },
     "forgotpassword": {
       "title": "Mot de passe oublié"
     },
@@ -224,6 +245,7 @@
     "profile": "Vous devez être ami avec la personne pour accéder à son profil."
   },
   "alert": {
+    "deletefriend": "Votre suppression a été pris en compte.",
     "notravelcountry": "Aucun voyage pour ce pays.",
     "updateavatarsuccess": "Votre modification d'avatar à été pris en compte.",
     "updatecountrysuccess": "Votre modification de pays à été pris en compte.",

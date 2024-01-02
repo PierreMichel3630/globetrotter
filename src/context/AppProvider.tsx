@@ -15,14 +15,19 @@ const AppContext = createContext<{
   continents: Array<Continent>;
   countries: Array<Country>;
   countriesVisited: Array<CountryVisited>;
+  countriesVisitedFriends: Array<CountryVisited>;
+  countriesVisitedAll: Array<CountryVisited>;
   travels: Array<Travel>;
+  travelsFriends: Array<Travel>;
   refreshTravel: () => void;
 }>({
   continents: [],
-  continent: null,
   countries: [],
   countriesVisited: [],
+  countriesVisitedFriends: [],
+  countriesVisitedAll: [],
   travels: [],
+  travelsFriends: [],
   refreshTravel: () => {},
 });
 
@@ -33,43 +38,65 @@ export const AppProvider = ({ children }: Props) => {
   const [continents, setContinents] = useState<Array<Continent>>([]);
   const [countries, setCountries] = useState<Array<Country>>([]);
   const [travels, setTravels] = useState<Array<Travel>>([]);
+  const [travelsFriends, setTravelsFriends] = useState<Array<Travel>>([]);
   const [countriesVisited, setCountriesVisited] = useState<
     Array<CountryVisited>
   >([]);
+  const [countriesVisitedFriends, setCountriesVisitedFriends] = useState<
+    Array<CountryVisited>
+  >([]);
+  const [countriesVisitedAll, setCountriesVisitedAll] = useState<
+    Array<CountryVisited>
+  >([]);
+
+  const getCountriesVisited = (travels: Array<Travel>) => {
+    if (countries.length > 0) {
+      const idCountries = uniqBy(
+        travels.reduce(
+          (acc, travel) => [
+            ...acc,
+            ...travel.countries.map((el) => el.country),
+          ],
+          [] as Array<number>
+        ),
+        (el) => el
+      );
+      const countriesVisited: Array<CountryVisited> = [];
+      idCountries.forEach((id) => {
+        const country = countries.find((el) => el.id === id);
+        const travelsCountry = travels.filter((travel) =>
+          travel.countries.map((el) => el.country).includes(id)
+        );
+        if (country)
+          countriesVisited.push({ ...country, travels: travelsCountry });
+      });
+      return countriesVisited;
+    }
+    return [];
+  };
 
   useEffect(() => {
-    const getCountriesVisited = () => {
-      if (countries.length > 0) {
-        const idCountries = uniqBy(
-          travels.reduce(
-            (acc, travel) => [
-              ...acc,
-              ...travel.countries.map((el) => el.country),
-            ],
-            [] as Array<number>
-          ),
-          (el) => el
-        );
-        const countriesVisited: Array<CountryVisited> = [];
-        idCountries.forEach((id) => {
-          const country = countries.find((el) => el.id === id);
-          const travelsCountry = travels.filter((travel) =>
-            travel.countries.map((el) => el.country).includes(id)
-          );
-          if (country)
-            countriesVisited.push({ ...country, travels: travelsCountry });
-        });
-        setCountriesVisited(countriesVisited);
-      }
-    };
-
-    getCountriesVisited();
+    setCountriesVisited(getCountriesVisited(travels));
   }, [travels, countries]);
 
+  useEffect(() => {
+    setCountriesVisitedFriends(getCountriesVisited(travelsFriends));
+  }, [travelsFriends, countries]);
+
+  useEffect(() => {
+    setCountriesVisitedAll(
+      getCountriesVisited([...travels, ...travelsFriends])
+    );
+  }, [travels, travelsFriends, countries]);
+
   const getTravels = () => {
-    selectTravels().then((res) => {
-      setTravels(res.data as Array<Travel>);
-    });
+    if (user) {
+      selectTravels().then((res) => {
+        const travels = res.data as Array<Travel>;
+        setTravels(travels.filter((el) => el.useruuid.id === user.id));
+        setTravelsFriends(travels.filter((el) => el.useruuid.id !== user.id));
+      });
+    }
   };
 
   const refreshTravel = () => {
@@ -100,7 +127,10 @@ export const AppProvider = ({ children }: Props) => {
         continents,
         countries,
         countriesVisited,
+        countriesVisitedFriends,
+        countriesVisitedAll,
         travels,
+        travelsFriends,
         refreshTravel,
       }}
     >

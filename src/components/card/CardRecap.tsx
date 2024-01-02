@@ -59,16 +59,21 @@ const imgCss = style({
 });
 
 interface PropsArray {
-  title: string;
+  title?: string;
+  isPosition?: boolean;
   values: Array<{
-    icon: string;
+    icon?: string;
     label: string;
     value: string | number;
     to?: string;
   }>;
 }
 
-export const CardRecapArray = ({ title, values }: PropsArray) => {
+export const CardRecapArray = ({
+  title,
+  values,
+  isPosition = true,
+}: PropsArray) => {
   const getIcon = (index: number) => {
     let icon = (
       <Avatar sx={{ bgcolor: Colors.grey }}>
@@ -110,17 +115,21 @@ export const CardRecapArray = ({ title, values }: PropsArray) => {
       }}
     >
       <Grid container spacing={1}>
-        <Grid item xs={12}>
-          <Typography variant="h2">{title}</Typography>
-        </Grid>
+        {title && (
+          <Grid item xs={12}>
+            <Typography variant="h2">{title}</Typography>
+          </Grid>
+        )}
         <Grid item xs={12}>
           <List dense>
             {values.map((el, index) => (
               <ListItem key={index} disablePadding component={Link} to={el.to}>
-                <ListItemIcon>{getIcon(index)}</ListItemIcon>
-                <ListItemIcon>
-                  <Avatar alt="flag" src={el.icon} />
-                </ListItemIcon>
+                {isPosition && <ListItemIcon>{getIcon(index)}</ListItemIcon>}
+                {el.icon && (
+                  <ListItemIcon>
+                    <Avatar alt="flag" src={el.icon} />
+                  </ListItemIcon>
+                )}
                 <ListItemText primary={el.label} secondary={el.value} />
               </ListItem>
             ))}

@@ -2,19 +2,24 @@ import { Box, Button, Grid, Paper, Tab, Tabs } from "@mui/material";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { useApp } from "src/context/AppProvider";
 import { useAuth } from "src/context/AuthProviderSupabase";
 import { CardCountryVisited } from "./card/CardCountry";
 import { CardTravel } from "./card/CardTravel";
 import { CreateTravelModal } from "./modal/CreateTravelModal";
 
 import FlightIcon from "@mui/icons-material/Flight";
+import { px } from "csx";
+import { Travel } from "src/models/Travel";
+import { CountryVisited } from "src/models/country/Country";
 import { sortByName, sortTravelByDate } from "src/utils/sort";
 
-export const DefaultBlock = () => {
+interface Props {
+  countriesVisited: Array<CountryVisited>;
+  travels: Array<Travel>;
+}
+export const DefaultBlock = ({ countriesVisited, travels }: Props) => {
   const { t } = useTranslation();
   const { user } = useAuth();
-  const { travels, countriesVisited } = useApp();
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
@@ -45,6 +50,7 @@ export const DefaultBlock = () => {
         <Grid item xs={12}>
           <Button
             variant="contained"
+            size="small"
             startIcon={<FlightIcon />}
             fullWidth
             onClick={addTravel}
@@ -60,9 +66,14 @@ export const DefaultBlock = () => {
                 setTab(newValue)
               }
               variant="fullWidth"
+              sx={{ minHeight: "auto" }}
             >
               {tabs.map((tab, index) => (
-                <Tab key={index} label={tab.label} />
+                <Tab
+                  key={index}
+                  label={tab.label}
+                  sx={{ pt: px(10), pb: px(10), minHeight: "auto" }}
+                />
               ))}
             </Tabs>
           </Paper>

@@ -1,32 +1,44 @@
-import { Box, Chip, Grid, InputBase, Paper } from "@mui/material";
+import { Box, Chip, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Map2 } from "src/components/map/Map2";
+import { Map } from "src/components/map/Map";
 
-import SearchIcon from "@mui/icons-material/Search";
-import { px } from "csx";
 import { CountryBlock } from "src/components/CountryBlock";
 
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ClearIcon from "@mui/icons-material/Clear";
+import { Helmet } from "react-helmet-async";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { ContinentBlock } from "src/components/ContinentBlock";
 import { DefaultBlock } from "src/components/DefaultBlock";
+import { AutocompleteInput } from "src/components/Input";
+import { SearchResult } from "src/components/SearchResultBlock";
 import { TravelBlock } from "src/components/TravelBlock";
 import { useApp } from "src/context/AppProvider";
-import { sortByName } from "src/utils/sort";
-import { Helmet } from "react-helmet-async";
 import { Colors } from "src/style/Colors";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { getScoreSearch, searchString } from "src/utils/string";
 
 export const MapPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { travels, continents, countries } = useApp();
+  const {
+    travelsFriends,
+    travels,
+    continents,
+    countries,
+    countriesVisited,
+    countriesVisitedFriends,
+    countriesVisitedAll,
+  } = useApp();
+  const [filter, setFilter] = useState({
+    friends: false,
+  });
   const [inputValue, setInputValue] = useState("");
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
+  const [resultsSearch, setResultsSearch] = useState<Array<SearchResult>>([]);
+
+  const allTravels = [...travelsFriends, ...travels];
 
   const travel = searchParams.has("travel")
-    ? travels.find((el) => el.id === Number(searchParams.get("travel")))
+    ? allTravels.find((el) => el.id === Number(searchParams.get("travel")))
     : undefined;
 
   const country = searchParams.has("country")
@@ -48,13 +60,63 @@ export const MapPage = () => {
     setInputValue(label);
   }, [country, continent, travel]);
 
+  useEffect(() => {
+    const getResult = () => {
+      if (inputValue !== "") {
+        const countriesFilter = countries
+          .filter((el) => searchString(inputValue, el.name.fra))
+          .map(
+            (el) =>
+              ({
+                type: "country",
+                value: el,
+                score: getScoreSearch(inputValue, el.name.fra),
+              } as SearchResult)
+          );
+        const continentFilter = continents
+          .filter((el) => searchString(inputValue, el.name.fra))
+          .map(
+            (el) =>
+              ({
+                type: "continent",
+                value: el,
+                score: getScoreSearch(inputValue, el.name.fra),
+              } as SearchResult)
+          );
+        const travelFilter = travels
+          .filter((el) => searchString(inputValue, el.name))
+          .map(
+            (el) =>
+              ({
+                type: "travel",
+                value: el,
+                score: getScoreSearch(inputValue, el.name),
+              } as SearchResult)
+          );
+        setResultsSearch([
+          ...countriesFilter,
+          ...continentFilter,
+          ...travelFilter,
+        ]);
+      } else {
+        setResultsSearch([]);
+      }
+    };
+    getResult();
+  }, [countries, travels, continents, inputValue]);
+
   return (
     <Grid container>
       <Helmet>
         <title>{`${t("pages.map.title")} - ${t("appname")}`}</title>
       </Helmet>
       <Grid item xs={12}>
-        <Map2 />
+        <Map
+          countriesVisited={countriesVisited}
+          countriesVisitedFriends={
+            filter.friends ? countriesVisitedFriends : []
+          }
+        />
       </Grid>
       <Grid item xs={12}>
         <Grid container justifyContent="center">
@@ -69,58 +131,48 @@ export const MapPage = () => {
               backgroundColor: Colors.backgroundColor,
             }}
           >
-            <Paper
-              sx={{
-                p: "4px 8px",
-                display: "flex",
-                alignItems: "center",
-                borderRadius: px(50),
+            <AutocompleteInput
+              isSelect={
+                country !== undefined ||
+                continent !== undefined ||
+                travel !== undefined
+              }
+              placeholder={t("commun.search")}
+              value={inputValue}
+              onChange={setInputValue}
+              results={resultsSearch}
+              clear={() => {
+                setInputValue("");
+                navigate("/map");
               }}
-              elevation={3}
-            >
-              {(country || continent || travel) && (
-                <ArrowBackIcon
-                  sx={{ cursor: "pointer" }}
-                  onClick={() => {
-                    setInputValue("");
-                    navigate("/map");
-                  }}
-                />
-              )}
-              <InputBase
-                sx={{ ml: 1, flex: 1 }}
-                placeholder={t("commun.search")}
-                inputProps={{ "aria-label": t("commun.search") }}
-                value={inputValue}
-                onChange={(event) => setInputValue(event.target.value)}
-              />
-              <SearchIcon />
-              {(country || continent || travel) && (
-                <ClearIcon
-                  sx={{ cursor: "pointer" }}
-                  onClick={() => {
-                    setInputValue("");
-                    navigate("/map");
-                  }}
-                />
-              )}
-            </Paper>
+            />
           </Grid>
           {!(country || continent || travel) && (
             <Grid item xs={12}>
-              <Box sx={{ p: 1 }}>
+              <Box sx={{ pl: 1, pr: 1 }}>
                 <Grid container spacing={1}>
-                  {continents.sort(sortByName).map((continent) => (
-                    <Grid item key={continent.id}>
-                      <Chip
-                        size="small"
-                        label={continent.name.fra}
-                        component={Link}
-                        to={`?continent=${continent.id}`}
-                        sx={{ cursor: "pointer" }}
-                      />
-                    </Grid>
-                  ))}
+                  <Grid item>
+                    <Chip
+                      size="small"
+                      label={t("commun.onlyme")}
+                      sx={{ cursor: "pointer" }}
+                      color={filter.friends ? "default" : "primary"}
+                      onClick={() =>
+                        setFilter((prev) => ({ ...prev, friends: false }))
+                      }
+                    />
+                  </Grid>
+                  <Grid item>
+                    <Chip
+                      size="small"
+                      label={t("commun.meandfriends")}
+                      sx={{ cursor: "pointer" }}
+                      color={filter.friends ? "primary" : "default"}
+                      onClick={() =>
+                        setFilter((prev) => ({ ...prev, friends: true }))
+                      }
+                    />
+                  </Grid>
                 </Grid>
               </Box>
             </Grid>
@@ -139,7 +191,12 @@ export const MapPage = () => {
             </Grid>
           ) : (
             <Grid item xs={12}>
-              <DefaultBlock />
+              <DefaultBlock
+                travels={filter.friends ? allTravels : travels}
+                countriesVisited={
+                  filter.friends ? countriesVisitedAll : countriesVisited
+                }
+              />
             </Grid>
           )}
         </Grid>

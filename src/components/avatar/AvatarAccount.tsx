@@ -1,22 +1,17 @@
 import { Avatar } from "@mui/material";
 import { AVATARS } from "./Avatar";
-import { useAuth } from "src/context/AuthProviderSupabase";
+import { CSSProperties } from "react";
 
 interface Props {
-  avatar: string | null;
+  avatar: string;
   size?: number;
+  style?: CSSProperties;
 }
 
-export const AvatarAccount = ({ avatar, size }: Props) => {
+export const AvatarAccount = ({ avatar, size, style }: Props) => {
   const DEFAULT_SIZE = 30;
-  const { user } = useAuth();
 
-  const image =
-    avatar !== null
-      ? AVATARS[Number(avatar)]
-      : user?.user_metadata.avatar_url
-      ? user?.user_metadata.avatar_url
-      : AVATARS[0];
+  const image = isNaN(Number(avatar)) ? avatar : AVATARS[Number(avatar)];
 
   return (
     <Avatar
@@ -26,6 +21,7 @@ export const AvatarAccount = ({ avatar, size }: Props) => {
         width: size ? size : DEFAULT_SIZE,
         height: size ? size : DEFAULT_SIZE,
       }}
+      style={style}
     />
   );
 };

@@ -23,7 +23,6 @@ export const CardCountryVisited = ({ country }: PropsVisited) => {
     <Paper
       sx={{
         p: 1,
-        backgroundColor: Colors.lightgrey,
         height: percent(100),
         display: "flex",
         alignItems: "flex-end",

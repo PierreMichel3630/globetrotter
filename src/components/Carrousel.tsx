@@ -1,6 +1,6 @@
 import { Box, IconButton } from "@mui/material";
 import { padding, percent, px } from "csx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
@@ -11,6 +11,10 @@ interface Props {
 }
 export const Carrousel = ({ images }: Props) => {
   const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    setIndex(0);
+  }, [images]);
 
   const goPrevious = () => {
     setIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
