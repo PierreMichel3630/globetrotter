@@ -24,11 +24,14 @@ import { CountryMostVisited } from "src/models/country/CountryMostVisited";
 import { CardRecapArray } from "./card/CardRecap";
 import { getFirstFriend } from "src/api/supabase/friend";
 import { Friend } from "src/models/Friend";
+import { JsonLanguageBlock } from "./typography/JsonLanguageBlock";
+import { useUser } from "src/context/UserProvider";
 
 export const CompareFriendsBlock = () => {
   const { t } = useTranslation();
   const { profile } = useAuth();
   const { continents, countriesVisited, countries } = useApp();
+  const { language } = useUser();
 
   const [profileIndex, setProfileIndex] = useState<number>(0);
 
@@ -38,7 +41,7 @@ export const CompareFriendsBlock = () => {
     Array<CountryVisited>
   >([]);
 
-  const [profile2, setProfile2] = useState<Profile | null>(profile);
+  const [profile2, setProfile2] = useState<Profile | null>(null);
   const [travels2, setTravels2] = useState<Array<Travel>>([]);
   const [countriesVisited2, setCountriesVisited2] = useState<
     Array<CountryVisited>
@@ -164,7 +167,7 @@ export const CompareFriendsBlock = () => {
         const timeLabel = getTime(time);
         return {
           icon: country.flag,
-          label: country.name.fra,
+          label: <JsonLanguageBlock variant="h6" value={country.name} />,
           value: `${
             timeLabel.years > 0
               ? t("commun.year", { count: timeLabel.years })
@@ -236,36 +239,38 @@ export const CompareFriendsBlock = () => {
       ],
       isPercent: false,
     },
-    ...continents.sort(sortByName).map((continent) => {
-      const countriesContinent = countries
-        .filter((el) => {
-          const idContinents = el.continents.map((continent) => continent.id);
-          return continent.id !== 0
-            ? idContinents.includes(continent.id)
-            : true;
-        })
-        .filter(filterIndependent);
-      const countriesContinentVisited1 = countriesContinent.filter(
-        (country) => {
-          const idVisited = countriesVisited1.map((el) => el.id);
-          return idVisited.includes(country.id);
-        }
-      );
-      const countriesContinentVisited2 = countriesContinent.filter(
-        (country) => {
-          const idVisited = countriesVisited2.map((el) => el.id);
-          return idVisited.includes(country.id);
-        }
-      );
-      return {
-        label: continent.name.fra,
-        values: [
-          { value: countriesContinentVisited1.length, color: color1 },
-          { value: countriesContinentVisited2.length, color: color2 },
-        ],
-        isPercent: false,
-      } as PropsLineCompare;
-    }),
+    ...continents
+      .sort((a, b) => sortByName(language, a, b))
+      .map((continent) => {
+        const countriesContinent = countries
+          .filter((el) => {
+            const idContinents = el.continents.map((continent) => continent.id);
+            return continent.id !== 0
+              ? idContinents.includes(continent.id)
+              : true;
+          })
+          .filter(filterIndependent);
+        const countriesContinentVisited1 = countriesContinent.filter(
+          (country) => {
+            const idVisited = countriesVisited1.map((el) => el.id);
+            return idVisited.includes(country.id);
+          }
+        );
+        const countriesContinentVisited2 = countriesContinent.filter(
+          (country) => {
+            const idVisited = countriesVisited2.map((el) => el.id);
+            return idVisited.includes(country.id);
+          }
+        );
+        return {
+          label: <JsonLanguageBlock variant="h6" value={continent.name} />,
+          values: [
+            { value: countriesContinentVisited1.length, color: color1 },
+            { value: countriesContinentVisited2.length, color: color2 },
+          ],
+          isPercent: false,
+        } as PropsLineCompare;
+      }),
   ];
 
   return (

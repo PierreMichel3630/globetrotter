@@ -11,7 +11,7 @@ export interface LineCompareTable {
 
 export interface PropsLineCompare {
   values: Array<LineCompareTable>;
-  label: string;
+  label: string | JSX.Element;
   isPercent: boolean;
 }
 
@@ -26,7 +26,11 @@ export const LineCompareTable = ({
   return (
     <Grid container>
       <Grid item xs={12} sx={{ textAlign: "center" }}>
-        <Typography variant="h6">{label}</Typography>
+        {typeof label === "string" ? (
+          <Typography variant="h6">{label}</Typography>
+        ) : (
+          label
+        )}
       </Grid>
       <Grid item xs={12}>
         <Grid container spacing={1}>

@@ -26,6 +26,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import PeopleIcon from "@mui/icons-material/People";
 import SettingsIcon from "@mui/icons-material/Settings";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
+import TranslateIcon from "@mui/icons-material/Translate";
 
 export const MenuPage = () => {
   const navigate = useNavigate();
@@ -74,6 +75,12 @@ export const MenuPage = () => {
       label: t("commun.settings"),
       icon: <SettingsIcon />,
       to: "/setting",
+    },
+    {
+      value: "language",
+      label: t("commun.languages"),
+      icon: <TranslateIcon />,
+      to: "/language",
     },
   ];
 

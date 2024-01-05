@@ -7,6 +7,7 @@ import { Travel } from "src/models/Travel";
 import { Continent } from "src/models/country/Continent";
 import { Country } from "src/models/country/Country";
 import { sortByScore } from "src/utils/sort";
+import { JsonLanguageBlock } from "./typography/JsonLanguageBlock";
 
 export interface SearchResult {
   type: "continent" | "country" | "travel";
@@ -67,9 +68,9 @@ const BlockCountry = ({ value }: PropsBlockCountry) => {
       <Avatar
         alt="flag"
         src={value.flag}
-        sx={{ width: px(25), height: px(25) }}
+        sx={{ width: px(30), height: px(30) }}
       />
-      <Typography variant="h6">{value.name.fra}</Typography>
+      <JsonLanguageBlock variant="h6" value={value.name} />
     </Box>
   );
 };
@@ -90,9 +91,9 @@ const BlockContinent = ({ value }: PropsBlockContinent) => {
       <Avatar
         alt="logo"
         src={logoWorld}
-        sx={{ width: px(25), height: px(25) }}
+        sx={{ width: px(30), height: px(30) }}
       />
-      <Typography variant="h6">{value.name.fra}</Typography>
+      <JsonLanguageBlock variant="h6" value={value.name} />
     </Box>
   );
 };
@@ -110,7 +111,7 @@ const BlockTravel = ({ value }: PropsBlockTravel) => {
         cursor: "pointer",
       }}
     >
-      <Avatar alt="logo" src={bagIcon} sx={{ width: px(25), height: px(25) }} />
+      <Avatar alt="logo" src={bagIcon} sx={{ width: px(30), height: px(30) }} />
       <Typography variant="h6">{value.name}</Typography>
     </Box>
   );

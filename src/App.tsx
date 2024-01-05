@@ -1,84 +1,25 @@
-import "./App.css";
-import "./i18n/config";
-import moment from "moment";
-import { createContext, useEffect, useMemo, useState } from "react";
-import { BrowserRouter, useLocation } from "react-router-dom";
-import i18next from "i18next";
 import { ThemeProvider, createTheme } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
+import { useMemo } from "react";
+import { BrowserRouter } from "react-router-dom";
+import "./App.css";
+import "./i18n/config";
 
 import { Colors } from "./style/Colors";
 
 import Routes from "./routes";
 
-import "moment/dist/locale/fr";
 import "moment/dist/locale/de";
 import "moment/dist/locale/es";
-import { AuthProviderSupabase } from "./context/AuthProviderSupabase";
+import "moment/dist/locale/fr";
 import { Helmet } from "react-helmet-async";
-import { Language } from "./models/Language";
-import { getLanguages } from "./api/supabase/language";
 import { ScrollToTopNavigator } from "./components/ScrollTop";
-
-const DEFAULT_LANGUAGE: Language = {
-  id: 2,
-  iso: "fr-FR",
-  name: "Français",
-  abbreviation: "fr",
-  image: "fr.svg",
-};
-
-export const UserContext = createContext<{
-  language: Language;
-  languages: Array<Language>;
-  setLanguage: (language: Language) => void;
-  setMode: (mode: "light" | "dark") => void;
-}>({
-  language:
-    localStorage.getItem("language") !== null
-      ? (JSON.parse(localStorage.getItem("language")!) as Language)
-      : DEFAULT_LANGUAGE,
-  languages: [],
-  setLanguage: (language: Language) => {},
-  setMode: (mode: "light" | "dark") => {},
-});
+import { AuthProviderSupabase } from "./context/AuthProviderSupabase";
+import { MessageProvider } from "./context/MessageProvider";
+import { UserProvider, useUser } from "./context/UserProvider";
 
 function App() {
-  const [languages, setLanguages] = useState<Array<Language>>([]);
-
-  const getLanguage = () =>
-    localStorage.getItem("language") !== null
-      ? (JSON.parse(localStorage.getItem("language")!) as Language)
-      : DEFAULT_LANGUAGE;
-
-  const searchAllLanguage = async () => {
-    const { data } = await getLanguages();
-    setLanguages(data as Array<Language>);
-  };
-
-  useEffect(() => {
-    searchAllLanguage();
-  }, []);
-
-  const [mode, setMode] = useState<"light" | "dark">(
-    localStorage.getItem("mode") !== null
-      ? (localStorage.getItem("mode")! as "light" | "dark")
-      : "dark"
-  );
-
-  const [language, setLanguage] = useState<Language>(getLanguage());
-
-  useEffect(() => {
-    if (language) {
-      moment.locale(language.abbreviation);
-      changeLanguage(language.id.toString());
-      localStorage.setItem("language", JSON.stringify(language));
-    }
-  }, [language]);
-
-  const changeLanguage = async (language: string) => {
-    await i18next.changeLanguage(language);
-  };
+  const { mode, language } = useUser();
 
   const theme = useMemo(
     () =>
@@ -156,24 +97,24 @@ function App() {
   );
 
   return (
-    <AuthProviderSupabase>
-      <UserContext.Provider
-        value={{ languages, language, setLanguage, setMode }}
-      >
+    <UserProvider>
+      <AuthProviderSupabase>
         <Helmet
           htmlAttributes={{
-            lang: language.abbreviation,
+            lang: language.iso,
           }}
         />
         <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <BrowserRouter>
-            <ScrollToTopNavigator />
-            <Routes />
-          </BrowserRouter>
+          <MessageProvider>
+            <CssBaseline />
+            <BrowserRouter>
+              <ScrollToTopNavigator />
+              <Routes />
+            </BrowserRouter>
+          </MessageProvider>
         </ThemeProvider>
-      </UserContext.Provider>
-    </AuthProviderSupabase>
+      </AuthProviderSupabase>
+    </UserProvider>
   );
 }
 

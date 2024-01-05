@@ -1,15 +1,13 @@
-import { useContext } from "react";
-
 import { IconButton } from "@mui/material";
 
-import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
 
 import { Colors } from "src/style/Colors";
-import { UserContext } from "src/App";
+import { useUser } from "src/context/UserProvider";
 
 export const ModeMenu = () => {
-  const { mode, setMode } = useContext(UserContext);
+  const { mode, setMode } = useUser();
   return (
     <IconButton
       aria-label="light mode"

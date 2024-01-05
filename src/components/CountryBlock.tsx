@@ -12,6 +12,11 @@ import { Carrousel } from "./Carrousel";
 import { LabelDiffArrayDate } from "./LabelDiffDate";
 import { CardCountryAdjacent } from "./card/CardCountry";
 import { CardTravel } from "./card/CardTravel";
+import {
+  JsonLanguageArrayBlock,
+  JsonLanguageBlock,
+} from "./typography/JsonLanguageBlock";
+import { useUser } from "src/context/UserProvider";
 
 interface Props {
   isExplore?: boolean;
@@ -21,6 +26,7 @@ interface Props {
 export const CountryBlock = ({ country, isExplore = true }: Props) => {
   const { t } = useTranslation();
   const { travels } = useApp();
+  const { language } = useUser();
 
   const travelsCountry = travels.filter((travel) =>
     travel.countries.map((el) => el.country).includes(country.id)
@@ -47,7 +53,7 @@ export const CountryBlock = ({ country, isExplore = true }: Props) => {
         <Box sx={{ p: 2 }}>
           <Grid container spacing={1}>
             <Grid item xs={12}>
-              <Typography variant="h2">{country.name.fra}</Typography>
+              <JsonLanguageBlock variant="h2" value={country.name} />
             </Grid>
             <Grid item xs={12}>
               <Divider />
@@ -76,15 +82,16 @@ export const CountryBlock = ({ country, isExplore = true }: Props) => {
             <Grid item xs={12}>
               <Divider />
             </Grid>
-            {country.description.fra && (
+            {country.description[language.iso] && (
               <>
                 <Grid item xs={12}>
                   <Typography variant="h4">{t("commun.inshort")}</Typography>
                 </Grid>
                 <Grid item xs={12}>
-                  <Typography variant="body1">
-                    {country.description.fra}
-                  </Typography>
+                  <JsonLanguageBlock
+                    variant="body1"
+                    value={country.description}
+                  />
                 </Grid>
                 <Grid item xs={12}>
                   <Divider />
@@ -101,6 +108,7 @@ export const CountryBlock = ({ country, isExplore = true }: Props) => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                justifyContent: "flex-end",
               }}
             >
               <img src={country.flag} style={{ width: px(40) }} />
@@ -119,6 +127,7 @@ export const CountryBlock = ({ country, isExplore = true }: Props) => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                justifyContent: "flex-end",
               }}
             >
               <Typography variant="h4">
@@ -141,11 +150,13 @@ export const CountryBlock = ({ country, isExplore = true }: Props) => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                justifyContent: "flex-end",
               }}
             >
-              <Typography variant="h4">
-                {country.capitals.map((el) => el.name.fra).join(", ")}
-              </Typography>
+              <JsonLanguageArrayBlock
+                variant="h4"
+                value={country.capitals.map((el) => el.name)}
+              />
               <Typography
                 variant="h6"
                 textTransform="uppercase"
@@ -161,11 +172,13 @@ export const CountryBlock = ({ country, isExplore = true }: Props) => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                justifyContent: "flex-end",
               }}
             >
-              <Typography variant="h4">
-                {country.continents.map((el) => el.name.fra).join(", ")}
-              </Typography>
+              <JsonLanguageArrayBlock
+                variant="h4"
+                value={country.continents.map((el) => el.name)}
+              />
               <Typography
                 variant="h6"
                 textTransform="uppercase"
@@ -181,6 +194,7 @@ export const CountryBlock = ({ country, isExplore = true }: Props) => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                justifyContent: "flex-end",
               }}
             >
               <Box>
@@ -206,6 +220,7 @@ export const CountryBlock = ({ country, isExplore = true }: Props) => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                justifyContent: "flex-end",
               }}
             >
               <Typography variant="h4">
@@ -226,9 +241,11 @@ export const CountryBlock = ({ country, isExplore = true }: Props) => {
               <Typography variant="h4" component="span">
                 {t("commun.speaklanguages")} :{" "}
               </Typography>
-              <Typography variant="body1" component="span">
-                {country.languages.map((el) => el.name.fra).join(", ")}
-              </Typography>
+              <JsonLanguageArrayBlock
+                variant="body1"
+                component="span"
+                value={country.languages.map((el) => el.name)}
+              />
             </Grid>
             <Grid item xs={12}>
               <Divider />
@@ -239,15 +256,17 @@ export const CountryBlock = ({ country, isExplore = true }: Props) => {
                 {country.adjacentcountries.length})
               </Typography>
             </Grid>
-            {country.adjacentcountries.sort(sortByName).map((el) => (
-              <Grid item xs={6} key={el.id} sx={{ cursor: "pointer" }}>
-                <Link
-                  to={isExplore ? `/country/${el.id}` : `?country=${el.id}`}
-                >
-                  <CardCountryAdjacent country={el} />
-                </Link>
-              </Grid>
-            ))}
+            {country.adjacentcountries
+              .sort((a, b) => sortByName(language, a, b))
+              .map((el) => (
+                <Grid item xs={6} key={el.id} sx={{ cursor: "pointer" }}>
+                  <Link
+                    to={isExplore ? `/country/${el.id}` : `?country=${el.id}`}
+                  >
+                    <CardCountryAdjacent country={el} />
+                  </Link>
+                </Grid>
+              ))}
           </Grid>
         </Box>
       </Grid>

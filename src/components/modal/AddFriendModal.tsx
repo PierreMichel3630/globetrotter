@@ -1,6 +1,5 @@
 import {
   Alert,
-  AlertColor,
   AppBar,
   Dialog,
   DialogContent,
@@ -12,15 +11,15 @@ import {
 import { useTranslation } from "react-i18next";
 
 import CloseIcon from "@mui/icons-material/Close";
-import { useState, useEffect } from "react";
-import { selectFriend, insertFriend } from "src/api/supabase/friend";
+import { useEffect, useState } from "react";
+import { insertFriend, selectFriend } from "src/api/supabase/friend";
 import { searchProfile } from "src/api/supabase/profile";
 import { useAuth } from "src/context/AuthProviderSupabase";
+import { useMessage } from "src/context/MessageProvider";
 import { FRIENDSTATUS, Friend, FriendInsert } from "src/models/Friend";
 import { Profile } from "src/models/Profile";
 import { BasicSearchInput } from "../Input";
 import { Loading } from "../Loading";
-import { MessageSnackbar } from "../Snackbar";
 import { CardProfile } from "../card/CardProfile";
 
 interface Props {
@@ -32,15 +31,13 @@ interface Props {
 export const AddFriendModal = ({ open, close, onValid }: Props) => {
   const { t } = useTranslation();
   const { user } = useAuth();
+  const { setMessage, setSeverity } = useMessage();
 
   const [search, setSearch] = useState("");
   const [profiles, setProfiles] = useState<Array<Profile>>([]);
 
   const [uuidfriends, setUuidFriends] = useState<Array<string>>([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  const [message, setMessage] = useState("");
-  const [severity, setSeverity] = useState<AlertColor>("error");
 
   const getUsers = async () => {
     const { data } = await searchProfile(search, uuidfriends);
@@ -149,13 +146,6 @@ export const AddFriendModal = ({ open, close, onValid }: Props) => {
           )}
         </Grid>
       </DialogContent>
-      <MessageSnackbar
-        autoHideDuration={600000}
-        open={message !== ""}
-        handleClose={() => setMessage("")}
-        message={message}
-        severity={severity}
-      />
     </Dialog>
   );
 };

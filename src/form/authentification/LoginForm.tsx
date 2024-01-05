@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Button,
   Checkbox,
@@ -12,22 +11,22 @@ import {
   OutlinedInput,
   Typography,
 } from "@mui/material";
-import { useTranslation } from "react-i18next";
-import * as Yup from "yup";
 import { useFormik } from "formik";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
+import * as Yup from "yup";
 
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useAuth } from "src/context/AuthProviderSupabase";
-import { MessageSnackbar } from "src/components/Snackbar";
+import { useMessage } from "src/context/MessageProvider";
 
 export const LoginForm = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { login } = useAuth();
-
-  const [errorLogin, setErrorLogin] = useState("");
+  const { setMessage, setSeverity } = useMessage();
 
   const initialValue = {
     email: "",
@@ -65,14 +64,17 @@ export const LoginForm = () => {
         } = await login(values.email, values.password);
         if (error) {
           if (error.message === "Invalid login credentials") {
-            setErrorLogin(t("form.login.errorconnect"));
+            setSeverity("error");
+            setMessage(t("form.login.errorconnect"));
           } else {
-            setErrorLogin(t("commun.error"));
+            setSeverity("error");
+            setMessage(t("commun.error"));
           }
         }
         if (user && session) navigate("/map");
       } catch (err) {
-        setErrorLogin(t("commun.error"));
+        setSeverity("error");
+        setMessage(t("commun.error"));
       }
     },
   });
@@ -179,11 +181,6 @@ export const LoginForm = () => {
           </Button>
         </Grid>
       </Grid>
-      <MessageSnackbar
-        open={errorLogin !== ""}
-        handleClose={() => setErrorLogin("")}
-        message={errorLogin}
-      />
     </form>
   );
 };

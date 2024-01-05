@@ -9,6 +9,7 @@ import { MenuPage } from "src/pages/MenuPage";
 import { NoLoginPage } from "src/pages/NoLoginPage";
 import { FriendPage } from "src/pages/FriendPage";
 import { ComparePage } from "src/pages/ComparePage";
+import { LanguagePage } from "src/pages/LanguagePage";
 
 export const AppRoutes = [
   {
@@ -80,6 +81,14 @@ export const AppRoutes = [
     element: (
       <ProtectedRoute>
         <ComparePage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/language",
+    element: (
+      <ProtectedRoute>
+        <LanguagePage />
       </ProtectedRoute>
     ),
   },

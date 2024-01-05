@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Button,
   FormControl,
@@ -9,24 +8,24 @@ import {
   InputLabel,
   OutlinedInput,
 } from "@mui/material";
+import { useFormik } from "formik";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import * as Yup from "yup";
-import { useFormik } from "formik";
 
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { signUpWithEmail } from "src/api/supabase";
 import { useNavigate } from "react-router-dom";
-import { MessageSnackbar } from "src/components/Snackbar";
-import { useAuth } from "src/context/AuthProviderSupabase";
+import { signUpWithEmail } from "src/api/supabase";
 import { countUsernameProfile } from "src/api/supabase/profile";
+import { useAuth } from "src/context/AuthProviderSupabase";
+import { useMessage } from "src/context/MessageProvider";
 
 export const RegisterForm = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { login } = useAuth();
-
-  const [errorLogin, setErrorLogin] = useState("");
+  const { setMessage, setSeverity } = useMessage();
 
   const initialValue = {
     email: "",
@@ -72,19 +71,22 @@ export const RegisterForm = () => {
           1
         );
         if (error) {
-          setErrorLogin(t("commun.error"));
+          setSeverity("error");
+          setMessage(t("commun.error"));
         } else {
           const {
             data: { user, session },
             error,
           } = await login(values.email, values.password);
           if (error) {
-            setErrorLogin(t("commun.error"));
+            setSeverity("error");
+            setMessage(t("commun.error"));
           }
           if (user && session) navigate("/map");
         }
       } catch (err) {
-        setErrorLogin(t("commun.error"));
+        setSeverity("error");
+        setMessage(t("commun.error"));
       }
     },
   });
@@ -198,11 +200,6 @@ export const RegisterForm = () => {
           </Button>
         </Grid>
       </Grid>
-      <MessageSnackbar
-        open={errorLogin !== ""}
-        handleClose={() => setErrorLogin("")}
-        message={errorLogin}
-      />
     </form>
   );
 };

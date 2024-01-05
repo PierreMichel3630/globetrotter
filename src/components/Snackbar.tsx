@@ -1,4 +1,4 @@
-import { Alert, AlertColor, Snackbar } from "@mui/material";
+import { Alert, AlertColor, Snackbar, Typography } from "@mui/material";
 
 interface Props {
   message: string;
@@ -22,7 +22,7 @@ export const MessageSnackbar = ({
       anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
     >
       <Alert onClose={handleClose} severity={severity} sx={{ width: "100%" }}>
-        {message}
+        <Typography variant="body1">{message}</Typography>
       </Alert>
     </Snackbar>
   );

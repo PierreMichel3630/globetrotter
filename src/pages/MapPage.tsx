@@ -15,6 +15,7 @@ import { TravelBlock } from "src/components/TravelBlock";
 import { useApp } from "src/context/AppProvider";
 import { Colors } from "src/style/Colors";
 import { getScoreSearch, searchString } from "src/utils/string";
+import { useUser } from "src/context/UserProvider";
 
 export const MapPage = () => {
   const { t } = useTranslation();
@@ -28,6 +29,8 @@ export const MapPage = () => {
     countriesVisitedFriends,
     countriesVisitedAll,
   } = useApp();
+  const { language } = useUser();
+
   const [filter, setFilter] = useState({
     friends: false,
   });
@@ -51,9 +54,9 @@ export const MapPage = () => {
 
   useEffect(() => {
     const label = country
-      ? country.name.fra
+      ? country.name[language.iso]
       : continent
-      ? continent.name.fra
+      ? continent.name[language.iso]
       : travel
       ? travel.name
       : "";
@@ -64,23 +67,23 @@ export const MapPage = () => {
     const getResult = () => {
       if (inputValue !== "") {
         const countriesFilter = countries
-          .filter((el) => searchString(inputValue, el.name.fra))
+          .filter((el) => searchString(inputValue, el.name[language.iso]))
           .map(
             (el) =>
               ({
                 type: "country",
                 value: el,
-                score: getScoreSearch(inputValue, el.name.fra),
+                score: getScoreSearch(inputValue, el.name[language.iso]),
               } as SearchResult)
           );
         const continentFilter = continents
-          .filter((el) => searchString(inputValue, el.name.fra))
+          .filter((el) => searchString(inputValue, el.name[language.iso]))
           .map(
             (el) =>
               ({
                 type: "continent",
                 value: el,
-                score: getScoreSearch(inputValue, el.name.fra),
+                score: getScoreSearch(inputValue, el.name[language.iso]),
               } as SearchResult)
           );
         const travelFilter = travels

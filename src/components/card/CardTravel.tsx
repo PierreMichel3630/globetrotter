@@ -6,6 +6,7 @@ import { Travel } from "src/models/Travel";
 import { LabelDiffDate } from "../LabelDiffDate";
 import { ListCountries } from "../ListCountries";
 import { useAuth } from "src/context/AuthProviderSupabase";
+import { AvatarAccount } from "../avatar/AvatarAccount";
 
 interface Props {
   travel: Travel;
@@ -33,11 +34,6 @@ export const CardTravel = ({ travel }: Props) => {
             <Typography variant="h4" component="span">
               {travel.name}
             </Typography>
-            {user && user.id !== travel.useruuid.id && (
-              <Typography variant="body1" component="span">
-                {` (${travel.useruuid.username})`}
-              </Typography>
-            )}
           </Grid>
           <Grid item xs={12}>
             <Typography variant="body1" component="span">
@@ -47,6 +43,18 @@ export const CardTravel = ({ travel }: Props) => {
               <LabelDiffDate startdate={momentStart} enddate={momentEnd} />
             )}
           </Grid>
+          {user && user.id !== travel.useruuid.id && (
+            <Grid
+              item
+              xs={12}
+              sx={{ display: "flex", alignItems: "center", gap: 1 }}
+            >
+              <AvatarAccount avatar={travel.useruuid.avatar} size={25} />
+              <Typography variant="h6" component="span">
+                {travel.useruuid.username}
+              </Typography>
+            </Grid>
+          )}
           <Grid item xs={12}>
             <Typography variant="h6" noWrap>
               {t("commun.countriesvisited")} :

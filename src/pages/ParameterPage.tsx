@@ -1,11 +1,4 @@
-import {
-  Alert,
-  AlertColor,
-  Box,
-  Button,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Alert, Box, Button, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { BaseInput } from "src/components/Input";
@@ -15,25 +8,24 @@ import DoneIcon from "@mui/icons-material/Done";
 import { Helmet } from "react-helmet-async";
 import { updateProfil } from "src/api/supabase/profile";
 import { updateUser } from "src/api/supabase/user";
-import { MessageSnackbar } from "src/components/Snackbar";
 import { AvatarSelector } from "src/components/avatar/AvatarSelector";
-import { Profile } from "src/models/Profile";
 import { AutocompleteCountry } from "src/components/input/AutocompleteCountry";
-import { Country } from "src/models/country/Country";
 import { useApp } from "src/context/AppProvider";
+import { useMessage } from "src/context/MessageProvider";
+import { Profile } from "src/models/Profile";
+import { Country } from "src/models/country/Country";
 
 export const ParameterPage = () => {
   const { t } = useTranslation();
   const { countries } = useApp();
+  const { setMessage, setSeverity } = useMessage();
   const { user, profile, setProfile } = useAuth();
+
   const [username, setUsername] = useState("");
   const [originCountry, setOriginCountry] = useState<Country | null>(null);
   const [email, setEmail] = useState("");
   const [isEmailChange, setIsEmailChange] = useState(false);
   const [avatar, setAvatar] = useState<string | null>(null);
-
-  const [message, setMessage] = useState("");
-  const [severity, setSeverity] = useState<AlertColor>("error");
 
   useEffect(() => {
     if (profile) {
@@ -220,13 +212,6 @@ export const ParameterPage = () => {
           </Grid>
         </Grid>
       </Grid>
-      <MessageSnackbar
-        autoHideDuration={600000}
-        open={message !== ""}
-        handleClose={() => setMessage("")}
-        message={message}
-        severity={severity}
-      />
     </Box>
   );
 };

@@ -4,7 +4,38 @@ import { VitePWA, VitePWAOptions } from "vite-plugin-pwa";
 
 const manifestForPlugIn: Partial<VitePWAOptions> = {
   registerType: "autoUpdate",
-  includeAssets: ["favicon.ico", "apple-touc-icon.png", "masked-icon.svg"],
+  includeAssets: ["**/*"],
+  workbox: {
+    globPatterns: ["**/*"],
+    runtimeCaching: [
+      {
+        urlPattern: /^https:\/\/otgkjrkkwbjtozbvcbuo\.supabase\.co\/.*/i,
+        handler: "CacheFirst",
+        options: {
+          cacheName: "supabase-image",
+          expiration: {
+            maxAgeSeconds: 60 * 60 * 24 * 30,
+          },
+          cacheableResponse: {
+            statuses: [0, 200],
+          },
+        },
+      },
+      {
+        urlPattern: /^https:\/\/flagcdn\.com\/.*/i,
+        handler: "CacheFirst",
+        options: {
+          cacheName: "flag",
+          expiration: {
+            maxAgeSeconds: 60 * 60 * 24 * 30,
+          },
+          cacheableResponse: {
+            statuses: [0, 200],
+          },
+        },
+      },
+    ],
+  },
   manifest: {
     name: "Itinéraire de ma vie",
     short_name: "Itinéraire de ma vie",

@@ -96,7 +96,8 @@
     "selectprofile": "Sélectionner un profil",
     "speaklanguages": "Langues Parlées",
     "onlyme": "Moi uniquement",
-    "meandfriends": "Moi et mes amis"
+    "meandfriends": "Moi et mes amis",
+    "languages": "Langues"
   },
   "filter": {
     "travel": "Voyage",
@@ -112,6 +113,9 @@
     "oceania": "Océanie"
   },
   "pages": {
+    "language": {
+      "title": "Langues"
+    },
     "compare": {
       "title": "Comparer"
     },

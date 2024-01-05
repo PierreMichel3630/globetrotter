@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Button,
   FormControl,
@@ -9,22 +8,22 @@ import {
   InputLabel,
   OutlinedInput,
 } from "@mui/material";
+import { useFormik } from "formik";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import * as Yup from "yup";
-import { useFormik } from "formik";
 
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "src/context/AuthProviderSupabase";
-import { MessageSnackbar } from "src/components/Snackbar";
+import { useMessage } from "src/context/MessageProvider";
 
 export const ResetPasswordForm = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { updatePassword } = useAuth();
-
-  const [message, setMessage] = useState("");
+  const { setMessage, setSeverity } = useMessage();
 
   const initialValue = {
     password: "",
@@ -56,13 +55,17 @@ export const ResetPasswordForm = () => {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       try {
-        const { data, error } = await updatePassword(values.password);
+        const { error } = await updatePassword(values.password);
         if (error) {
+          setSeverity("error");
           setMessage(t("commun.error"));
         } else {
           navigate("/login");
         }
-      } catch (error) {}
+      } catch (error) {
+        setSeverity("error");
+        setMessage(t("commun.error"));
+      }
     },
   });
 
@@ -153,11 +156,6 @@ export const ResetPasswordForm = () => {
           </Button>
         </Grid>
       </Grid>
-      <MessageSnackbar
-        open={message !== ""}
-        handleClose={() => setMessage("")}
-        message={message}
-      />
     </form>
   );
 };

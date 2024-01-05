@@ -12,6 +12,7 @@ import { px } from "csx";
 import { Travel } from "src/models/Travel";
 import { CountryVisited } from "src/models/country/Country";
 import { sortByName, sortTravelByDate } from "src/utils/sort";
+import { useUser } from "src/context/UserProvider";
 
 interface Props {
   countriesVisited: Array<CountryVisited>;
@@ -21,6 +22,7 @@ export const DefaultBlock = ({ countriesVisited, travels }: Props) => {
   const { t } = useTranslation();
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { language } = useUser();
 
   const [open, setOpen] = useState(false);
   const [tab, setTab] = useState(0);
@@ -88,11 +90,13 @@ export const DefaultBlock = ({ countriesVisited, travels }: Props) => {
           </>
         ) : (
           <>
-            {[...countriesVisited].sort(sortByName).map((country) => (
-              <Grid item xs={12} key={country.id}>
-                <CardCountryVisited country={country} />
-              </Grid>
-            ))}
+            {[...countriesVisited]
+              .sort((a, b) => sortByName(language, a, b))
+              .map((country) => (
+                <Grid item xs={12} key={country.id}>
+                  <CardCountryVisited country={country} />
+                </Grid>
+              ))}
           </>
         )}
         <CreateTravelModal open={open} close={onClose} />

@@ -1,0 +1,266 @@
+{
+  "appname": "Itinerario della mia vita",
+  "header": {
+    "account": {
+      "hi": "Buongiorno",
+      "parameter": "Le mie impostazioni",
+      "statistics": "Le mie statistiche",
+      "logout": "Disconnetti"
+    },
+    "login": "Per accedere"
+  },
+  "commun": {
+    "login": "Per accedere",
+    "register": "Registrati",
+    "getstarted": "Iniziare",
+    "backhome": "Pagina iniziale",
+    "welcome": "Benvenuto",
+    "welcomemessage": "Globetrotter è una mappa interattiva che ti permette di elencare tutti i tuoi viaggi, averne statistiche, condividerli o confrontarli con i tuoi amici.",
+    "all": "Tutti",
+    "addtravel": "Aggiungi un viaggio",
+    "addcountry": "Aggiungi un paese",
+    "validate": "convalidare",
+    "cancel": "Annulla",
+    "createdthe": "registrato dal {{value}}",
+    "error": "Spiacenti, si è verificato un errore. ",
+    "myfriends": "I miei amici",
+    "myrequests": "Le mie richieste",
+    "myinvitation": "I miei inviti",
+    "noresultinvitation": "Nessun invito in sospeso.",
+    "noresultrequest": "Nessuna richiesta di amicizia in sospeso.",
+    "noresultfriends": "No amici.",
+    "notravelinform": "Nessuna informazione di viaggio.",
+    "day": "giorno",
+    "email": "Indirizzo e-mail",
+    "avatar": "Avatar",
+    "return": "Indietro",
+    "myparameters": "Le mie impostazioni",
+    "username": "nome utente",
+    "timeintravel": "Viaggiare nel passato",
+    "timeintravelday": "Tempo trascorso viaggiando (in giorni)",
+    "mostvisitedcountries": "Paesi visitati",
+    "countriesvisited": "Paesi visitati",
+    "countriesnotvisited": "Paesi non visitati",
+    "year_one": "{{count}} anno",
+    "year_other": "{{count}} anni",
+    "month_one": "{{count}} mese",
+    "month_other": "{{count}} mese",
+    "day_one": "{{count}} giorno",
+    "day_other": "{{count}} giorni",
+    "world": "Mondo",
+    "search": "ricercare",
+    "travel_one": "{{count}} viaggio",
+    "travel_other": "{{count}} viaggio",
+    "travelcount_zero": "Viaggio",
+    "travelcount_one": "{{count}} Viaggio",
+    "travelcount_other": "{{count}} Viaggio",
+    "flag": "Bandiera",
+    "continent": "Continente",
+    "continentsvisited": "Continenti visitati",
+    "capital": "Capitale",
+    "population": "Popolazione",
+    "area": "La zona",
+    "currency": "Moneta",
+    "or": "O",
+    "adjacentcountry": "Paese di confine",
+    "inshort": "In breve",
+    "country": "Paese",
+    "countries": "Paese",
+    "areaunite": "km2",
+    "superficyunite": "abitante/km2",
+    "travels": "Viaggio",
+    "information": "Informazione",
+    "map": "Mappa",
+    "statistics": "Statistico",
+    "timeline": "Sequenza temporale",
+    "friends": "Amici",
+    "explore": "Esplorare",
+    "back": "Indietro",
+    "delete": "ELIMINARE",
+    "account": "Account",
+    "logout": "Disconnetti",
+    "settings": "Impostazioni",
+    "yourstravels": "I tuoi viaggi",
+    "origincountry": "Paese d'origine",
+    "modify": "Modificare",
+    "yes": "SÌ",
+    "no": "NO",
+    "addfriend": "Aggiungi un amico",
+    "waitinvitation": "Inviti in sospeso",
+    "searchfriend": "Cerca un amico per nome utente",
+    "noresult": "Nessun risultato è stato trovato per la tua ricerca.",
+    "addtofriend": "Aggiungi come Amico",
+    "waitvalidation": "In attesa di convalida da allora",
+    "refuse": "Rifiutare",
+    "compare": "Confrontare",
+    "selectprofile": "Seleziona un profilo",
+    "speaklanguages": "Lingue parlate",
+    "onlyme": "Solo io",
+    "meandfriends": "Io e i miei amici",
+    "languages": "Lingue"
+  },
+  "filter": {
+    "travel": "Viaggio",
+    "country": "Paese",
+    "all": "Tutti"
+  },
+  "continent": {
+    "asia": "Asia",
+    "africa": "Africa",
+    "northamerica": "Nord America",
+    "southamerica": "Sud America",
+    "europe": "Europa",
+    "oceania": "Oceania"
+  },
+  "pages": {
+    "language": {
+      "title": "Lingue"
+    },
+    "compare": {
+      "title": "Confrontare"
+    },
+    "forgotpassword": {
+      "title": "Hai dimenticato la password"
+    },
+    "friend": {
+      "title": "I miei amici"
+    },
+    "friendadd": {
+      "title": "Aggiunta di amici"
+    },
+    "friendinvitation": {
+      "title": "Invito di amici"
+    },
+    "home": {
+      "title": "accoglienza"
+    },
+    "timeline": {
+      "title": "Sequenza temporale"
+    },
+    "statistic": {
+      "title": "Statistico"
+    },
+    "menu": {
+      "title": "Menù"
+    },
+    "map": {
+      "title": "Carta geografica"
+    },
+    "explore": {
+      "title": "Esplorare"
+    },
+    "login": {
+      "title": "Connessione",
+      "hi": "Benvenuto",
+      "credential": "Inserisci le tue credenziali per continuare"
+    },
+    "parameters": {
+      "title": "Le mie impostazioni",
+      "selectorigincountry": "Seleziona un paese di origine",
+      "infoemail": "Sarà necessaria la conferma del vecchio e del nuovo indirizzo email. "
+    },
+    "register": {
+      "title": "iscrizione"
+    },
+    "resetpassword": {
+      "title": "Resetta la password"
+    }
+  },
+  "form": {
+    "login": {
+      "email": "Indirizzo e-mail",
+      "password": "Parola d'ordine",
+      "rememberme": "Ricordati di me",
+      "createaccount": "Creare un account",
+      "forgotpassword": "Hai dimenticato la password ?",
+      "connect": "Per accedere",
+      "connectgoogle": "Accedi tramite Google",
+      "connectmail": "Accedi tramite indirizzo email",
+      "haveaccount": "Non hai un account?",
+      "requiredpassword": "Per favore inserire una password",
+      "requiredmail": "Si prega di inserire un indirizzo email",
+      "formatmail": "Si prega di inserire un indirizzo email valido",
+      "errorconnect": "L'indirizzo email o la password non sono corretti"
+    },
+    "register": {
+      "username": "Nome utente *",
+      "email": "Indirizzo e-mail *",
+      "password": "Parola d'ordine *",
+      "createaccount": "Creare un account",
+      "createaccountemail": "Crea un account tramite indirizzo email",
+      "createaccountgoogle": "Crea un account tramite Google",
+      "continue": "Continuare",
+      "requiredusername": "Inserisci un nome utente",
+      "uniqueusername": "Nome utente già preso",
+      "requiredpassword": "Per favore inserire una password",
+      "minpassword": "Inserisci una password più lunga di 6 caratteri",
+      "requiredmail": "Si prega di inserire un indirizzo email",
+      "formatmail": "Si prega di inserire un indirizzo email valido",
+      "alreadyaccount": "Hai già un account?",
+      "connect": "Login"
+    },
+    "forgotpassword": {
+      "forgotpassword": "Hai dimenticato la password ?",
+      "email": "Indirizzo e-mail *",
+      "createaccount": "Creare un account",
+      "continue": "Continuare",
+      "requiredmail": "Si prega di inserire un indirizzo email",
+      "formatmail": "Si prega di inserire un indirizzo email valido",
+      "modality": "Inserisci l'indirizzo email che hai utilizzato al momento della registrazione. ",
+      "connection": "Connessione",
+      "notforget": "Ricordi la tua password?",
+      "successsendmail": "Email inviata",
+      "limitsendemail": "Si prega di attendere 60 secondi prima di inviare nuovamente l'e-mail"
+    },
+    "resetpassword": {
+      "resetpassword": "reimposta la tua password",
+      "password": "Parola d'ordine *",
+      "confirmpassword": "Conferma password *",
+      "continue": "Continuare",
+      "passwordmatch": "Le password devono essere identiche",
+      "requiredpassword": "Per favore inserire una password",
+      "minpassword": "Inserisci una password più lunga di 6 caratteri"
+    },
+    "createmodifytravel": {
+      "titlecreate": "Aggiungi un viaggio",
+      "titlemodify": "Modifica un viaggio",
+      "name": "Nome *",
+      "country": "Paese *",
+      "startdate": "Data d'inizio *",
+      "enddate": "Data di fine *",
+      "requiredname": "Inserisci un nome",
+      "requiredstartdate": "Inserisci una data di inizio",
+      "requiredenddate": "Inserisci una data di fine",
+      "typeerrordate": "Per favore, inserisci una data valida",
+      "typeerrorcountry": "Per favore seleziona un paese"
+    }
+  },
+  "information": {
+    "visibilityon": "Il tuo profilo è visibile a tutti.",
+    "visibilityoff": "Il tuo profilo è visibile solo ai tuoi amici"
+  },
+  "notification": {
+    "FRIENDREQUEST": {
+      "title": "Richiesta di amicizia",
+      "text": "{{username}} vi chiede da amici"
+    }
+  },
+  "unauthorized": {
+    "profile": "Devi essere amico della persona per accedere al suo profilo."
+  },
+  "alert": {
+    "deletefriend": "La tua cancellazione è stata presa in considerazione.",
+    "notravelcountry": "Nessun viaggio in questo paese.",
+    "updateavatarsuccess": "La modifica del tuo avatar è stata presa in considerazione.",
+    "updatecountrysuccess": "Il tuo cambio di Paese è stato preso in considerazione.",
+    "updatevisibilitysuccess": "La tua modifica è stata presa in considerazione.",
+    "updateusernamesuccess": "La tua modifica del nome utente è stata presa in considerazione.",
+    "sendfriendrequest": "La tua richiesta di amicizia è stata inviata.",
+    "validatefriendrequest": "Richiesta di amicizia convalidata.",
+    "refusefriendrequest": "Richiesta di amicizia rifiutata.",
+    "updateemailsuccess": "La modifica del tuo indirizzo email è in corso. "
+  },
+  "modal": {
+    "deletemessage": "Sei sicuro di vedere Elimina {{name}} ?"
+  }
+}

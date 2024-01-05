@@ -1,10 +1,266 @@
 {
+  "appname": "Itinerary of my life",
   "header": {
     "account": {
-      "hi": "Hi",
-      "profile": "My Profile",
-      "parameters": "My Settings",
-      "logout": "Logout"
+      "hi": "Good morning",
+      "parameter": "My settings",
+      "statistics": "My Statistics",
+      "logout": "Disconnect"
+    },
+    "login": "To log in"
+  },
+  "commun": {
+    "login": "To log in",
+    "register": "Register",
+    "getstarted": "Get started",
+    "backhome": "Home page",
+    "welcome": "Welcome",
+    "welcomemessage": "Globetrotter is an interactive map allowing you to list all your trips, have statistics on them, share them or compare them with your friends.",
+    "all": "All",
+    "addtravel": "Add a trip",
+    "addcountry": "Add a country",
+    "validate": "To validate",
+    "cancel": "Cancel",
+    "createdthe": "registered since {{value}}",
+    "error": "Oops, an error occurred. ",
+    "myfriends": "My friends",
+    "myrequests": "My requests",
+    "myinvitation": "My invitations",
+    "noresultinvitation": "No invitations pending.",
+    "noresultrequest": "No pending friend requests.",
+    "noresultfriends": "No friends.",
+    "notravelinform": "No travel information.",
+    "day": "day",
+    "email": "E-mail address",
+    "avatar": "Avatar",
+    "return": "Back",
+    "myparameters": "My Settings",
+    "username": "username",
+    "timeintravel": "Traveling past",
+    "timeintravelday": "Time spent traveling (in days)",
+    "mostvisitedcountries": "Countries visited",
+    "countriesvisited": "Visited countries",
+    "countriesnotvisited": "Countries not visited",
+    "world": "World",
+    "search": "To research",
+    "travelcount_zero": "Journey",
+    "flag": "Flag",
+    "continent": "Continent",
+    "continentsvisited": "Continents visited",
+    "capital": "Capital",
+    "population": "Population",
+    "area": "Area",
+    "currency": "Cash",
+    "or": "Or",
+    "adjacentcountry": "Border country",
+    "inshort": "In short",
+    "country": "Country",
+    "countries": "Country",
+    "areaunite": "km2",
+    "superficyunite": "inhabitant/km2",
+    "travels": "Travel",
+    "information": "Information",
+    "map": "Map",
+    "statistics": "Statistical",
+    "timeline": "Timeline",
+    "friends": "Friends",
+    "explore": "Explore",
+    "back": "Back",
+    "delete": "DELETE",
+    "account": "Account",
+    "logout": "Disconnect",
+    "settings": "Settings",
+    "yourstravels": "Your Travels",
+    "origincountry": "Native country",
+    "modify": "To modify",
+    "yes": "Yes",
+    "no": "No",
+    "addfriend": "Add a friend",
+    "waitinvitation": "Pending invitations",
+    "searchfriend": "Search for a friend by username",
+    "noresult": "No results were found for your search.",
+    "addtofriend": "Add as friend",
+    "waitvalidation": "Awaiting validation since",
+    "refuse": "Refuse",
+    "compare": "Compare",
+    "selectprofile": "Select a profile",
+    "speaklanguages": "Spoken languages",
+    "onlyme": "Only me",
+    "meandfriends": "Me and my friends",
+    "languages": "Languages",
+    "year_one": "{{count}} year",
+    "year_other": "{{count}} years",
+    "month_one": "{{count}} month",
+    "month_other": "{{count}} month",
+    "day_one": "{{count}} day",
+    "day_other": "{{count}} days",
+    "travel_one": "{{count}} journey",
+    "travel_other": "{{count}} travel",
+    "travelcount_one": "{{count}} Journey",
+    "travelcount_other": "{{count}} Travel"
+  },
+  "filter": {
+    "travel": "Journey",
+    "country": "Country",
+    "all": "All"
+  },
+  "continent": {
+    "asia": "Asia",
+    "africa": "Africa",
+    "northamerica": "North America",
+    "southamerica": "South America",
+    "europe": "Europe",
+    "oceania": "Oceania"
+  },
+  "pages": {
+    "language": {
+      "title": "Languages"
+    },
+    "compare": {
+      "title": "Compare"
+    },
+    "forgotpassword": {
+      "title": "Forgot your password"
+    },
+    "friend": {
+      "title": "My friends"
+    },
+    "friendadd": {
+      "title": "Adding Friends"
+    },
+    "friendinvitation": {
+      "title": "Invitation of friends"
+    },
+    "home": {
+      "title": "Welcome"
+    },
+    "timeline": {
+      "title": "Timeline"
+    },
+    "statistic": {
+      "title": "Statistical"
+    },
+    "menu": {
+      "title": "Menus"
+    },
+    "map": {
+      "title": "Map"
+    },
+    "explore": {
+      "title": "Explore"
+    },
+    "login": {
+      "title": "Connection",
+      "hi": "Welcome",
+      "credential": "Enter your credentials to continue"
+    },
+    "parameters": {
+      "title": "My settings",
+      "selectorigincountry": "Select a country of origin",
+      "infoemail": "Confirmation of the old and new email addresses will be necessary. "
+    },
+    "register": {
+      "title": "Registration"
+    },
+    "resetpassword": {
+      "title": "Reset password"
     }
+  },
+  "form": {
+    "login": {
+      "email": "E-mail address",
+      "password": "Password",
+      "rememberme": "Remember me",
+      "createaccount": "Create an account",
+      "forgotpassword": "Forgot your password ?",
+      "connect": "To log in",
+      "connectgoogle": "Log in via Google",
+      "connectmail": "Log in via email address",
+      "haveaccount": "You do not have an account ?",
+      "requiredpassword": "Please enter a password",
+      "requiredmail": "Please enter an email address",
+      "formatmail": "Please enter a valid email address",
+      "errorconnect": "The email address or password is incorrect"
+    },
+    "register": {
+      "username": "Username *",
+      "email": "E-mail address *",
+      "password": "Password *",
+      "createaccount": "Create an account",
+      "createaccountemail": "Create an account via email address",
+      "createaccountgoogle": "Create an account through Google",
+      "continue": "Continue",
+      "requiredusername": "Please enter a username",
+      "uniqueusername": "Username already taken",
+      "requiredpassword": "Please enter a password",
+      "minpassword": "Please enter a password longer than 6 characters",
+      "requiredmail": "Please enter an email address",
+      "formatmail": "Please enter a valid email address",
+      "alreadyaccount": "Already have an account?",
+      "connect": "Log in"
+    },
+    "forgotpassword": {
+      "forgotpassword": "Forgot your password ?",
+      "email": "E-mail address *",
+      "createaccount": "Create an account",
+      "continue": "Continue",
+      "requiredmail": "Please enter an email address",
+      "formatmail": "Please enter a valid email address",
+      "modality": "Please enter the email address you used when registering. ",
+      "connection": "Connection",
+      "notforget": "Remember your password?",
+      "successsendmail": "Email sent",
+      "limitsendemail": "Please wait 60s before resending an email"
+    },
+    "resetpassword": {
+      "resetpassword": "Reset your password",
+      "password": "Password *",
+      "confirmpassword": "Password Confirmation *",
+      "continue": "Continue",
+      "passwordmatch": "Passwords must match",
+      "requiredpassword": "Please enter a password",
+      "minpassword": "Please enter a password longer than 6 characters"
+    },
+    "createmodifytravel": {
+      "titlecreate": "Add a trip",
+      "titlemodify": "Edit a trip",
+      "name": "Name *",
+      "country": "Country *",
+      "startdate": "Start date *",
+      "enddate": "End date *",
+      "requiredname": "Please enter a name",
+      "requiredstartdate": "Please enter a start date",
+      "requiredenddate": "Please enter an end date",
+      "typeerrordate": "Please enter a valid date",
+      "typeerrorcountry": "Please select a country"
+    }
+  },
+  "information": {
+    "visibilityon": "Your profile is visible to everyone.",
+    "visibilityoff": "Your profile is only visible to your friends"
+  },
+  "notification": {
+    "FRIENDREQUEST": {
+      "title": "Friends request",
+      "text": "{{username}} asks you as friends"
+    }
+  },
+  "unauthorized": {
+    "profile": "You must be friends with the person to access their profile."
+  },
+  "alert": {
+    "deletefriend": "Your deletion has been taken into account.",
+    "notravelcountry": "No travel to this country.",
+    "updateavatarsuccess": "Your avatar modification has been taken into account.",
+    "updatecountrysuccess": "Your country change has been taken into account.",
+    "updatevisibilitysuccess": "Your modification has been taken into account.",
+    "updateusernamesuccess": "Your username change has been taken into account.",
+    "sendfriendrequest": "Your friend request has been sent.",
+    "validatefriendrequest": "Friend request validated.",
+    "refusefriendrequest": "Friend request declined.",
+    "updateemailsuccess": "Your email address modification is in progress. "
+  },
+  "modal": {
+    "deletemessage": "Are you sure you see delete {{name}} ?"
   }
 }

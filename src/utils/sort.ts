@@ -1,9 +1,10 @@
 import moment from "moment";
+import { Language } from "src/models/Language";
 import { Travel } from "src/models/Travel";
 
 export const sortByLabel = (a: any, b: any) => a.label.localeCompare(b.label);
-export const sortByName = (a: any, b: any) =>
-  a.name.fra.localeCompare(b.name.fra);
+export const sortByName = (language: Language, a: any, b: any) =>
+  a.name[language.iso].localeCompare(b.name[language.iso]);
 
 export const sortByUsername = (a: any, b: any) =>
   a.username.localeCompare(b.username);
@@ -19,6 +20,8 @@ export const sortByNumber = (a: { number: number }, b: { number: number }) =>
 
 export const sortByScore = (a: { score: number }, b: { score: number }) =>
   b.score - a.score;
+
+export const sortById = (a: { id: number }, b: { id: number }) => b.id - a.id;
 
 export const sortTravelByDate = (a: Travel, b: Travel) => {
   const momentStartA = moment.min(

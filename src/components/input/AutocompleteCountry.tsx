@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useApp } from "src/context/AppProvider";
 import { Country } from "src/models/country/Country";
 import { sortByName } from "src/utils/sort";
+import { JsonLanguageBlock } from "../typography/JsonLanguageBlock";
+import { useUser } from "src/context/UserProvider";
 
 interface Props {
   error?: string;
@@ -22,9 +24,10 @@ export const AutocompleteCountry = ({
   onBlur,
 }: Props) => {
   const { countries } = useApp();
+  const { language } = useUser();
   const [inputValue, setInputValue] = useState("");
 
-  const countriesSort = countries.sort(sortByName);
+  const countriesSort = countries.sort((a, b) => sortByName(language, a, b));
   return (
     <Autocomplete
       id="autocompleteCountry"
@@ -40,7 +43,7 @@ export const AutocompleteCountry = ({
       onInputChange={(_, newInputValue) => {
         setInputValue(newInputValue);
       }}
-      getOptionLabel={(option) => (option ? option.name.fra : "")}
+      getOptionLabel={(option) => (option ? option.name[language.iso] : "")}
       renderOption={(props, option) => (
         <Box
           component="li"
@@ -55,7 +58,7 @@ export const AutocompleteCountry = ({
             src={option.flag}
             alt=""
           />
-          {option.name.fra}
+          <JsonLanguageBlock variant="h6" value={option.name} />
         </Box>
       )}
       renderInput={(params) => (

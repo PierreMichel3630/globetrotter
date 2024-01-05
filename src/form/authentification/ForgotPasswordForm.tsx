@@ -1,5 +1,4 @@
 import {
-  AlertColor,
   Button,
   FormControl,
   FormHelperText,
@@ -7,20 +6,16 @@ import {
   InputLabel,
   OutlinedInput,
 } from "@mui/material";
-import { useTranslation } from "react-i18next";
-import * as Yup from "yup";
 import { useFormik } from "formik";
+import { useTranslation } from "react-i18next";
 import { useAuth } from "src/context/AuthProviderSupabase";
-import { useState } from "react";
-import { MessageSnackbar } from "src/components/Snackbar";
+import { useMessage } from "src/context/MessageProvider";
+import * as Yup from "yup";
 
 export const ForgotPasswordForm = () => {
   const { t } = useTranslation();
-
   const { passwordReset } = useAuth();
-
-  const [message, setMessage] = useState("");
-  const [severity, setSeverity] = useState<AlertColor>("success");
+  const { setMessage, setSeverity } = useMessage();
 
   const initialValue = {
     email: "",
@@ -102,12 +97,6 @@ export const ForgotPasswordForm = () => {
           </Button>
         </Grid>
       </Grid>
-      <MessageSnackbar
-        open={message !== ""}
-        handleClose={() => setMessage("")}
-        message={message}
-        severity={severity}
-      />
     </form>
   );
 };

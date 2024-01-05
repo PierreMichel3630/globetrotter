@@ -1,0 +1,266 @@
+{
+  "appname": "Reiseroute meines Lebens",
+  "header": {
+    "account": {
+      "hi": "Guten Morgen",
+      "parameter": "Meine Einstellungen",
+      "statistics": "Meine Statistiken",
+      "logout": "Trennen"
+    },
+    "login": "Einloggen"
+  },
+  "commun": {
+    "login": "Einloggen",
+    "register": "Registrieren",
+    "getstarted": "Loslegen",
+    "backhome": "Startseite",
+    "welcome": "Willkommen",
+    "welcomemessage": "Globetrotter ist eine interaktive Karte, mit der Sie alle Ihre Reisen auflisten, Statistiken darüber erstellen, sie teilen oder mit Ihren Freunden vergleichen können.",
+    "all": "Alle",
+    "addtravel": "Fügen Sie eine Reise hinzu",
+    "addcountry": "Fügen Sie ein Land hinzu",
+    "validate": "Bestätigen",
+    "cancel": "Stornieren",
+    "createdthe": "Dabei seit {{value}}",
+    "error": "Hoppla! Ein Fehler ist aufgetreten. ",
+    "myfriends": "Meine Freunde",
+    "myrequests": "Meine Anfragen",
+    "myinvitation": "Meine Einladungen",
+    "noresultinvitation": "Keine Einladungen ausstehend.",
+    "noresultrequest": "Keine ausstehenden Freundschaftsanfragen.",
+    "noresultfriends": "Keine Freunde.",
+    "notravelinform": "Keine Reiseinformationen.",
+    "day": "Tag",
+    "email": "E-Mail-Adresse",
+    "avatar": "Benutzerbild",
+    "return": "Zurück",
+    "myparameters": "Meine Einstellungen",
+    "username": "Nutzername",
+    "timeintravel": "Vorbeireisen",
+    "timeintravelday": "Reisezeit (in Tagen)",
+    "mostvisitedcountries": "Länder besucht",
+    "countriesvisited": "Besuchte Länder",
+    "countriesnotvisited": "Nicht besuchte Länder",
+    "world": "Welt",
+    "search": "Forschen",
+    "travelcount_zero": "Reise",
+    "flag": "Flagge",
+    "continent": "Kontinent",
+    "continentsvisited": "Kontinente besucht",
+    "capital": "Hauptstadt",
+    "population": "Bevölkerung",
+    "area": "Bereich",
+    "currency": "Kasse",
+    "or": "Oder",
+    "adjacentcountry": "Grenzland",
+    "inshort": "Zusamenfassend",
+    "country": "Land",
+    "countries": "Land",
+    "areaunite": "km2",
+    "superficyunite": "Einwohner/km2",
+    "travels": "Reisen",
+    "information": "Information",
+    "map": "Karte",
+    "statistics": "Statistisch",
+    "timeline": "Zeitleiste",
+    "friends": "Freunde",
+    "explore": "Erkunden",
+    "back": "Zurück",
+    "delete": "LÖSCHEN",
+    "account": "Konto",
+    "logout": "Trennen",
+    "settings": "Einstellungen",
+    "yourstravels": "Ihre Reisen",
+    "origincountry": "Heimatland",
+    "modify": "Ändern",
+    "yes": "Ja",
+    "no": "NEIN",
+    "addfriend": "Einen Freund hinzufügen",
+    "waitinvitation": "Ausstehende Einladungen",
+    "searchfriend": "Suchen Sie nach einem Freund anhand des Benutzernamens",
+    "noresult": "Es wurden keine Ergebnisse für deine Suche gefunden.",
+    "addtofriend": "Als Freund hinzufügen",
+    "waitvalidation": "Warte seitdem auf Bestätigung",
+    "refuse": "Verweigern",
+    "compare": "Vergleichen",
+    "selectprofile": "Wählen Sie ein Profil aus",
+    "speaklanguages": "Gesprochene Sprachen",
+    "onlyme": "Nur ich",
+    "meandfriends": "Ich und meine Freunde",
+    "languages": "Sprachen",
+    "year_one": "{{count}} Jahr",
+    "year_other": "{{count}} Jahre",
+    "month_one": "{{count}} Monat",
+    "month_other": "{{count}} Monat",
+    "day_one": "{{count}} Tag",
+    "day_other": "{{count}} Tage",
+    "travel_one": "{{count}} Reise",
+    "travel_other": "{{count}} reisen",
+    "travelcount_one": "{{count}} Reise",
+    "travelcount_other": "{{count}} Reisen"
+  },
+  "filter": {
+    "travel": "Reise",
+    "country": "Land",
+    "all": "Alle"
+  },
+  "continent": {
+    "asia": "Asien",
+    "africa": "Afrika",
+    "northamerica": "Nordamerika",
+    "southamerica": "Südamerika",
+    "europe": "Europa",
+    "oceania": "Ozeanien"
+  },
+  "pages": {
+    "language": {
+      "title": "Sprachen"
+    },
+    "compare": {
+      "title": "Vergleichen"
+    },
+    "forgotpassword": {
+      "title": "Haben Sie Ihr Passwort vergessen"
+    },
+    "friend": {
+      "title": "Meine Freunde"
+    },
+    "friendadd": {
+      "title": "Freunde hinzufügen"
+    },
+    "friendinvitation": {
+      "title": "Einladung von Freunden"
+    },
+    "home": {
+      "title": "Willkommen"
+    },
+    "timeline": {
+      "title": "Zeitleiste"
+    },
+    "statistic": {
+      "title": "Statistisch"
+    },
+    "menu": {
+      "title": "Menüs"
+    },
+    "map": {
+      "title": "Karte"
+    },
+    "explore": {
+      "title": "Erkunden"
+    },
+    "login": {
+      "title": "Verbindung",
+      "hi": "Willkommen",
+      "credential": "Geben Sie Ihre Anmeldedaten ein, um fortzufahren"
+    },
+    "parameters": {
+      "title": "Meine Einstellungen",
+      "selectorigincountry": "Wählen Sie ein Herkunftsland aus",
+      "infoemail": "Eine Bestätigung der alten und neuen E-Mail-Adresse ist erforderlich. "
+    },
+    "register": {
+      "title": "Anmeldung"
+    },
+    "resetpassword": {
+      "title": "Passwort zurücksetzen"
+    }
+  },
+  "form": {
+    "login": {
+      "email": "E-Mail-Adresse",
+      "password": "Passwort",
+      "rememberme": "Erinnere dich an mich",
+      "createaccount": "Ein Konto erstellen",
+      "forgotpassword": "Haben Sie Ihr Passwort vergessen ?",
+      "connect": "Einloggen",
+      "connectgoogle": "Melden Sie sich über Google an",
+      "connectmail": "Melden Sie sich per E-Mail-Adresse an",
+      "haveaccount": "Sie haben noch kein Konto?",
+      "requiredpassword": "Bitte Passwort eingeben",
+      "requiredmail": "Bitte geben Sie eine E-mail-Adresse ein",
+      "formatmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+      "errorconnect": "Die E-Mail-Adresse oder das Passwort ist falsch"
+    },
+    "register": {
+      "username": "Nutzername *",
+      "email": "E-Mail-Adresse *",
+      "password": "Passwort *",
+      "createaccount": "Ein Konto erstellen",
+      "createaccountemail": "Erstellen Sie ein Konto per E-Mail-Adresse",
+      "createaccountgoogle": "Erstellen Sie ein Konto über Google",
+      "continue": "Weitermachen",
+      "requiredusername": "Bitte geben Sie einen Benutzernamen ein",
+      "uniqueusername": "Benutzername bereits vergeben",
+      "requiredpassword": "Bitte Passwort eingeben",
+      "minpassword": "Bitte geben Sie ein Passwort mit mehr als 6 Zeichen ein",
+      "requiredmail": "Bitte geben Sie eine E-mail-Adresse ein",
+      "formatmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+      "alreadyaccount": "Sie haben bereits ein Konto?",
+      "connect": "Anmeldung"
+    },
+    "forgotpassword": {
+      "forgotpassword": "Haben Sie Ihr Passwort vergessen ?",
+      "email": "E-Mail-Adresse *",
+      "createaccount": "Ein Konto erstellen",
+      "continue": "Weitermachen",
+      "requiredmail": "Bitte geben Sie eine E-mail-Adresse ein",
+      "formatmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+      "modality": "Bitte geben Sie die E-Mail-Adresse ein, die Sie bei der Registrierung verwendet haben. ",
+      "connection": "Verbindung",
+      "notforget": "Erinnern Sie sich an Ihr Passwort?",
+      "successsendmail": "E-Mail gesendet",
+      "limitsendemail": "Bitte warten Sie 60 Sekunden, bevor Sie eine E-Mail erneut senden"
+    },
+    "resetpassword": {
+      "resetpassword": "Setze dein Passwort zurück",
+      "password": "Passwort *",
+      "confirmpassword": "Passwort Bestätigung *",
+      "continue": "Weitermachen",
+      "passwordmatch": "Die Passwörter müssen übereinstimmen",
+      "requiredpassword": "Bitte Passwort eingeben",
+      "minpassword": "Bitte geben Sie ein Passwort mit mehr als 6 Zeichen ein"
+    },
+    "createmodifytravel": {
+      "titlecreate": "Fügen Sie eine Reise hinzu",
+      "titlemodify": "Bearbeiten Sie eine Reise",
+      "name": "Name *",
+      "country": "Land *",
+      "startdate": "Startdatum *",
+      "enddate": "Endtermin *",
+      "requiredname": "Bitte geben Sie einen Namen ein",
+      "requiredstartdate": "Bitte geben Sie ein Startdatum ein",
+      "requiredenddate": "Bitte geben Sie ein Enddatum ein",
+      "typeerrordate": "Bitte gib ein korrektes Datum an",
+      "typeerrorcountry": "Bitte wähle ein Land"
+    }
+  },
+  "information": {
+    "visibilityon": "Ihr Profil ist für jeden sichtbar.",
+    "visibilityoff": "Ihr Profil ist nur für Ihre Freunde sichtbar"
+  },
+  "notification": {
+    "FRIENDREQUEST": {
+      "title": "Freundschaftsanfrage",
+      "text": "{{username}} fragt euch als Freunde"
+    }
+  },
+  "unauthorized": {
+    "profile": "Sie müssen mit der Person befreundet sein, um auf deren Profil zugreifen zu können."
+  },
+  "alert": {
+    "deletefriend": "Ihre Löschung wurde berücksichtigt.",
+    "notravelcountry": "Keine Reise in dieses Land.",
+    "updateavatarsuccess": "Ihre Avatar-Änderung wurde berücksichtigt.",
+    "updatecountrysuccess": "Ihre Länderänderung wurde berücksichtigt.",
+    "updatevisibilitysuccess": "Ihre Änderung wurde berücksichtigt.",
+    "updateusernamesuccess": "Die Änderung Ihres Benutzernamens wurde berücksichtigt.",
+    "sendfriendrequest": "Deine Freundschaftsanfrage wurde gesendet.",
+    "validatefriendrequest": "Freundschaftsanfrage bestätigt.",
+    "refusefriendrequest": "Freundschaftsanfrage abgelehnt.",
+    "updateemailsuccess": "Ihre E-Mail-Adresse wird derzeit geändert. "
+  },
+  "modal": {
+    "deletemessage": "Sind Sie sicher, dass „Löschen“ angezeigt wird? {{name}} ?"
+  }
+}

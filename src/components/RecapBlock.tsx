@@ -13,6 +13,7 @@ import logoWorld from "src/assets/logo.png";
 import planeIcon from "src/assets/avion.png";
 import continentIcon from "src/assets/continent.png";
 import bagIcon from "src/assets/bag.png";
+import { JsonLanguageBlock } from "./typography/JsonLanguageBlock";
 
 export const RecapBlock = () => {
   const { t } = useTranslation();
@@ -43,7 +44,7 @@ export const RecapBlock = () => {
       const timeLabel = getTime(time);
       return {
         icon: country.flag,
-        label: country.name.fra,
+        label: <JsonLanguageBlock variant="h6" value={country.name} />,
         value: `${
           timeLabel.years > 0
             ? t("commun.year", { count: timeLabel.years })

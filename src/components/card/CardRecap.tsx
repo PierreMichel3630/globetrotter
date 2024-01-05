@@ -63,7 +63,7 @@ interface PropsArray {
   isPosition?: boolean;
   values: Array<{
     icon?: string;
-    label: string;
+    label: string | JSX.Element;
     value: string | number;
     to?: string;
   }>;

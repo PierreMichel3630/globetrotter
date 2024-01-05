@@ -10,7 +10,7 @@ import {
 import { DateField } from "@mui/x-date-pickers";
 import { useFormik } from "formik";
 import moment, { Moment } from "moment";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import {
   insertCountryTravel,
@@ -18,9 +18,9 @@ import {
   updateCountryTravel,
   updateTravel,
 } from "src/api/globetrotter";
-import { MessageSnackbar } from "src/components/Snackbar";
 import { AutocompleteCountry } from "src/components/input/AutocompleteCountry";
 import { useApp } from "src/context/AppProvider";
+import { useMessage } from "src/context/MessageProvider";
 import {
   CountryTravelInsert,
   CountryTravelUpdate,
@@ -44,7 +44,7 @@ export const TravelForm = ({ travel, onValid }: Props) => {
   const { t } = useTranslation();
   const { refreshTravel, countries } = useApp();
 
-  const [message, setMessage] = useState("");
+  const { setMessage, setSeverity } = useMessage();
 
   const initialValue: {
     name: string;
@@ -126,6 +126,7 @@ export const TravelForm = ({ travel, onValid }: Props) => {
                 onValid();
               });
             } else {
+              setSeverity("error");
               setMessage(t("commun.error"));
             }
           });
@@ -154,11 +155,13 @@ export const TravelForm = ({ travel, onValid }: Props) => {
                 onValid();
               });
             } else {
+              setSeverity("error");
               setMessage(t("commun.error"));
             }
           });
         }
       } catch (err) {
+        setSeverity("error");
         setMessage(t("commun.error"));
       }
     },
@@ -340,11 +343,6 @@ export const TravelForm = ({ travel, onValid }: Props) => {
           </Button>
         </Grid>
       </Grid>
-      <MessageSnackbar
-        open={message !== ""}
-        handleClose={() => setMessage("")}
-        message={message}
-      />
     </form>
   );
 };

@@ -11,7 +11,10 @@ import { Colors } from "src/style/Colors";
 
 import CheckCircleTwoToneIcon from "@mui/icons-material/CheckCircleTwoTone";
 import HighlightOffTwoToneIcon from "@mui/icons-material/HighlightOffTwoTone";
+import ImageNotSupportedIcon from "@mui/icons-material/ImageNotSupported";
 import { Link } from "react-router-dom";
+import { ImageRectangularBlock } from "../ImageBlock";
+import { JsonLanguageBlock } from "../typography/JsonLanguageBlock";
 
 interface PropsVisited {
   country: CountryVisited;
@@ -42,7 +45,7 @@ export const CardCountryVisited = ({ country }: PropsVisited) => {
         <Grid item xs={9}>
           <Grid container spacing={1}>
             <Grid item xs={12}>
-              <Typography variant="h2">{country.name.fra}</Typography>
+              <JsonLanguageBlock variant="h2" value={country.name} />
             </Grid>
             <Grid item xs={12}>
               <Typography variant="h6" noWrap component="span">
@@ -102,7 +105,7 @@ export const CardCountryAdjacent = ({ country }: PropsAdj) => {
           />
         </Grid>
         <Grid item xs={12} sx={{ textAlign: "center" }}>
-          <Typography variant="h4">{country.name.fra}</Typography>
+          <JsonLanguageBlock variant="h4" value={country.name} />
         </Grid>
       </Grid>
     </Paper>
@@ -114,7 +117,7 @@ interface Props {
 }
 
 export const CardCountry = ({ country }: Props) => {
-  const image = country.images.length > 0 ? country.images[0] : "France8.jpg";
+  const image = country.images.length > 0 ? country.images[0] : undefined;
   return (
     <Link to={`/country/${country.id}`}>
       <Paper
@@ -139,16 +142,30 @@ export const CardCountry = ({ country }: Props) => {
         </Box>
         <Grid container>
           <Grid item xs={12}>
-            <img
-              src={`https://otgkjrkkwbjtozbvcbuo.supabase.co/storage/v1/object/public/country/${image}`}
-              style={{
-                width: percent(100),
-              }}
-            />
+            {image ? (
+              <ImageRectangularBlock
+                src={`https://otgkjrkkwbjtozbvcbuo.supabase.co/storage/v1/object/public/country/${image}`}
+                height={200}
+              />
+            ) : (
+              <Box
+                sx={{
+                  minHeight: px(200),
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  backgroundColor: Colors.grey,
+                }}
+              >
+                <ImageNotSupportedIcon
+                  sx={{ fill: Colors.white, width: px(50), height: px(50) }}
+                />
+              </Box>
+            )}
           </Grid>
           <Grid item xs={12}>
             <Box sx={{ p: 1 }}>
-              <Typography variant="h2">{country.name.fra}</Typography>
+              <JsonLanguageBlock variant="h2" value={country.name} />
             </Box>
           </Grid>
         </Grid>

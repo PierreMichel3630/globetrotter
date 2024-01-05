@@ -6,12 +6,14 @@ import { useParams } from "react-router-dom";
 import { CountryBlock } from "src/components/CountryBlock";
 import { GoBackButton } from "src/components/navigation/GoBackButton";
 import { useApp } from "src/context/AppProvider";
+import { useUser } from "src/context/UserProvider";
 import { Country } from "src/models/country/Country";
 
 export const CountryPage = () => {
   const { t } = useTranslation();
   const { countries } = useApp();
   const { id } = useParams();
+  const { language } = useUser();
 
   const [country, setCountry] = useState<Country | undefined>(undefined);
 
@@ -25,8 +27,8 @@ export const CountryPage = () => {
     <Grid container alignItems="flex-end">
       <Helmet>
         <title>
-          {country
-            ? `${country.name.fra} - ${t("appname")}`
+          {country && country.name[language.iso]
+            ? `${country.name[language.iso]} - ${t("appname")}`
             : `${t("appname")}`}
         </title>
       </Helmet>

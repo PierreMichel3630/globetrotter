@@ -1,4 +1,3 @@
-import { useContext, useState } from "react";
 import {
   Box,
   IconButton,
@@ -8,11 +7,12 @@ import {
   MenuItem,
 } from "@mui/material";
 import { percent } from "csx";
+import { useState } from "react";
 
-import { style } from "typestyle";
-import { UserContext } from "src/App";
-import { Language } from "src/models/Language";
 import { BUCKET_LANGUAGE, getUrlPublic } from "src/api/supabase/storage";
+import { useUser } from "src/context/UserProvider";
+import { Language } from "src/models/Language";
+import { style } from "typestyle";
 
 const divFlagCss = style({
   width: 24,
@@ -22,7 +22,7 @@ const divFlagCss = style({
 });
 
 export const LanguagesMenu = () => {
-  const { language, setLanguage, languages } = useContext(UserContext);
+  const { language, setLanguage, languages } = useUser();
 
   const [anchor, setAnchor] = useState<null | HTMLElement>(null);
 

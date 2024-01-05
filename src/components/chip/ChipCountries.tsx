@@ -1,5 +1,6 @@
 import { Grid, Chip, Avatar } from "@mui/material";
 import { Country } from "src/models/country/Country";
+import { JsonLanguageBlock } from "../typography/JsonLanguageBlock";
 
 interface Props {
   countries: Array<Country>;
@@ -13,7 +14,7 @@ export const ChipCountries = ({ countries, onDelete }: Props) => {
         <Grid item key={el.id}>
           <Chip
             avatar={<Avatar alt="flag" src={el.flag} />}
-            label={el.name.fra}
+            label={<JsonLanguageBlock variant="h2" value={el.name} />}
             onDelete={onDelete}
           />
         </Grid>

@@ -24,7 +24,7 @@ export const StatisticPage = () => {
         {continents.map((continent) => (
           <Grid item xs={12} key={continent.id}>
             <CardContinentStat
-              continent={{ id: continent.id, name: continent.name.fra }}
+              continent={{ id: continent.id, name: continent.name }}
             />
           </Grid>
         ))}

@@ -13,9 +13,11 @@ import northAmericaJson from "src/assets/map/continent/north-america.topo.json";
 import oceaniaJson from "src/assets/map/continent/oceania.topo.json";
 import southAmericaJson from "src/assets/map/continent/southAmericaLow.json";
 import worldJson from "src/assets/map/countries-110m.json";
+import { JsonLanguage } from "src/models/Language";
+import { JsonLanguageBlock } from "../typography/JsonLanguageBlock";
 
 interface PropsStat {
-  continent: { id: number; name: string };
+  continent: { id: number; name: string | JsonLanguage };
 }
 
 export const CardContinentStat = ({ continent }: PropsStat) => {
@@ -92,7 +94,11 @@ export const CardContinentStat = ({ continent }: PropsStat) => {
     <Paper sx={{ p: 1 }} elevation={3}>
       <Grid container spacing={1}>
         <Grid item xs={12}>
-          <Typography variant="h2">{continent.name}</Typography>
+          {typeof continent.name === "string" ? (
+            <Typography variant="h6">{continent.name}</Typography>
+          ) : (
+            <JsonLanguageBlock variant="h6" value={continent.name} />
+          )}
         </Grid>
         <Grid item xs={12}>
           <Grid container spacing={1} alignItems="flex-end">

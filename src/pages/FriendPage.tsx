@@ -1,6 +1,5 @@
 import {
   Alert,
-  AlertColor,
   Box,
   Button,
   Chip,
@@ -16,7 +15,6 @@ import {
   selectFriend,
   updateFriend,
 } from "src/api/supabase/friend";
-import { MessageSnackbar } from "src/components/Snackbar";
 import {
   CardInvitationFriend,
   CardRequestFriend,
@@ -28,19 +26,18 @@ import { useAuth } from "src/context/AuthProviderSupabase";
 import { FRIENDSTATUS, Friend, FriendUpdate } from "src/models/Friend";
 
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import { Colors } from "src/style/Colors";
 import { Profile } from "src/models/Profile";
+import { Colors } from "src/style/Colors";
+import { useMessage } from "src/context/MessageProvider";
 
 export const FriendPage = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
+  const { setMessage, setSeverity } = useMessage();
   const LOADINGITEM = 2;
   const [isLoading, setIsLoading] = useState(true);
   const [friends, setFriends] = useState<Array<Friend>>([]);
   const [openAddFriend, setOpenAddFriend] = useState(false);
-
-  const [message, setMessage] = useState("");
-  const [severity, setSeverity] = useState<AlertColor>("error");
 
   const getFriends = async () => {
     if (user !== null) {
@@ -227,13 +224,6 @@ export const FriendPage = () => {
           setOpenAddFriend(false);
           getFriends();
         }}
-      />
-      <MessageSnackbar
-        autoHideDuration={600000}
-        open={message !== ""}
-        handleClose={() => setMessage("")}
-        message={message}
-        severity={severity}
       />
     </Box>
   );

@@ -23,6 +23,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Fragment } from "react";
 import { Loading } from "src/components/Loading";
+import { JsonLanguageBlock } from "src/components/typography/JsonLanguageBlock";
 
 export const TimelinePage = () => {
   const { t } = useTranslation();
@@ -100,9 +101,10 @@ export const TimelinePage = () => {
                               </TimelineSeparator>
                               <TimelineContent sx={{ py: "12px", px: 2 }}>
                                 <Link to={`/country/${country.id}`}>
-                                  <Typography variant="h4">
-                                    {country.name.fra}
-                                  </Typography>
+                                  <JsonLanguageBlock
+                                    variant="h4"
+                                    value={country.name}
+                                  />
                                   <Typography variant="body2">
                                     {travel.name}
                                   </Typography>

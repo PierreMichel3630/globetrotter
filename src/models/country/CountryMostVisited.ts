@@ -1,6 +1,6 @@
 export interface CountryMostVisited {
   icon?: string;
-  label: string;
+  label: JSX.Element;
   value: string;
   number: number;
   to: string;

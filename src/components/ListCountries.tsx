@@ -12,6 +12,7 @@ import { useApp } from "src/context/AppProvider";
 import { CountryTravel } from "src/models/CountryTravel";
 import { sortByStartDateDesc } from "src/utils/sort";
 import { GetLabelDiffDate } from "./LabelDiffDate";
+import { JsonLanguageBlock } from "./typography/JsonLanguageBlock";
 
 interface Props {
   value: Array<CountryTravel>;
@@ -41,7 +42,13 @@ export const ListCountries = ({ value }: Props) => {
                   </ListItemIcon>
                 )}
                 <ListItemText
-                  primary={country ? country.name.fra : ""}
+                  primary={
+                    country ? (
+                      <JsonLanguageBlock variant="h6" value={country.name} />
+                    ) : (
+                      ""
+                    )
+                  }
                   secondary={`${labelStart} - ${labelEnd} ${GetLabelDiffDate(
                     start,
                     end

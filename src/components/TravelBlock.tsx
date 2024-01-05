@@ -7,14 +7,14 @@ import { ListCountries } from "./ListCountries";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { ConfirmDialog } from "./modal/ConfirmModal";
 import { useState } from "react";
-import { useApp } from "src/context/AppProvider";
-import { deleteTravelById } from "src/api/globetrotter";
-import { MessageSnackbar } from "./Snackbar";
-import { CreateTravelModal } from "./modal/CreateTravelModal";
 import { useNavigate } from "react-router-dom";
+import { deleteTravelById } from "src/api/globetrotter";
+import { useApp } from "src/context/AppProvider";
 import { useAuth } from "src/context/AuthProviderSupabase";
+import { useMessage } from "src/context/MessageProvider";
+import { ConfirmDialog } from "./modal/ConfirmModal";
+import { CreateTravelModal } from "./modal/CreateTravelModal";
 
 interface Props {
   travel: Travel;
@@ -25,10 +25,10 @@ export const TravelBlock = ({ travel }: Props) => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { refreshTravel } = useApp();
+  const { setMessage, setSeverity } = useMessage();
 
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const [openModifyModal, setOpenModifyModal] = useState(false);
-  const [message, setMessage] = useState("");
 
   const momentStart = moment.min(
     travel.countries.map((el) => moment(el.startdate))
@@ -43,6 +43,7 @@ export const TravelBlock = ({ travel }: Props) => {
   const deleteTravel = () => {
     deleteTravelById(travel.id).then((res) => {
       if (res.error) {
+        setSeverity("error");
         setMessage(t("commun.error"));
       } else {
         setOpenConfirmModal(false);
@@ -77,7 +78,7 @@ export const TravelBlock = ({ travel }: Props) => {
               </Typography>
               <ListCountries value={travel.countries} />
             </Grid>
-            {user && travel.useruuid === user.id && (
+            {user && travel.useruuid.id === user.id && (
               <>
                 <Grid item xs={12}>
                   <Button
@@ -117,11 +118,6 @@ export const TravelBlock = ({ travel }: Props) => {
         open={openModifyModal}
         close={() => setOpenModifyModal(false)}
         travel={travel}
-      />
-      <MessageSnackbar
-        open={message !== ""}
-        handleClose={() => setMessage("")}
-        message={message}
       />
     </Grid>
   );

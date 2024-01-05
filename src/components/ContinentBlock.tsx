@@ -9,6 +9,8 @@ import { sortByName } from "src/utils/sort";
 import { formatNumber } from "src/utils/string";
 import { Carrousel } from "./Carrousel";
 import { CardCountryAdjacent } from "./card/CardCountry";
+import { JsonLanguageBlock } from "./typography/JsonLanguageBlock";
+import { useUser } from "src/context/UserProvider";
 
 interface Props {
   continent: Continent;
@@ -16,7 +18,9 @@ interface Props {
 
 export const ContinentBlock = ({ continent }: Props) => {
   const { t } = useTranslation();
+  const { language } = useUser();
   const { countriesVisited, countries } = useApp();
+
   const [filter, setFilter] = useState({
     all: true,
     visited: false,
@@ -54,20 +58,21 @@ export const ContinentBlock = ({ continent }: Props) => {
         <Box sx={{ p: 2 }}>
           <Grid container spacing={1}>
             <Grid item xs={12}>
-              <Typography variant="h2">{continent.name.fra}</Typography>
+              <JsonLanguageBlock variant="h2" value={continent.name} />
             </Grid>
             <Grid item xs={12}>
               <Divider />
             </Grid>
-            {continent.description.fra && (
+            {continent.description[language.iso] && (
               <>
                 <Grid item xs={12}>
                   <Typography variant="h4">{t("commun.inshort")}</Typography>
                 </Grid>
                 <Grid item xs={12}>
-                  <Typography variant="body1">
-                    {continent.description.fra}
-                  </Typography>
+                  <JsonLanguageBlock
+                    variant="body1"
+                    value={continent.description}
+                  />
                 </Grid>
                 <Grid item xs={12}>
                   <Divider />
@@ -190,13 +195,15 @@ export const ContinentBlock = ({ continent }: Props) => {
                 }
               />
             </Grid>
-            {countriesFilter.sort(sortByName).map((el) => (
-              <Grid item xs={4} key={el.id}>
-                <Link to={`?country=${el.id}`}>
-                  <CardCountryAdjacent country={el} />
-                </Link>
-              </Grid>
-            ))}
+            {countriesFilter
+              .sort((a, b) => sortByName(language, a, b))
+              .map((el) => (
+                <Grid item xs={4} key={el.id}>
+                  <Link to={`?country=${el.id}`}>
+                    <CardCountryAdjacent country={el} />
+                  </Link>
+                </Grid>
+              ))}
           </Grid>
         </Box>
       </Grid>
