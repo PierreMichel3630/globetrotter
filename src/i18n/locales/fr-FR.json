@@ -21,6 +21,7 @@
     "addcountry": "Ajouter un pays",
     "validate": "Valider",
     "cancel": "Annuler",
+    "createdat": "créé le {{value}}",
     "createdthe": "inscrit depuis le {{value}}",
     "error": "Oups une erreur est survenue. Veuillez ressayer",
     "myfriends": "Mes amis",
@@ -99,9 +100,16 @@
     "onlyme": "Moi uniquement",
     "meandfriends": "Moi et mes amis",
     "languages": "Langues",
+    "languagesavailable": "Langues disponibles",
     "firstname": "Prénom",
     "lastname": "Nom",
-    "independent": "Indépendant"
+    "independent": "Indépendant",
+    "report": "Signaler un problème",
+    "inprogress": "En cours",
+    "abandon": "Abandonné",
+    "corrected": "Corrigé",
+    "response": "réponse",
+    "addreport": "Signaler un problème"
   },
   "filter": {
     "travel": "Voyage",
@@ -171,9 +179,24 @@
     },
     "resetpassword": {
       "title": "Réinitialiser mot de passe"
+    },
+    "report": {
+      "title": "Signaler un problème / Demander une amélioration"
     }
   },
   "form": {
+    "report": {
+      "title": "Signaler un problème",
+      "type": "Type *",
+      "message": "Message *",
+      "requiredtype": "Veuillez sélectionner un type",
+      "requiredmessage": "Veuillez saisir un message",
+      "typeerrortechnique": "Problème technique",
+      "typeevolution": "Demande d'amélioration",
+      "typeerrortraduction": "Erreur de traduction",
+      "typeerrorinformation": "Erreur d'information sur un pays/continent",
+      "typeother": "Autres"
+    },
     "login": {
       "email": "Adresse email",
       "password": "Mot de passe",
@@ -255,6 +278,17 @@
   },
   "unauthorized": {
     "profile": "Vous devez être ami avec la personne pour accéder à son profil."
+  },
+  "screenshoot": {
+    "countryvisited": "Carte intéractive",
+    "compare": "Comparez-vous avec vos amis",
+    "stats": "Statistiques de vos voyages",
+    "friends": "Gestion de vos amis",
+    "connexion": "Connexion via Mail ou Google",
+    "timeline": "Timeline de vos voyages",
+    "explore": "Catalogue de tous les pays",
+    "country": "Fiche d'informations",
+    "travel": "Ajout de Roadtrip"
   },
   "alert": {
     "nointernet": "Veuillez activer internet pour effectuer cette action.",

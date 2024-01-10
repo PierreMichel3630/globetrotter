@@ -15,6 +15,9 @@ export const sortByUsername = (a: any, b: any) =>
 export const sortByStartDate = (a: any, b: any) =>
   moment(b.startdate).diff(moment(a.startdate));
 
+export const sortByCreatedAt = (a: any, b: any) =>
+  moment(b.created_at).diff(moment(a.created_at));
+
 export const sortByStartDateDesc = (a: any, b: any) =>
   moment(a.startdate).diff(b.startdate);
 

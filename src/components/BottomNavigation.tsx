@@ -16,6 +16,7 @@ import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import ExploreIcon from "@mui/icons-material/Explore";
 import TranslateIcon from "@mui/icons-material/Translate";
 import PublicIcon from "@mui/icons-material/Public";
+import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { getBreakpoint } from "src/utils/mediaQuery";
 import { Menu } from "src/models/Menu";
@@ -106,6 +107,12 @@ export const BottomNavigationBasic = () => {
         label: t("commun.settings"),
         icon: <SettingsIcon />,
         to: "/setting",
+      },
+      {
+        value: "report",
+        label: t("commun.report"),
+        icon: <ReportProblemIcon />,
+        to: "/report",
       },
     ],
     [invitations.length, newTravels.length, t]

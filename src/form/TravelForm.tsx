@@ -28,6 +28,9 @@ import {
 import { Travel, TravelInsert, TravelUpdate } from "src/models/Travel";
 import { Country } from "src/models/country/Country";
 import * as Yup from "yup";
+import CheckIcon from "@mui/icons-material/Check";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
 
 interface CountryTravelForm {
   id?: number;
@@ -295,6 +298,7 @@ export const TravelForm = ({ travel, onValid }: Props) => {
                   <Button
                     disableElevation
                     fullWidth
+                    size="small"
                     type="submit"
                     variant="contained"
                     color="error"
@@ -303,6 +307,7 @@ export const TravelForm = ({ travel, onValid }: Props) => {
                       newValue.splice(index, 1);
                       formik.setFieldValue("countries", newValue);
                     }}
+                    startIcon={<DeleteIcon />}
                   >
                     {t("commun.delete")}
                   </Button>
@@ -317,12 +322,14 @@ export const TravelForm = ({ travel, onValid }: Props) => {
             fullWidth
             variant="contained"
             color="success"
+            size="small"
             onClick={() => {
               formik.setFieldValue("countries", [
                 ...formik.values.countries,
                 { country: null, startdate: null, enddate: null },
               ]);
             }}
+            startIcon={<AddIcon />}
           >
             {t("commun.addcountry")}
           </Button>
@@ -334,6 +341,8 @@ export const TravelForm = ({ travel, onValid }: Props) => {
             type="submit"
             variant="contained"
             color="primary"
+            startIcon={<CheckIcon />}
+            size="small"
           >
             {t("commun.validate")}
           </Button>

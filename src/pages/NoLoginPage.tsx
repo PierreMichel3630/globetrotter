@@ -2,30 +2,41 @@ import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { Navigate, useNavigate } from "react-router-dom";
 
-import logo from "src/assets/logo.png";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import { Helmet } from "react-helmet-async";
-import { Carrousel } from "src/components/Carrousel";
+import logo from "src/assets/logo.png";
 
-import screenshoot1 from "src/assets/screenshoot/screenshoot1.png";
-import screenshoot2 from "src/assets/screenshoot/screenshoot2.png";
-import screenshoot3 from "src/assets/screenshoot/screenshoot3.png";
-import screenshoot4 from "src/assets/screenshoot/screenshoot4.png";
-import screenshoot5 from "src/assets/screenshoot/screenshoot5.png";
+import screenshoot1 from "src/assets/screenshoot/Screenshot1.jpg";
+import screenshoot2 from "src/assets/screenshoot/Screenshot2.jpg";
+import screenshoot3 from "src/assets/screenshoot/Screenshot3.jpg";
+import screenshoot4 from "src/assets/screenshoot/Screenshot4.jpg";
+import screenshoot5 from "src/assets/screenshoot/Screenshot5.jpg";
+import screenshoot6 from "src/assets/screenshoot/Screenshot6.jpg";
+import screenshoot7 from "src/assets/screenshoot/Screenshot7.jpg";
+import screenshoot8 from "src/assets/screenshoot/Screenshot8.jpg";
+import screenshoot9 from "src/assets/screenshoot/Screenshot9.jpg";
+import { ScreenshootBlock } from "src/components/ScreenshootBlock";
 import { useAuth } from "src/context/AuthProviderSupabase";
+import { useUser } from "src/context/UserProvider";
+import { Colors } from "src/style/Colors";
 
 export const NoLoginPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { user } = useAuth();
+  const { language, setLanguage, languages } = useUser();
 
-  const images = [
-    screenshoot1,
-    screenshoot2,
-    screenshoot3,
-    screenshoot4,
-    screenshoot5,
+  const screenshots = [
+    { label: t("screenshoot.countryvisited"), image: screenshoot2 },
+    { label: t("screenshoot.stats"), image: screenshoot3 },
+    { label: t("screenshoot.compare"), image: screenshoot6 },
+    { label: t("screenshoot.timeline"), image: screenshoot4 },
+    { label: t("screenshoot.explore"), image: screenshoot7 },
+    { label: t("screenshoot.country"), image: screenshoot8 },
+    { label: t("screenshoot.travel"), image: screenshoot9 },
+    { label: t("screenshoot.friends"), image: screenshoot5 },
+    { label: t("screenshoot.connexion"), image: screenshoot1 },
   ];
 
   if (user) {
@@ -34,7 +45,7 @@ export const NoLoginPage = () => {
 
   return (
     <Container maxWidth="md">
-      <Box sx={{ p: 2 }}>
+      <Box sx={{ p: 1 }}>
         <Helmet>
           <title>{`${t("pages.home.title")} - ${t("appname")}`}</title>
         </Helmet>
@@ -77,8 +88,42 @@ export const NoLoginPage = () => {
               <Typography variant="body1">{t("commun.register")}</Typography>
             </Button>
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <Carrousel images={images} />
+          <Grid item xs={12}>
+            <ScreenshootBlock screenshots={screenshots} />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h6">
+              {t("commun.languagesavailable")}
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Grid
+              container
+              spacing={1}
+              alignItems="center"
+              justifyContent="center"
+            >
+              {languages.map((el) => (
+                <Grid
+                  item
+                  sx={{
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setLanguage(el)}
+                >
+                  <img
+                    style={{
+                      border:
+                        language.iso === el.iso
+                          ? `3px solid ${Colors.green}`
+                          : "none",
+                    }}
+                    src={el.icon}
+                    height={language.iso === el.iso ? 36 : 30}
+                  />
+                </Grid>
+              ))}
+            </Grid>
           </Grid>
         </Grid>
       </Box>

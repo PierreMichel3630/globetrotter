@@ -5,12 +5,12 @@
       "hi": "Guten Morgen",
       "parameter": "Meine Einstellungen",
       "statistics": "Meine Statistiken",
-      "logout": "Trennen"
+      "logout": "Ausloggen"
     },
-    "login": "Einloggen"
+    "login": "Anmeldung"
   },
   "commun": {
-    "login": "Einloggen",
+    "login": "Anmeldung",
     "register": "Registrieren",
     "getstarted": "Loslegen",
     "backhome": "Startseite",
@@ -21,6 +21,7 @@
     "addcountry": "Fügen Sie ein Land hinzu",
     "validate": "Bestätigen",
     "cancel": "Stornieren",
+    "createdat": "erstellt die {{value}}",
     "createdthe": "Dabei seit {{value}}",
     "error": "Hoppla! Ein Fehler ist aufgetreten. ",
     "myfriends": "Meine Freunde",
@@ -66,12 +67,13 @@
     "friends": "Freunde",
     "explore": "Erkunden",
     "back": "Zurück",
-    "delete": "LÖSCHEN",
+    "delete": "Löschen",
     "account": "Konto",
     "logout": "Trennen",
     "settings": "Einstellungen",
     "yourstravels": "Ihre Reisen",
     "origincountry": "Heimatland",
+    "myorigincountry": "Mein Heimatland",
     "modify": "Ändern",
     "yes": "Ja",
     "no": "NEIN",
@@ -87,7 +89,17 @@
     "speaklanguages": "Gesprochene Sprachen",
     "onlyme": "Nur ich",
     "meandfriends": "Ich und meine Freunde",
-    "languages": "Sprachen",
+    "languages": "SPRACHEN",
+    "languagesavailable": "Verfügbare Sprachen",
+    "firstname": "Vorname",
+    "lastname": "Name",
+    "independent": "Unabhängig",
+    "report": "Ein Problem melden",
+    "inprogress": "Im Gange",
+    "abandon": "Verlassen",
+    "corrected": "Korrigiert",
+    "response": "Antwort",
+    "addreport": "ein Problem melden",
     "year_one": "{{count}} Jahr",
     "year_other": "{{count}} Jahre",
     "month_one": "{{count}} Monat",
@@ -115,6 +127,9 @@
   "pages": {
     "language": {
       "title": "Sprachen"
+    },
+    "origincountry": {
+      "title": "Heimatland"
     },
     "compare": {
       "title": "Vergleichen"
@@ -164,9 +179,24 @@
     },
     "resetpassword": {
       "title": "Passwort zurücksetzen"
+    },
+    "report": {
+      "title": "Ein Problem melden / eine Verbesserung anfordern"
     }
   },
   "form": {
+    "report": {
+      "title": "ein Problem melden",
+      "type": "Art *",
+      "message": "Nachricht *",
+      "requiredtype": "Bitte wählen Sie einen Typ aus",
+      "requiredmessage": "Bitte geben Sie eine Nachricht ein",
+      "typeerrortechnique": "Technisches Problem",
+      "typeevolution": "Verbesserungswunsch",
+      "typeerrortraduction": "Übersetzungsfehler",
+      "typeerrorinformation": "Informationsfehler zu einem Land/Kontinent",
+      "typeother": "Andere"
+    },
     "login": {
       "email": "E-Mail-Adresse",
       "password": "Passwort",
@@ -183,15 +213,16 @@
       "errorconnect": "Die E-Mail-Adresse oder das Passwort ist falsch"
     },
     "register": {
-      "username": "Nutzername *",
+      "firstname": "Vorname *",
+      "lastname": "Name *",
       "email": "E-Mail-Adresse *",
       "password": "Passwort *",
       "createaccount": "Ein Konto erstellen",
       "createaccountemail": "Erstellen Sie ein Konto per E-Mail-Adresse",
       "createaccountgoogle": "Erstellen Sie ein Konto über Google",
       "continue": "Weitermachen",
-      "requiredusername": "Bitte geben Sie einen Benutzernamen ein",
-      "uniqueusername": "Benutzername bereits vergeben",
+      "requiredfirstname": "Bitte geben Sie einen Vornamen ein",
+      "requiredlastname": "Bitte geben Sie einen Namen ein",
       "requiredpassword": "Bitte Passwort eingeben",
       "minpassword": "Bitte geben Sie ein Passwort mit mehr als 6 Zeichen ein",
       "requiredmail": "Bitte geben Sie eine E-mail-Adresse ein",
@@ -248,13 +279,26 @@
   "unauthorized": {
     "profile": "Sie müssen mit der Person befreundet sein, um auf deren Profil zugreifen zu können."
   },
+  "screenshoot": {
+    "countryvisited": "Interaktive Karte",
+    "compare": "Vergleichen Sie sich mit Ihren Freunden",
+    "stats": "Statistiken Ihrer Reisen",
+    "friends": "Verwalten Sie Ihre Freunde",
+    "connexion": "Verbindung per Mail oder Google",
+    "timeline": "Zeitleiste Ihrer Reisen",
+    "explore": "Katalog aller Länder",
+    "country": "Infoblatt",
+    "travel": "Roadtrip hinzugefügt"
+  },
   "alert": {
+    "nointernet": "Bitte aktivieren Sie das Internet, um diese Aktion auszuführen.",
     "deletefriend": "Ihre Löschung wurde berücksichtigt.",
     "notravelcountry": "Keine Reise in dieses Land.",
     "updateavatarsuccess": "Ihre Avatar-Änderung wurde berücksichtigt.",
     "updatecountrysuccess": "Ihre Länderänderung wurde berücksichtigt.",
     "updatevisibilitysuccess": "Ihre Änderung wurde berücksichtigt.",
-    "updateusernamesuccess": "Die Änderung Ihres Benutzernamens wurde berücksichtigt.",
+    "updatefirstnamesuccess": "Ihre Vornamensänderung wurde berücksichtigt.",
+    "updatelastnamesuccess": "Ihre Namensänderung wurde berücksichtigt.",
     "sendfriendrequest": "Deine Freundschaftsanfrage wurde gesendet.",
     "validatefriendrequest": "Freundschaftsanfrage bestätigt.",
     "refusefriendrequest": "Freundschaftsanfrage abgelehnt.",

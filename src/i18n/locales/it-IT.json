@@ -5,22 +5,23 @@
       "hi": "Buongiorno",
       "parameter": "Le mie impostazioni",
       "statistics": "Le mie statistiche",
-      "logout": "Disconnetti"
+      "logout": "Disconnettersi"
     },
-    "login": "Per accedere"
+    "login": "Login"
   },
   "commun": {
-    "login": "Per accedere",
+    "login": "Login",
     "register": "Registrati",
     "getstarted": "Iniziare",
     "backhome": "Pagina iniziale",
     "welcome": "Benvenuto",
     "welcomemessage": "Globetrotter è una mappa interattiva che ti permette di elencare tutti i tuoi viaggi, averne statistiche, condividerli o confrontarli con i tuoi amici.",
-    "all": "Tutti",
+    "all": "Tutto",
     "addtravel": "Aggiungi un viaggio",
     "addcountry": "Aggiungi un paese",
-    "validate": "convalidare",
+    "validate": "Convalidare",
     "cancel": "Annulla",
+    "createdat": "ha creato il {{value}}",
     "createdthe": "registrato dal {{value}}",
     "error": "Spiacenti, si è verificato un errore. ",
     "myfriends": "I miei amici",
@@ -41,26 +42,16 @@
     "mostvisitedcountries": "Paesi visitati",
     "countriesvisited": "Paesi visitati",
     "countriesnotvisited": "Paesi non visitati",
-    "year_one": "{{count}} anno",
-    "year_other": "{{count}} anni",
-    "month_one": "{{count}} mese",
-    "month_other": "{{count}} mese",
-    "day_one": "{{count}} giorno",
-    "day_other": "{{count}} giorni",
     "world": "Mondo",
-    "search": "ricercare",
-    "travel_one": "{{count}} viaggio",
-    "travel_other": "{{count}} viaggio",
+    "search": "Ricercare",
     "travelcount_zero": "Viaggio",
-    "travelcount_one": "{{count}} Viaggio",
-    "travelcount_other": "{{count}} Viaggio",
     "flag": "Bandiera",
     "continent": "Continente",
     "continentsvisited": "Continenti visitati",
     "capital": "Capitale",
     "population": "Popolazione",
     "area": "La zona",
-    "currency": "Moneta",
+    "currency": "Contanti",
     "or": "O",
     "adjacentcountry": "Paese di confine",
     "inshort": "In breve",
@@ -70,18 +61,19 @@
     "superficyunite": "abitante/km2",
     "travels": "Viaggio",
     "information": "Informazione",
-    "map": "Mappa",
+    "map": "Carta geografica",
     "statistics": "Statistico",
     "timeline": "Sequenza temporale",
     "friends": "Amici",
     "explore": "Esplorare",
     "back": "Indietro",
-    "delete": "ELIMINARE",
+    "delete": "Eliminare",
     "account": "Account",
     "logout": "Disconnetti",
     "settings": "Impostazioni",
     "yourstravels": "I tuoi viaggi",
     "origincountry": "Paese d'origine",
+    "myorigincountry": "Il mio paese d'origine",
     "modify": "Modificare",
     "yes": "SÌ",
     "no": "NO",
@@ -97,12 +89,37 @@
     "speaklanguages": "Lingue parlate",
     "onlyme": "Solo io",
     "meandfriends": "Io e i miei amici",
-    "languages": "Lingue"
+    "languages": "LE LINGUE",
+    "languagesavailable": "Lingue disponibili",
+    "firstname": "Nome di battesimo",
+    "lastname": "Nome",
+    "independent": "Indipendente",
+    "report": "Segnala un problema",
+    "inprogress": "In corso",
+    "abandon": "Abbandonato",
+    "corrected": "Corretto",
+    "response": "risposta",
+    "addreport": "per segnalare un problema",
+    "travelcount_one": "{{count}} Viaggio",
+    "travelcount_many": "{{count}} Viaggio",
+    "travelcount_other": "{{count}} Viaggio",
+    "year_one": "{{count}} anno",
+    "year_many": "{{count}} anni",
+    "year_other": "{{count}} anni",
+    "month_one": "{{count}} mese",
+    "month_many": "{{count}} mese",
+    "month_other": "{{count}} mese",
+    "day_one": "{{count}} giorno",
+    "day_many": "{{count}} giorni",
+    "day_other": "{{count}} giorni",
+    "travel_one": "{{count}} viaggio",
+    "travel_many": "{{count}} viaggio",
+    "travel_other": "{{count}} viaggio"
   },
   "filter": {
     "travel": "Viaggio",
     "country": "Paese",
-    "all": "Tutti"
+    "all": "Tutto"
   },
   "continent": {
     "asia": "Asia",
@@ -114,7 +131,10 @@
   },
   "pages": {
     "language": {
-      "title": "Lingue"
+      "title": "Le lingue"
+    },
+    "origincountry": {
+      "title": "Paese d'origine"
     },
     "compare": {
       "title": "Confrontare"
@@ -132,7 +152,7 @@
       "title": "Invito di amici"
     },
     "home": {
-      "title": "accoglienza"
+      "title": "Benvenuto"
     },
     "timeline": {
       "title": "Sequenza temporale"
@@ -160,13 +180,28 @@
       "infoemail": "Sarà necessaria la conferma del vecchio e del nuovo indirizzo email. "
     },
     "register": {
-      "title": "iscrizione"
+      "title": "Registrazione"
     },
     "resetpassword": {
       "title": "Resetta la password"
+    },
+    "report": {
+      "title": "Segnala un problema / Richiedi un miglioramento"
     }
   },
   "form": {
+    "report": {
+      "title": "per segnalare un problema",
+      "type": "Tipo *",
+      "message": "Messaggio *",
+      "requiredtype": "Seleziona un tipo",
+      "requiredmessage": "Per favore inserisci un messaggio",
+      "typeerrortechnique": "Problemi tecnici",
+      "typeevolution": "Richiesta di miglioramento",
+      "typeerrortraduction": "Errore di traduzione",
+      "typeerrorinformation": "Errore di informazione su un paese/continente",
+      "typeother": "Altri"
+    },
     "login": {
       "email": "Indirizzo e-mail",
       "password": "Parola d'ordine",
@@ -183,15 +218,16 @@
       "errorconnect": "L'indirizzo email o la password non sono corretti"
     },
     "register": {
-      "username": "Nome utente *",
+      "firstname": "Nome di battesimo *",
+      "lastname": "Nome *",
       "email": "Indirizzo e-mail *",
       "password": "Parola d'ordine *",
       "createaccount": "Creare un account",
       "createaccountemail": "Crea un account tramite indirizzo email",
       "createaccountgoogle": "Crea un account tramite Google",
-      "continue": "Continuare",
-      "requiredusername": "Inserisci un nome utente",
-      "uniqueusername": "Nome utente già preso",
+      "continue": "Continua",
+      "requiredfirstname": "Inserisci un nome",
+      "requiredlastname": "Inserisci un nome",
       "requiredpassword": "Per favore inserire una password",
       "minpassword": "Inserisci una password più lunga di 6 caratteri",
       "requiredmail": "Si prega di inserire un indirizzo email",
@@ -203,7 +239,7 @@
       "forgotpassword": "Hai dimenticato la password ?",
       "email": "Indirizzo e-mail *",
       "createaccount": "Creare un account",
-      "continue": "Continuare",
+      "continue": "Continua",
       "requiredmail": "Si prega di inserire un indirizzo email",
       "formatmail": "Si prega di inserire un indirizzo email valido",
       "modality": "Inserisci l'indirizzo email che hai utilizzato al momento della registrazione. ",
@@ -216,7 +252,7 @@
       "resetpassword": "reimposta la tua password",
       "password": "Parola d'ordine *",
       "confirmpassword": "Conferma password *",
-      "continue": "Continuare",
+      "continue": "Continua",
       "passwordmatch": "Le password devono essere identiche",
       "requiredpassword": "Per favore inserire una password",
       "minpassword": "Inserisci una password più lunga di 6 caratteri"
@@ -248,13 +284,26 @@
   "unauthorized": {
     "profile": "Devi essere amico della persona per accedere al suo profilo."
   },
+  "screenshoot": {
+    "countryvisited": "Mappa interattiva",
+    "compare": "Confrontati con i tuoi amici",
+    "stats": "Statistiche dei tuoi viaggi",
+    "friends": "Gestire i tuoi amici",
+    "connexion": "Connessione tramite Mail o Google",
+    "timeline": "Cronologia dei tuoi viaggi",
+    "explore": "Catalogo di tutti i paesi",
+    "country": "Foglio informativo",
+    "travel": "Aggiunto Viaggio su strada"
+  },
   "alert": {
+    "nointernet": "Abilita Internet per eseguire questa azione.",
     "deletefriend": "La tua cancellazione è stata presa in considerazione.",
     "notravelcountry": "Nessun viaggio in questo paese.",
     "updateavatarsuccess": "La modifica del tuo avatar è stata presa in considerazione.",
     "updatecountrysuccess": "Il tuo cambio di Paese è stato preso in considerazione.",
     "updatevisibilitysuccess": "La tua modifica è stata presa in considerazione.",
-    "updateusernamesuccess": "La tua modifica del nome utente è stata presa in considerazione.",
+    "updatefirstnamesuccess": "Il tuo cambio di nome è stato preso in considerazione.",
+    "updatelastnamesuccess": "Il tuo cambio di nome è stato preso in considerazione.",
     "sendfriendrequest": "La tua richiesta di amicizia è stata inviata.",
     "validatefriendrequest": "Richiesta di amicizia convalidata.",
     "refusefriendrequest": "Richiesta di amicizia rifiutata.",

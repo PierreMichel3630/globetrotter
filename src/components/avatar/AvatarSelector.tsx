@@ -22,12 +22,12 @@ export const AvatarSelector = ({ selected, onSelect }: Props) => {
           <Avatar
             sx={{
               cursor: "pointer",
-              border: selected === null ? "5px solid green" : "none",
-              width: selected === null ? 55 : 50,
-              height: selected === null ? 55 : 50,
+              border: selected === avatarExternal ? "5px solid green" : "none",
+              width: selected === avatarExternal ? 55 : 50,
+              height: selected === avatarExternal ? 55 : 50,
             }}
             src={avatarExternal}
-            onClick={() => onSelect(null)}
+            onClick={() => onSelect(avatarExternal ?? null)}
           />
         </Grid>
       )}

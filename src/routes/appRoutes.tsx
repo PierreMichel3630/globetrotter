@@ -11,6 +11,7 @@ import { FriendPage } from "src/pages/FriendPage";
 import { ComparePage } from "src/pages/ComparePage";
 import { LanguagePage } from "src/pages/LanguagePage";
 import { OriginCountryPage } from "src/pages/OriginCountryPage";
+import { ReportPage } from "src/pages/ReportPage";
 
 export const AppRoutes = [
   {
@@ -98,6 +99,14 @@ export const AppRoutes = [
     element: (
       <ProtectedRoute>
         <OriginCountryPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/report",
+    element: (
+      <ProtectedRoute>
+        <ReportPage />
       </ProtectedRoute>
     ),
   },

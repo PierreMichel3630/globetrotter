@@ -43,10 +43,11 @@ function App() {
             },
           },
           caption: {
-            fontSize: 13,
+            fontSize: 10,
+            fontStyle: "italic",
             fontWeight: 500,
             "@media (max-width:600px)": {
-              fontSize: 12,
+              fontSize: 10,
             },
           },
           body1: {

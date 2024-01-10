@@ -5,12 +5,12 @@
       "hi": "Good morning",
       "parameter": "My settings",
       "statistics": "My Statistics",
-      "logout": "Disconnect"
+      "logout": "Logout"
     },
-    "login": "To log in"
+    "login": "Login"
   },
   "commun": {
-    "login": "To log in",
+    "login": "Login",
     "register": "Register",
     "getstarted": "Get started",
     "backhome": "Home page",
@@ -19,8 +19,9 @@
     "all": "All",
     "addtravel": "Add a trip",
     "addcountry": "Add a country",
-    "validate": "To validate",
+    "validate": "Validate",
     "cancel": "Cancel",
+    "createdat": "created the {{value}}",
     "createdthe": "registered since {{value}}",
     "error": "Oops, an error occurred. ",
     "myfriends": "My friends",
@@ -66,12 +67,13 @@
     "friends": "Friends",
     "explore": "Explore",
     "back": "Back",
-    "delete": "DELETE",
+    "delete": "Delete",
     "account": "Account",
     "logout": "Disconnect",
     "settings": "Settings",
     "yourstravels": "Your Travels",
     "origincountry": "Native country",
+    "myorigincountry": "My home country",
     "modify": "To modify",
     "yes": "Yes",
     "no": "No",
@@ -87,7 +89,17 @@
     "speaklanguages": "Spoken languages",
     "onlyme": "Only me",
     "meandfriends": "Me and my friends",
-    "languages": "Languages",
+    "languages": "LANGUAGES",
+    "languagesavailable": "Languages ​​available",
+    "firstname": "First name",
+    "lastname": "Name",
+    "independent": "Independent",
+    "report": "Report a problem",
+    "inprogress": "In progress",
+    "abandon": "Abandoned",
+    "corrected": "Corrected",
+    "response": "answer",
+    "addreport": "to report a problem",
     "year_one": "{{count}} year",
     "year_other": "{{count}} years",
     "month_one": "{{count}} month",
@@ -115,6 +127,9 @@
   "pages": {
     "language": {
       "title": "Languages"
+    },
+    "origincountry": {
+      "title": "Native country"
     },
     "compare": {
       "title": "Compare"
@@ -164,9 +179,24 @@
     },
     "resetpassword": {
       "title": "Reset password"
+    },
+    "report": {
+      "title": "Report a problem / Request an improvement"
     }
   },
   "form": {
+    "report": {
+      "title": "to report a problem",
+      "type": "Kind *",
+      "message": "Message *",
+      "requiredtype": "Please select a type",
+      "requiredmessage": "Please enter a message",
+      "typeerrortechnique": "Technical problem",
+      "typeevolution": "Improvement request",
+      "typeerrortraduction": "Translation mistake",
+      "typeerrorinformation": "Information error on a country/continent",
+      "typeother": "Others"
+    },
     "login": {
       "email": "E-mail address",
       "password": "Password",
@@ -183,15 +213,16 @@
       "errorconnect": "The email address or password is incorrect"
     },
     "register": {
-      "username": "Username *",
+      "firstname": "First name *",
+      "lastname": "Name *",
       "email": "E-mail address *",
       "password": "Password *",
       "createaccount": "Create an account",
       "createaccountemail": "Create an account via email address",
       "createaccountgoogle": "Create an account through Google",
       "continue": "Continue",
-      "requiredusername": "Please enter a username",
-      "uniqueusername": "Username already taken",
+      "requiredfirstname": "Please enter a first name",
+      "requiredlastname": "Please enter a name",
       "requiredpassword": "Please enter a password",
       "minpassword": "Please enter a password longer than 6 characters",
       "requiredmail": "Please enter an email address",
@@ -248,13 +279,26 @@
   "unauthorized": {
     "profile": "You must be friends with the person to access their profile."
   },
+  "screenshoot": {
+    "countryvisited": "Interactive map",
+    "compare": "Compare yourself with your friends",
+    "stats": "Statistics of your trips",
+    "friends": "Managing your friends",
+    "connexion": "Connection via Mail or Google",
+    "timeline": "Timeline of your travels",
+    "explore": "Catalog of all countries",
+    "country": "Information sheet",
+    "travel": "Added Roadtrip"
+  },
   "alert": {
+    "nointernet": "Please enable internet to perform this action.",
     "deletefriend": "Your deletion has been taken into account.",
     "notravelcountry": "No travel to this country.",
     "updateavatarsuccess": "Your avatar modification has been taken into account.",
     "updatecountrysuccess": "Your country change has been taken into account.",
     "updatevisibilitysuccess": "Your modification has been taken into account.",
-    "updateusernamesuccess": "Your username change has been taken into account.",
+    "updatefirstnamesuccess": "Your first name change has been taken into account.",
+    "updatelastnamesuccess": "Your name change has been taken into account.",
     "sendfriendrequest": "Your friend request has been sent.",
     "validatefriendrequest": "Friend request validated.",
     "refusefriendrequest": "Friend request declined.",

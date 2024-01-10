@@ -29,6 +29,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import TranslateIcon from "@mui/icons-material/Translate";
 import PublicIcon from "@mui/icons-material/Public";
+import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 import { Menu } from "src/models/Menu";
 
 export const MenuPage = () => {
@@ -90,6 +91,12 @@ export const MenuPage = () => {
       label: t("commun.settings"),
       icon: <SettingsIcon />,
       to: "/setting",
+    },
+    {
+      value: "report",
+      label: t("commun.report"),
+      icon: <ReportProblemIcon />,
+      to: "/report",
     },
   ];
 

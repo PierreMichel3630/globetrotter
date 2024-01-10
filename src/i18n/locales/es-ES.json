@@ -2,16 +2,16 @@
   "appname": "itinerario de mi vida",
   "header": {
     "account": {
-      "hi": "Buenos dias",
+      "hi": "Buen día",
       "parameter": "Mi configuración",
       "statistics": "Mis estadísticas",
-      "logout": "Desconectar"
+      "logout": "Cerrar sesión"
     },
-    "login": "Conectarse"
+    "login": "Acceso"
   },
   "commun": {
-    "login": "Conectarse",
-    "register": "Inscribirse",
+    "login": "Acceso",
+    "register": "Registro",
     "getstarted": "Empezar",
     "backhome": "pagina de inicio",
     "welcome": "Bienvenido",
@@ -20,7 +20,8 @@
     "addtravel": "Añadir un viaje",
     "addcountry": "Añadir un país",
     "validate": "Validar",
-    "cancel": "anular",
+    "cancel": "Cancelar",
+    "createdat": "creó el {{value}}",
     "createdthe": "registrado desde {{value}}",
     "error": "Oops! Ha ocurrido un error. ",
     "myfriends": "Mis amigos",
@@ -35,25 +36,15 @@
     "avatar": "Avatar",
     "return": "Atrás",
     "myparameters": "Mi configuración",
-    "username": "nombre del usuario",
+    "username": "nombre de usuario",
     "timeintravel": "Pasando por",
     "timeintravelday": "Tiempo empleado en viajar (en días)",
     "mostvisitedcountries": "Países visitados",
     "countriesvisited": "Países visitados",
     "countriesnotvisited": "Países no visitados",
-    "year_one": "{{count}} año",
-    "year_other": "{{count}} años",
-    "month_one": "{{count}} mes",
-    "month_other": "{{count}} mes",
-    "day_one": "{{count}} día",
-    "day_other": "{{count}} días",
     "world": "Mundo",
-    "search": "Buscar",
-    "travel_one": "{{count}} viaje",
-    "travel_other": "{{count}} viajar",
+    "search": "A la investigación",
     "travelcount_zero": "Viaje",
-    "travelcount_one": "{{count}} Viaje",
-    "travelcount_other": "{{count}} Viajar",
     "flag": "Bandera",
     "continent": "Continente",
     "continentsvisited": "Continentes visitados",
@@ -76,13 +67,14 @@
     "friends": "Amigos",
     "explore": "Explorar",
     "back": "Atrás",
-    "delete": "BORRAR",
+    "delete": "Borrar",
     "account": "Cuenta",
     "logout": "Desconectar",
-    "settings": "configuraciones",
+    "settings": "Ajustes",
     "yourstravels": "Tus viajes",
-    "origincountry": "País de origen",
-    "modify": "Editar",
+    "origincountry": "Patria",
+    "myorigincountry": "Mi país natal",
+    "modify": "Modificar",
     "yes": "Sí",
     "no": "No",
     "addfriend": "Añade un amigo",
@@ -94,10 +86,35 @@
     "refuse": "Rechazar",
     "compare": "Comparar",
     "selectprofile": "Seleccione un perfil",
-    "speaklanguages": "Lenguas habladas",
+    "speaklanguages": "Lenguajes hablados",
     "onlyme": "Solo yo",
     "meandfriends": "Yo y mis amigos",
-    "languages": "Idiomas"
+    "languages": "IDIOMAS",
+    "languagesavailable": "Idiomas disponibles",
+    "firstname": "Nombre de pila",
+    "lastname": "Nombre",
+    "independent": "Independiente",
+    "report": "Informar de un problema",
+    "inprogress": "En curso",
+    "abandon": "Abandonado",
+    "corrected": "Corregido",
+    "response": "respuesta",
+    "addreport": "para informar un problema",
+    "travelcount_one": "{{count}} Viaje",
+    "travelcount_many": "{{count}} Viajar",
+    "travelcount_other": "{{count}} Viajar",
+    "year_one": "{{count}} año",
+    "year_many": "{{count}} años",
+    "year_other": "{{count}} años",
+    "month_one": "{{count}} mes",
+    "month_many": "{{count}} mes",
+    "month_other": "{{count}} mes",
+    "day_one": "{{count}} día",
+    "day_many": "{{count}} días",
+    "day_other": "{{count}} días",
+    "travel_one": "{{count}} viaje",
+    "travel_many": "{{count}} viajar",
+    "travel_other": "{{count}} viajar"
   },
   "filter": {
     "travel": "Viaje",
@@ -116,11 +133,14 @@
     "language": {
       "title": "Idiomas"
     },
+    "origincountry": {
+      "title": "Patria"
+    },
     "compare": {
       "title": "Comparar"
     },
     "forgotpassword": {
-      "title": "contraseña olvidada"
+      "title": "Olvidaste tu contraseña"
     },
     "friend": {
       "title": "Mis amigos"
@@ -132,7 +152,7 @@
       "title": "invitacion de amigos"
     },
     "home": {
-      "title": "bienvenida"
+      "title": "Bienvenido"
     },
     "timeline": {
       "title": "Línea de tiempo"
@@ -164,16 +184,31 @@
     },
     "resetpassword": {
       "title": "Restablecer la contraseña"
+    },
+    "report": {
+      "title": "Informar un problema / Solicitar una mejora"
     }
   },
   "form": {
+    "report": {
+      "title": "para informar un problema",
+      "type": "Amable *",
+      "message": "Mensaje *",
+      "requiredtype": "Por favor seleccione un tipo",
+      "requiredmessage": "Por favor introduce un mensaje",
+      "typeerrortechnique": "Problema técnico",
+      "typeevolution": "Solicitud de mejora",
+      "typeerrortraduction": "Error de traducción",
+      "typeerrorinformation": "Error de información en un país/continente",
+      "typeother": "Otros"
+    },
     "login": {
       "email": "Dirección de correo electrónico",
       "password": "Contraseña",
-      "rememberme": "se acuerda de mi",
-      "createaccount": "Crear una cuenta",
-      "forgotpassword": "Contraseña olvidada ?",
-      "connect": "Conectarse",
+      "rememberme": "Acuérdate de mí",
+      "createaccount": "Crea una cuenta",
+      "forgotpassword": "Olvidaste tu contraseña ?",
+      "connect": "Iniciar sesión",
       "connectgoogle": "Iniciar sesión a través de Google",
       "connectmail": "Iniciar sesión a través de la dirección de correo electrónico",
       "haveaccount": "¿No tienes una cuenta?",
@@ -183,15 +218,16 @@
       "errorconnect": "La dirección de correo electrónico o la contraseña son incorrectas."
     },
     "register": {
-      "username": "Nombre del usuario *",
+      "firstname": "Nombre de pila *",
+      "lastname": "Nombre *",
       "email": "Dirección de correo electrónico *",
       "password": "Contraseña *",
-      "createaccount": "Crear una cuenta",
+      "createaccount": "Crea una cuenta",
       "createaccountemail": "Crear una cuenta a través de la dirección de correo electrónico",
       "createaccountgoogle": "Crear una cuenta a través de Google",
-      "continue": "seguir",
-      "requiredusername": "por favor, ingrese un nombre de usuario",
-      "uniqueusername": "nombre de usuario ya tomado",
+      "continue": "Continuar",
+      "requiredfirstname": "Por favor ingresa un nombre",
+      "requiredlastname": "Por favor ingresa un nombre",
       "requiredpassword": "porfavor ingrese una contraseña",
       "minpassword": "Por favor ingrese una contraseña de más de 6 caracteres",
       "requiredmail": "Por favor introduzca una dirección de correo eléctronico",
@@ -200,10 +236,10 @@
       "connect": "Acceso"
     },
     "forgotpassword": {
-      "forgotpassword": "Contraseña olvidada ?",
+      "forgotpassword": "Olvidaste tu contraseña ?",
       "email": "Dirección de correo electrónico *",
-      "createaccount": "Crear una cuenta",
-      "continue": "seguir",
+      "createaccount": "Crea una cuenta",
+      "continue": "Continuar",
       "requiredmail": "Por favor introduzca una dirección de correo eléctronico",
       "formatmail": "Por favor, introduce una dirección de correo electrónico válida",
       "modality": "Por favor, introduzca la dirección de correo electrónico que utilizó al registrarse. ",
@@ -216,7 +252,7 @@
       "resetpassword": "Restablecer su contraseña",
       "password": "Contraseña *",
       "confirmpassword": "Confirmación de contraseña *",
-      "continue": "seguir",
+      "continue": "Continuar",
       "passwordmatch": "Las contraseñas deben coincidir",
       "requiredpassword": "porfavor ingrese una contraseña",
       "minpassword": "Por favor ingrese una contraseña de más de 6 caracteres"
@@ -224,7 +260,7 @@
     "createmodifytravel": {
       "titlecreate": "Añadir un viaje",
       "titlemodify": "Editar un viaje",
-      "name": "Apellido *",
+      "name": "Nombre *",
       "country": "País *",
       "startdate": "Fecha de inicio *",
       "enddate": "Fecha final *",
@@ -248,13 +284,26 @@
   "unauthorized": {
     "profile": "Debes ser amigo de la persona para acceder a su perfil."
   },
+  "screenshoot": {
+    "countryvisited": "Mapa interactivo",
+    "compare": "Compárate con tus amigos",
+    "stats": "Estadísticas de tus viajes",
+    "friends": "Administrar a tus amigos",
+    "connexion": "Conexión vía Mail o Google",
+    "timeline": "Cronología de tus viajes",
+    "explore": "Catálogo de todos los países.",
+    "country": "Ficha informativa",
+    "travel": "Viaje por carretera añadido"
+  },
   "alert": {
+    "nointernet": "Habilite Internet para realizar esta acción.",
     "deletefriend": "Su eliminación ha sido tenida en cuenta.",
     "notravelcountry": "No viajar a este país.",
     "updateavatarsuccess": "Se ha tenido en cuenta la modificación de tu avatar.",
     "updatecountrysuccess": "Se ha tenido en cuenta el cambio de país.",
     "updatevisibilitysuccess": "Su modificación ha sido tenida en cuenta.",
-    "updateusernamesuccess": "Se ha tenido en cuenta el cambio de nombre de usuario.",
+    "updatefirstnamesuccess": "Se ha tenido en cuenta su cambio de nombre.",
+    "updatelastnamesuccess": "Su cambio de nombre ha sido tenido en cuenta.",
     "sendfriendrequest": "Tu solicitud de amistad ha sido enviada.",
     "validatefriendrequest": "Solicitud de amistad validada.",
     "refusefriendrequest": "Solicitud de amistad rechazada.",
