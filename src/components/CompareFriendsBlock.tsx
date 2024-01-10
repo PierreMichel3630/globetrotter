@@ -1,4 +1,4 @@
-import { Box, Divider, Grid, Typography } from "@mui/material";
+import { Box, Container, Divider, Grid, Typography } from "@mui/material";
 import { percent } from "csx";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -274,125 +274,133 @@ export const CompareFriendsBlock = () => {
   ];
 
   return (
-    <Grid container>
-      <Grid item xs={12}>
-        <Box sx={{ p: 1 }}>
-          <Grid container spacing={2}>
-            {profile1 && (
-              <Grid
-                item
-                xs={6}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  flexDirection: "column",
-                  cursor: "pointer",
-                }}
-                onClick={() => {
-                  setProfileIndex(0);
-                  setOpenSelectProfile(true);
-                }}
-              >
-                <AvatarAccount
-                  avatar={profile1.avatar}
-                  size={40}
-                  style={{ border: `3px solid ${color1}` }}
-                />
-                <Typography
-                  variant="h2"
+    <Container maxWidth="md">
+      <Grid container>
+        <Grid item xs={12}>
+          <Box sx={{ p: 1 }}>
+            <Grid container spacing={2}>
+              {profile1 && (
+                <Grid
+                  item
+                  xs={6}
                   sx={{
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    maxWidth: percent(80),
-                    color: color1,
+                    display: "flex",
+                    alignItems: "center",
+                    flexDirection: "column",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    setProfileIndex(0);
+                    setOpenSelectProfile(true);
                   }}
                 >
-                  {profile1.username}
-                </Typography>
-              </Grid>
-            )}
-            {profile2 && (
-              <Grid
-                item
-                xs={6}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  flexDirection: "column",
-                  cursor: "pointer",
-                }}
-                onClick={() => {
-                  setProfileIndex(1);
-                  setOpenSelectProfile(true);
-                }}
-              >
-                <AvatarAccount
-                  avatar={profile2.avatar}
-                  size={40}
-                  style={{ border: `3px solid ${color2}` }}
-                />
-                <Typography
-                  variant="h2"
+                  <AvatarAccount
+                    avatar={profile1.avatar}
+                    size={40}
+                    style={{ border: `3px solid ${color1}` }}
+                  />
+                  <Typography
+                    variant="h2"
+                    sx={{
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      maxWidth: percent(80),
+                      color: color1,
+                    }}
+                  >
+                    {`${profile1.firstname} ${profile1.lastname}`}
+                  </Typography>
+                </Grid>
+              )}
+              {profile2 && (
+                <Grid
+                  item
+                  xs={6}
                   sx={{
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    maxWidth: percent(80),
-                    color: color2,
+                    display: "flex",
+                    alignItems: "center",
+                    flexDirection: "column",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    setProfileIndex(1);
+                    setOpenSelectProfile(true);
                   }}
                 >
-                  {profile2.username}
+                  <AvatarAccount
+                    avatar={profile2.avatar}
+                    size={40}
+                    style={{ border: `3px solid ${color2}` }}
+                  />
+                  <Typography
+                    variant="h2"
+                    sx={{
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      maxWidth: percent(80),
+                      color: color2,
+                    }}
+                  >
+                    {`${profile2.firstname} ${profile2.lastname}`}
+                  </Typography>
+                </Grid>
+              )}
+            </Grid>
+          </Box>
+        </Grid>
+        <Grid item xs={12}>
+          <MapCompare
+            countriesVisited1={countriesVisited1}
+            countriesVisited2={countriesVisited2}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Box sx={{ p: 1 }}>
+            <Grid container spacing={1}>
+              {datas.map((el, index) => (
+                <Grid item xs={12} key={index}>
+                  <LineCompareTable
+                    values={el.values}
+                    label={el.label}
+                    isPercent={el.isPercent}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+        </Grid>
+        <Grid item xs={12}>
+          <Divider />
+        </Grid>
+        <Grid item xs={12}>
+          <Box sx={{ p: 1 }}>
+            <Grid container spacing={1}>
+              <Grid item xs={12} sx={{ textAlign: "center" }}>
+                <Typography variant="h4">
+                  {t("commun.mostvisitedcountries")}
                 </Typography>
               </Grid>
-            )}
-          </Grid>
-        </Box>
-      </Grid>
-      <Grid item xs={12}>
-        <MapCompare
-          countriesVisited1={countriesVisited1}
-          countriesVisited2={countriesVisited2}
+              <Grid item xs={6}>
+                <CardRecapArray
+                  values={countryMostVisited1}
+                  isPosition={false}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <CardRecapArray
+                  values={countryMostVisited2}
+                  isPosition={false}
+                />
+              </Grid>
+            </Grid>
+          </Box>
+        </Grid>
+        <SelectProfileModal
+          open={openSelectProfile}
+          close={() => setOpenSelectProfile(false)}
+          onValid={onSelect}
         />
       </Grid>
-      <Grid item xs={12}>
-        <Box sx={{ p: 1 }}>
-          <Grid container spacing={1}>
-            {datas.map((el, index) => (
-              <Grid item xs={12} key={index}>
-                <LineCompareTable
-                  values={el.values}
-                  label={el.label}
-                  isPercent={el.isPercent}
-                />
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
-      </Grid>
-      <Grid item xs={12}>
-        <Divider />
-      </Grid>
-      <Grid item xs={12}>
-        <Box sx={{ p: 1 }}>
-          <Grid container spacing={1}>
-            <Grid item xs={12} sx={{ textAlign: "center" }}>
-              <Typography variant="h4">
-                {t("commun.mostvisitedcountries")}
-              </Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <CardRecapArray values={countryMostVisited1} isPosition={false} />
-            </Grid>
-            <Grid item xs={6}>
-              <CardRecapArray values={countryMostVisited2} isPosition={false} />
-            </Grid>
-          </Grid>
-        </Box>
-      </Grid>
-      <SelectProfileModal
-        open={openSelectProfile}
-        close={() => setOpenSelectProfile(false)}
-        onValid={onSelect}
-      />
-    </Grid>
+    </Container>
   );
 };

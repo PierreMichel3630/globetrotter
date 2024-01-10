@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { Navigate, useNavigate } from "react-router-dom";
 
@@ -33,51 +33,55 @@ export const NoLoginPage = () => {
   }
 
   return (
-    <Box sx={{ p: 2 }}>
-      <Helmet>
-        <title>{`${t("pages.home.title")} - ${t("appname")}`}</title>
-      </Helmet>
-      <Grid
-        container
-        spacing={1}
-        justifyContent="center"
-        sx={{ textAlign: "center" }}
-      >
-        <Grid item xs={12}>
-          <img src={logo} width={80} height={80} />
-          <Typography variant="h1">GlobeTrotter</Typography>
+    <Container maxWidth="md">
+      <Box sx={{ p: 2 }}>
+        <Helmet>
+          <title>{`${t("pages.home.title")} - ${t("appname")}`}</title>
+        </Helmet>
+        <Grid
+          container
+          spacing={1}
+          justifyContent="center"
+          sx={{ textAlign: "center" }}
+        >
+          <Grid item xs={12}>
+            <img src={logo} width={80} height={80} />
+            <Typography variant="h1">GlobeTrotter</Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h4">{t("commun.welcome")}</Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="body1">
+              {t("commun.welcomemessage")}
+            </Typography>
+            <Typography variant="h6">{t("commun.getstarted")}</Typography>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Button
+              fullWidth
+              variant="contained"
+              startIcon={<AccountCircleIcon />}
+              onClick={() => navigate("login")}
+            >
+              <Typography variant="body1">{t("commun.login")}</Typography>
+            </Button>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Button
+              fullWidth
+              variant="outlined"
+              startIcon={<AppRegistrationIcon />}
+              onClick={() => navigate("register")}
+            >
+              <Typography variant="body1">{t("commun.register")}</Typography>
+            </Button>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Carrousel images={images} />
+          </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h4">{t("commun.welcome")}</Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="body1">{t("commun.welcomemessage")}</Typography>
-          <Typography variant="h6">{t("commun.getstarted")}</Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Button
-            fullWidth
-            variant="contained"
-            startIcon={<AccountCircleIcon />}
-            onClick={() => navigate("login")}
-          >
-            <Typography variant="body1">{t("commun.login")}</Typography>
-          </Button>
-        </Grid>
-        <Grid item xs={12}>
-          <Button
-            fullWidth
-            variant="outlined"
-            startIcon={<AppRegistrationIcon />}
-            onClick={() => navigate("register")}
-          >
-            <Typography variant="body1">{t("commun.register")}</Typography>
-          </Button>
-        </Grid>
-        <Grid item xs={12}>
-          <Carrousel images={images} />
-        </Grid>
-      </Grid>
-    </Box>
+      </Box>
+    </Container>
   );
 };

@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 import { selectFriend } from "src/api/supabase/friend";
 import { FRIENDSTATUS, Friend } from "src/models/Friend";
 import { Profile } from "src/models/Profile";
-import { sortByUsername } from "src/utils/sort";
+import { sortByFirstnameAndLastname } from "src/utils/sort";
 import { BasicSearchInput } from "../Input";
 import { Loading } from "../Loading";
 import { CardProfile } from "../card/CardProfile";
@@ -56,7 +56,10 @@ export const SelectProfileModal = ({ open, close, onValid }: Props) => {
 
   const profileFilter = profiles.filter(
     (el) =>
-      search === "" || el.username.toLowerCase().includes(search.toLowerCase())
+      search === "" ||
+      `${el.firstname} ${el.lastname}`
+        .toLowerCase()
+        .includes(search.toLowerCase())
   );
 
   return (
@@ -88,24 +91,26 @@ export const SelectProfileModal = ({ open, close, onValid }: Props) => {
                 />
               </Grid>
               {profileFilter.length > 0 ? (
-                profileFilter.sort(sortByUsername).map((profile) => (
-                  <Grid
-                    item
-                    xs={12}
-                    sm={6}
-                    md={4}
-                    lg={3}
-                    xl={3}
-                    key={profile.id}
-                  >
-                    <CardProfile
-                      profile={profile}
-                      onSelect={() => {
-                        onValid(profile);
-                      }}
-                    />
-                  </Grid>
-                ))
+                profileFilter
+                  .sort(sortByFirstnameAndLastname)
+                  .map((profile) => (
+                    <Grid
+                      item
+                      xs={12}
+                      sm={6}
+                      md={4}
+                      lg={3}
+                      xl={3}
+                      key={profile.id}
+                    >
+                      <CardProfile
+                        profile={profile}
+                        onSelect={() => {
+                          onValid(profile);
+                        }}
+                      />
+                    </Grid>
+                  ))
               ) : (
                 <Grid item xs={12}>
                   <Alert severity="warning">{t("commun.noresult")}</Alert>

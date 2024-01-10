@@ -1,4 +1,4 @@
-import { Grid, Paper, Typography } from "@mui/material";
+import { Box, Grid, Paper, Typography } from "@mui/material";
 import { useApp } from "src/context/AppProvider";
 
 import { percent } from "csx";
@@ -91,8 +91,37 @@ export const CardContinentStat = ({ continent }: PropsStat) => {
   const map = continentMap.find((el) => el.id === continent.id);
 
   return (
-    <Paper sx={{ p: 1 }} elevation={3}>
-      <Grid container spacing={1}>
+    <Paper
+      sx={{ p: 1, height: percent(100), position: "relative" }}
+      elevation={3}
+    >
+      <Box sx={{ position: "absolute", bottom: 5, left: 5 }}>
+        <Grid container spacing={2}>
+          <Grid item>
+            <Typography variant="h2" component="span">
+              {percentVisited}
+            </Typography>
+            <Typography variant="body1" component="span">
+              {" "}
+              %
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant="h2" component="span">
+              {countriesContinentVisited.length}
+            </Typography>
+            <Typography variant="body1" component="span">
+              / {countriesContinent.length}
+            </Typography>
+          </Grid>
+        </Grid>
+      </Box>
+      <Grid
+        container
+        spacing={1}
+        justifyContent="space-between"
+        sx={{ height: percent(100) }}
+      >
         <Grid item xs={12}>
           {typeof continent.name === "string" ? (
             <Typography variant="h6">{continent.name}</Typography>
@@ -102,29 +131,9 @@ export const CardContinentStat = ({ continent }: PropsStat) => {
         </Grid>
         <Grid item xs={12}>
           <Grid container spacing={1} alignItems="flex-end">
-            <Grid item xs={4} sx={{ height: percent(100) }}>
-              <Grid container spacing={2}>
-                <Grid item>
-                  <Typography variant="h2" component="span">
-                    {percentVisited}
-                  </Typography>
-                  <Typography variant="body1" component="span">
-                    {" "}
-                    %
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <Typography variant="h2" component="span">
-                    {countriesContinentVisited.length}
-                  </Typography>
-                  <Typography variant="body1" component="span">
-                    / {countriesContinent.length}
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Grid>
+            <Grid item xs={4} md={3} />
             {map && (
-              <Grid item xs={8}>
+              <Grid item xs={8} md={9}>
                 <ComposableMap
                   projection="geoMercator"
                   projectionConfig={{

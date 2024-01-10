@@ -5,19 +5,27 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-const URLPROD = "https://rankallandnothing.web.app";
-const URLLOCAL = "http://localhost:5173";
+const URLPRODSIGNUP = "https://intinerairedemavie.web.app/origincountry";
+const URLPROD = "https://intinerairedemavie.web.app";
+// const URLLOCAL = "http://localhost:5173";
 
 export const signUpWithGoogle = () =>
   supabase.auth.signInWithOAuth({
     provider: "google",
-    options: { redirectTo: URLLOCAL },
+    options: { redirectTo: URLPRODSIGNUP },
+  });
+
+export const signInWithGoogle = () =>
+  supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: { redirectTo: URLPROD },
   });
 
 export const signUpWithEmail = (
   email: string,
   password: string,
-  username: string,
+  firstname: string,
+  lastname: string,
   avatar: number
 ) =>
   supabase.auth.signUp({
@@ -25,7 +33,8 @@ export const signUpWithEmail = (
     password,
     options: {
       data: {
-        username,
+        firstname,
+        lastname,
         avatar,
       },
     },

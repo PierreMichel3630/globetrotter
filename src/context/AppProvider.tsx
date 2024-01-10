@@ -6,6 +6,8 @@ import { Travel } from "src/models/Travel";
 import { Continent } from "src/models/country/Continent";
 import { Country, CountryVisited } from "src/models/country/Country";
 import { useAuth } from "./AuthProviderSupabase";
+import { selectFriend } from "src/api/supabase/friend";
+import { Friend } from "src/models/Friend";
 
 type Props = {
   children: string | JSX.Element | JSX.Element[];
@@ -20,6 +22,8 @@ const AppContext = createContext<{
   travels: Array<Travel>;
   travelsFriends: Array<Travel>;
   refreshTravel: () => void;
+  friends: Array<Friend>;
+  refreshFriends: () => void;
 }>({
   continents: [],
   countries: [],
@@ -29,6 +33,8 @@ const AppContext = createContext<{
   travels: [],
   travelsFriends: [],
   refreshTravel: () => {},
+  friends: [],
+  refreshFriends: () => {},
 });
 
 export const useApp = () => useContext(AppContext);
@@ -48,6 +54,23 @@ export const AppProvider = ({ children }: Props) => {
   const [countriesVisitedAll, setCountriesVisitedAll] = useState<
     Array<CountryVisited>
   >([]);
+  const [friends, setFriends] = useState<Array<Friend>>([]);
+
+  const getFriends = async () => {
+    if (user !== null) {
+      const { data } = await selectFriend();
+      const friends = data as Array<Friend>;
+      setFriends(friends);
+    }
+  };
+  const refreshFriends = () => {
+    getFriends();
+    getTravels();
+  };
+
+  useEffect(() => {
+    getFriends();
+  }, [user]);
 
   const getCountriesVisited = (travels: Array<Travel>) => {
     if (countries.length > 0) {
@@ -132,6 +155,8 @@ export const AppProvider = ({ children }: Props) => {
         travels,
         travelsFriends,
         refreshTravel,
+        friends,
+        refreshFriends,
       }}
     >
       {children}

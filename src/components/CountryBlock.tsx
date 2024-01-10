@@ -19,16 +19,22 @@ import {
 import { useUser } from "src/context/UserProvider";
 
 interface Props {
+  isFriends?: boolean;
   isExplore?: boolean;
   country: Country;
 }
 
-export const CountryBlock = ({ country, isExplore = true }: Props) => {
+export const CountryBlock = ({
+  country,
+  isExplore = true,
+  isFriends = false,
+}: Props) => {
   const { t } = useTranslation();
-  const { travels } = useApp();
+  const { travels, travelsFriends } = useApp();
   const { language } = useUser();
+  const allTravels = [...travelsFriends, ...travels];
 
-  const travelsCountry = travels.filter((travel) =>
+  const travelsCountry = (isFriends ? allTravels : travels).filter((travel) =>
     travel.countries.map((el) => el.country).includes(country.id)
   );
 
@@ -103,7 +109,7 @@ export const CountryBlock = ({ country, isExplore = true }: Props) => {
             </Grid>
             <Grid
               item
-              xs={4}
+              xs={6}
               sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -122,7 +128,28 @@ export const CountryBlock = ({ country, isExplore = true }: Props) => {
             </Grid>
             <Grid
               item
-              xs={4}
+              xs={6}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "flex-end",
+              }}
+            >
+              <Typography variant="h4">
+                {country.independent ? t("commun.yes") : t("commun.no")}
+              </Typography>
+              <Typography
+                variant="h6"
+                textTransform="uppercase"
+                color={Colors.grey}
+              >
+                {t("commun.independent")}
+              </Typography>
+            </Grid>
+            <Grid
+              item
+              xs={6}
               sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -145,7 +172,7 @@ export const CountryBlock = ({ country, isExplore = true }: Props) => {
             </Grid>
             <Grid
               item
-              xs={4}
+              xs={6}
               sx={{
                 display: "flex",
                 flexDirection: "column",

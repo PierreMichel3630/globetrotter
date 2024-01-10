@@ -1,24 +1,31 @@
-import { Box, Chip, Grid } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Badge, Box, Chip, Grid } from "@mui/material";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Map } from "src/components/map/Map";
 
 import { CountryBlock } from "src/components/CountryBlock";
 
+import { px, viewHeight } from "csx";
+import moment from "moment";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { updateProfil } from "src/api/supabase/profile";
 import { ContinentBlock } from "src/components/ContinentBlock";
 import { DefaultBlock } from "src/components/DefaultBlock";
 import { AutocompleteInput } from "src/components/Input";
 import { SearchResult } from "src/components/SearchResultBlock";
 import { TravelBlock } from "src/components/TravelBlock";
 import { useApp } from "src/context/AppProvider";
+import { useAuth } from "src/context/AuthProviderSupabase";
+import { useUser } from "src/context/UserProvider";
+import { Profile, ProfileUpdate } from "src/models/Profile";
 import { Colors } from "src/style/Colors";
 import { getScoreSearch, searchString } from "src/utils/string";
-import { useUser } from "src/context/UserProvider";
+import { getBreakpoint } from "src/utils/mediaQuery";
 
 export const MapPage = () => {
   const { t } = useTranslation();
+  const { profile, setProfile } = useAuth();
   const navigate = useNavigate();
   const {
     travelsFriends,
@@ -37,8 +44,13 @@ export const MapPage = () => {
   const [inputValue, setInputValue] = useState("");
   const [searchParams] = useSearchParams();
   const [resultsSearch, setResultsSearch] = useState<Array<SearchResult>>([]);
+  const breakpoint = getBreakpoint();
+  const isLarge = breakpoint === "lg" || breakpoint === "xl";
 
-  const allTravels = [...travelsFriends, ...travels];
+  const allTravels = useMemo(
+    () => [...travelsFriends, ...travels],
+    [travelsFriends, travels]
+  );
 
   const travel = searchParams.has("travel")
     ? allTravels.find((el) => el.id === Number(searchParams.get("travel")))
@@ -61,7 +73,7 @@ export const MapPage = () => {
       ? travel.name
       : "";
     setInputValue(label);
-  }, [country, continent, travel]);
+  }, [country, continent, travel, language]);
 
   useEffect(() => {
     const getResult = () => {
@@ -86,7 +98,8 @@ export const MapPage = () => {
                 score: getScoreSearch(inputValue, el.name[language.iso]),
               } as SearchResult)
           );
-        const travelFilter = travels
+        const travelsSearch = filter.friends ? allTravels : travels;
+        const travelFilter = travelsSearch
           .filter((el) => searchString(inputValue, el.name))
           .map(
             (el) =>
@@ -106,14 +119,39 @@ export const MapPage = () => {
       }
     };
     getResult();
-  }, [countries, travels, continents, inputValue]);
+  }, [
+    countries,
+    travels,
+    continents,
+    inputValue,
+    filter,
+    language,
+    allTravels,
+  ]);
+
+  const newTravels = travelsFriends.filter(
+    (el) =>
+      profile !== null &&
+      moment(profile.last_seen_travel).isBefore(moment(el.created_at))
+  );
+
+  const refreshSeen = async () => {
+    if (profile !== null) {
+      const newProfil: ProfileUpdate = {
+        id: profile.id,
+        last_seen_travel: moment().toDate(),
+      };
+      const { data } = await updateProfil(newProfil);
+      if (data) setProfile(data as Profile);
+    }
+  };
 
   return (
     <Grid container>
       <Helmet>
         <title>{`${t("pages.map.title")} - ${t("appname")}`}</title>
       </Helmet>
-      <Grid item xs={12}>
+      <Grid item xs={12} lg={8}>
         <Map
           countriesVisited={countriesVisited}
           countriesVisitedFriends={
@@ -121,8 +159,16 @@ export const MapPage = () => {
           }
         />
       </Grid>
-      <Grid item xs={12}>
-        <Grid container justifyContent="center">
+      <Grid item xs={12} lg={4}>
+        <Grid
+          container
+          justifyContent="center"
+          sx={{
+            maxHeight: isLarge ? "calc(100vh - 60px)" : "fit-content",
+            overflow: "hidden",
+            overflowY: "auto",
+          }}
+        >
           <Grid
             item
             xs={12}
@@ -152,7 +198,7 @@ export const MapPage = () => {
           </Grid>
           {!(country || continent || travel) && (
             <Grid item xs={12}>
-              <Box sx={{ pl: 1, pr: 1 }}>
+              <Box sx={{ pl: 1, pr: 1, pt: px(10) }}>
                 <Grid container spacing={1}>
                   <Grid item>
                     <Chip
@@ -166,15 +212,18 @@ export const MapPage = () => {
                     />
                   </Grid>
                   <Grid item>
-                    <Chip
-                      size="small"
-                      label={t("commun.meandfriends")}
-                      sx={{ cursor: "pointer" }}
-                      color={filter.friends ? "primary" : "default"}
-                      onClick={() =>
-                        setFilter((prev) => ({ ...prev, friends: true }))
-                      }
-                    />
+                    <Badge badgeContent={newTravels.length} color="error">
+                      <Chip
+                        size="small"
+                        label={t("commun.meandfriends")}
+                        sx={{ cursor: "pointer" }}
+                        color={filter.friends ? "primary" : "default"}
+                        onClick={() => {
+                          setFilter((prev) => ({ ...prev, friends: true }));
+                          refreshSeen();
+                        }}
+                      />
+                    </Badge>
                   </Grid>
                 </Grid>
               </Box>
@@ -182,7 +231,11 @@ export const MapPage = () => {
           )}
           {country ? (
             <Grid item xs={12}>
-              <CountryBlock country={country} isExplore={false} />
+              <CountryBlock
+                country={country}
+                isExplore={false}
+                isFriends={filter.friends}
+              />
             </Grid>
           ) : continent ? (
             <Grid item xs={12}>

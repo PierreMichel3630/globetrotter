@@ -9,7 +9,21 @@ const manifestForPlugIn: Partial<VitePWAOptions> = {
     globPatterns: ["**/*"],
     runtimeCaching: [
       {
-        urlPattern: /^https:\/\/otgkjrkkwbjtozbvcbuo\.supabase\.co\/.*/i,
+        urlPattern: /^https:\/\/otgkjrkkwbjtozbvcbuo\.supabase\.co\/rest\/.*/i,
+        handler: "NetworkFirst",
+        options: {
+          cacheName: "api-rest",
+          expiration: {
+            maxAgeSeconds: 60 * 60 * 24 * 30,
+          },
+          cacheableResponse: {
+            statuses: [0, 200],
+          },
+        },
+      },
+      {
+        urlPattern:
+          /^https:\/\/otgkjrkkwbjtozbvcbuo\.supabase\.co\/storage\/.*/i,
         handler: "CacheFirst",
         options: {
           cacheName: "supabase-image",

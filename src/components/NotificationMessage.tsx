@@ -71,7 +71,7 @@ const NotificationFriendRequestMessage = ({ notification, onClose }: Props) => {
           {friend !== null && (
             <Typography variant="caption">
               {t("notification.FRIENDREQUEST.text", {
-                username: friend.user1.username,
+                username: friend.user1.firstname + " " + friend.user2.lastname,
               })}
             </Typography>
           )}

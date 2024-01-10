@@ -82,6 +82,7 @@
     "settings": "Paramètres",
     "yourstravels": "Vos Voyages",
     "origincountry": "Pays d'origine",
+    "myorigincountry": "Mon Pays d'origine",
     "modify": "Modifier",
     "yes": "Oui",
     "no": "Non",
@@ -97,7 +98,10 @@
     "speaklanguages": "Langues Parlées",
     "onlyme": "Moi uniquement",
     "meandfriends": "Moi et mes amis",
-    "languages": "Langues"
+    "languages": "Langues",
+    "firstname": "Prénom",
+    "lastname": "Nom",
+    "independent": "Indépendant"
   },
   "filter": {
     "travel": "Voyage",
@@ -115,6 +119,9 @@
   "pages": {
     "language": {
       "title": "Langues"
+    },
+    "origincountry": {
+      "title": "Pays d'origine"
     },
     "compare": {
       "title": "Comparer"
@@ -183,15 +190,16 @@
       "errorconnect": "L'adresse email ou le mot de passe est erroné"
     },
     "register": {
-      "username": "Nom d'utilisateur *",
+      "firstname": "Prénom *",
+      "lastname": "Nom *",
       "email": "Adresse email *",
       "password": "Mot de passe *",
       "createaccount": "Créer un compte",
       "createaccountemail": "Créer un compte via adresse mail",
       "createaccountgoogle": "Créer un compte via Google",
       "continue": "Continuer",
-      "requiredusername": "Veuillez saisir un nom d'utilisateur",
-      "uniqueusername": "Nom d'utilisateur déjà pris",
+      "requiredfirstname": "Veuillez saisir un prénom",
+      "requiredlastname": "Veuillez saisir un nom",
       "requiredpassword": "Veuillez saisir un mot de passe",
       "minpassword": "Veuillez saisir un mot de passe de plus de 6 caractères",
       "requiredmail": "Veuillez saisir une adresse mail",
@@ -249,12 +257,14 @@
     "profile": "Vous devez être ami avec la personne pour accéder à son profil."
   },
   "alert": {
+    "nointernet": "Veuillez activer internet pour effectuer cette action.",
     "deletefriend": "Votre suppression a été pris en compte.",
     "notravelcountry": "Aucun voyage pour ce pays.",
     "updateavatarsuccess": "Votre modification d'avatar à été pris en compte.",
     "updatecountrysuccess": "Votre modification de pays à été pris en compte.",
     "updatevisibilitysuccess": "Votre modification à été pris en compte.",
-    "updateusernamesuccess": "Votre modification de nom d'utilisateur à été pris en compte.",
+    "updatefirstnamesuccess": "Votre modification de prénom à été pris en compte.",
+    "updatelastnamesuccess": "Votre modification de nom à été pris en compte.",
     "sendfriendrequest": "Votre demande d'ami a été envoyé.",
     "validatefriendrequest": "Demande d'ami validée.",
     "refusefriendrequest": "Demande d'ami refusée.",

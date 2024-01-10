@@ -13,11 +13,11 @@ import { style } from "typestyle";
 
 import { LoginForm } from "src/form/authentification/LoginForm";
 
-import logo from "src/assets/logo.png";
-import { Link } from "react-router-dom";
-import { GoogleButton } from "src/components/button/GoogleButton";
-import { signUpWithGoogle } from "src/api/supabase";
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
+import { signInWithGoogle } from "src/api/supabase";
+import logo from "src/assets/logo.png";
+import { GoogleButton } from "src/components/button/GoogleButton";
 import { GoHomeButton } from "src/components/navigation/GoBackButton";
 
 const cardCss = style({
@@ -27,7 +27,7 @@ export const LoginPage = () => {
   const { t } = useTranslation();
 
   const connectGoogle = async () => {
-    await signUpWithGoogle();
+    await signInWithGoogle();
   };
 
   return (

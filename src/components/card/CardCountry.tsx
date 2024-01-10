@@ -124,7 +124,6 @@ export const CardCountry = ({ country }: Props) => {
         sx={{
           height: percent(100),
           display: "flex",
-          alignItems: "flex-end",
           cursor: "pointer",
           position: "relative",
           borderRadius: px(5),
@@ -140,7 +139,7 @@ export const CardCountry = ({ country }: Props) => {
             loading="lazy"
           />
         </Box>
-        <Grid container>
+        <Grid container justifyContent="space-between">
           <Grid item xs={12}>
             {image ? (
               <ImageRectangularBlock
@@ -163,8 +162,8 @@ export const CardCountry = ({ country }: Props) => {
               </Box>
             )}
           </Grid>
-          <Grid item xs={12}>
-            <Box sx={{ p: 1 }}>
+          <Grid item xs={12} sx={{ alignContent: "flex-end", display: "flex" }}>
+            <Box sx={{ p: 1, alignItems: "flex-end", display: "flex" }}>
               <JsonLanguageBlock variant="h2" value={country.name} />
             </Box>
           </Grid>

@@ -46,7 +46,7 @@ export const CardProfile = ({
         </Grid>
         <Grid item xs={9}>
           <Typography variant="h2" sx={{ wordWrap: "break-word" }}>
-            {profile.username}
+            {`${profile.firstname} ${profile.lastname}`}
           </Typography>
           <Typography
             variant="caption"

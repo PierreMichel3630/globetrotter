@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Grid, Typography } from "@mui/material";
+import { Alert, Box, Button, Container, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { BaseInput } from "src/components/Input";
@@ -9,42 +9,53 @@ import { Helmet } from "react-helmet-async";
 import { updateProfil } from "src/api/supabase/profile";
 import { updateUser } from "src/api/supabase/user";
 import { AvatarSelector } from "src/components/avatar/AvatarSelector";
-import { AutocompleteCountry } from "src/components/input/AutocompleteCountry";
-import { useApp } from "src/context/AppProvider";
 import { useMessage } from "src/context/MessageProvider";
 import { Profile } from "src/models/Profile";
-import { Country } from "src/models/country/Country";
 
 export const ParameterPage = () => {
   const { t } = useTranslation();
-  const { countries } = useApp();
   const { setMessage, setSeverity } = useMessage();
   const { user, profile, setProfile } = useAuth();
 
-  const [username, setUsername] = useState("");
-  const [originCountry, setOriginCountry] = useState<Country | null>(null);
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
-  const [isEmailChange, setIsEmailChange] = useState(false);
   const [avatar, setAvatar] = useState<string | null>(null);
 
   useEffect(() => {
     if (profile) {
-      setUsername(profile.username);
-      const country = countries.find((el) => el.id === profile.country);
-      setOriginCountry(country ?? null);
+      setFirstname(profile.firstname);
+      setLastname(profile.lastname);
     }
   }, [profile]);
 
-  const changeUsername = async () => {
+  const changeFirstname = async () => {
     if (user) {
-      const newProfil = { id: user.id, username };
+      const newProfil = { id: user.id, firstname };
       const { data, error } = await updateProfil(newProfil);
       if (error) {
         setSeverity("error");
         setMessage(t("commun.error"));
       } else {
         setSeverity("success");
-        setMessage(t("alert.updateusernamesuccess"));
+        setMessage(t("alert.updatefirstnamesuccess"));
+        setProfile(data as Profile);
+      }
+    } else {
+      setSeverity("error");
+      setMessage(t("commun.error"));
+    }
+  };
+  const changeLastname = async () => {
+    if (user) {
+      const newProfil = { id: user.id, lastname };
+      const { data, error } = await updateProfil(newProfil);
+      if (error) {
+        setSeverity("error");
+        setMessage(t("commun.error"));
+      } else {
+        setSeverity("success");
+        setMessage(t("alert.updatelastnamesuccess"));
         setProfile(data as Profile);
       }
     } else {
@@ -100,118 +111,118 @@ export const ParameterPage = () => {
     }
   };
 
-  const changeOriginCountry = async (value: Country | null) => {
-    if (user) {
-      const newProfil = { id: user.id, country: value ? value.id : null };
-      const { data, error } = await updateProfil(newProfil);
-      if (error) {
-        setSeverity("error");
-        setMessage(t("commun.error"));
-      } else {
-        setSeverity("success");
-        setMessage(t("alert.updatecountrysuccess"));
-        setProfile(data as Profile);
-      }
-    } else {
-      setSeverity("error");
-      setMessage(t("commun.error"));
-    }
-  };
-
   return (
-    <Box sx={{ p: 2 }}>
-      <Helmet>
-        <title>{`${t("pages.parameters.title")} - ${t("appname")}`}</title>
-      </Helmet>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sx={{ textAlign: "center" }}>
-          <Typography variant="h2">{t("commun.myparameters")}</Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Grid container spacing={1} alignItems="center">
-            <Grid item xs={12} md={4}>
-              <Typography variant="h4">{t("commun.username")}</Typography>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <BaseInput
-                value={username}
-                clear={() => setUsername("")}
-                onChange={(value) => setUsername(value)}
-              />
-            </Grid>
-            <Grid item xs={12} md={2}>
-              <Button
-                variant="contained"
-                startIcon={<DoneIcon />}
-                fullWidth
-                onClick={() => changeUsername()}
-                size="small"
-              >
-                {t("commun.validate")}
-              </Button>
-            </Grid>
+    <Container maxWidth="sm">
+      <Box sx={{ p: 2 }}>
+        <Helmet>
+          <title>{`${t("pages.parameters.title")} - ${t("appname")}`}</title>
+        </Helmet>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sx={{ textAlign: "center" }}>
+            <Typography variant="h2">{t("commun.myparameters")}</Typography>
           </Grid>
-        </Grid>
-        <Grid item xs={12}>
-          <Grid container spacing={1} alignItems="center">
-            <Grid item xs={12} md={4}>
-              <Typography variant="h4">{t("commun.email")}</Typography>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <BaseInput
-                value={email}
-                clear={() => setEmail(user ? user.email ?? "" : "")}
-                onChange={(value) => {
-                  setIsEmailChange(true);
-                  setEmail(value);
-                }}
-              />
-            </Grid>
-            <Grid item xs={12} md={2}>
-              <Button
-                variant="contained"
-                startIcon={<DoneIcon />}
-                fullWidth
-                onClick={() => changeEmail()}
-                size="small"
-              >
-                {t("commun.validate")}
-              </Button>
-            </Grid>
-            {isEmailChange && (
-              <Grid item xs={12}>
-                <Alert severity="info">{t("pages.parameters.infoemail")}</Alert>
+          <Grid item xs={12}>
+            <Grid container spacing={1} alignItems="center">
+              <Grid item xs={12} md={4}>
+                <Typography variant="h4">{t("commun.firstname")}</Typography>
               </Grid>
-            )}
-          </Grid>
-        </Grid>
-        <Grid item xs={12}>
-          <Grid container spacing={1} alignItems="center">
-            <Grid item xs={12} md={4}>
-              <Typography variant="h4">{t("commun.avatar")}</Typography>
-            </Grid>
-            <Grid item xs={12} md={8}>
-              <AvatarSelector selected={avatar} onSelect={changeAvatar} />
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item xs={12}>
-          <Grid container spacing={1} alignItems="center">
-            <Grid item xs={12} md={4}>
-              <Typography variant="h4">{t("commun.origincountry")}</Typography>
-            </Grid>
-            <Grid item xs={12} md={8}>
-              <AutocompleteCountry
-                placeholder={t("pages.parameters.selectorigincountry")}
-                value={originCountry}
-                onChange={(value) => {
-                  changeOriginCountry(value);
-                }}
-              />
+              <Grid item xs={12} md={8}>
+                <BaseInput
+                  value={firstname}
+                  clear={() => setFirstname("")}
+                  onChange={(value) => setFirstname(value)}
+                />
+              </Grid>
+              {profile && profile.firstname !== firstname && (
+                <Grid item xs={12}>
+                  <Button
+                    variant="contained"
+                    startIcon={<DoneIcon />}
+                    fullWidth
+                    onClick={() => changeFirstname()}
+                    size="small"
+                  >
+                    {t("commun.validate")}
+                  </Button>
+                </Grid>
+              )}
             </Grid>
           </Grid>
+          <Grid item xs={12}>
+            <Grid container spacing={1} alignItems="center">
+              <Grid item xs={12} md={4}>
+                <Typography variant="h4">{t("commun.lastname")}</Typography>
+              </Grid>
+              <Grid item xs={12} md={8}>
+                <BaseInput
+                  value={lastname}
+                  clear={() => setLastname("")}
+                  onChange={(value) => setLastname(value)}
+                />
+              </Grid>
+              {profile && profile.lastname !== lastname && (
+                <Grid item xs={12}>
+                  <Button
+                    variant="contained"
+                    startIcon={<DoneIcon />}
+                    fullWidth
+                    onClick={() => changeLastname()}
+                    size="small"
+                  >
+                    {t("commun.validate")}
+                  </Button>
+                </Grid>
+              )}
+            </Grid>
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container spacing={1} alignItems="center">
+              <Grid item xs={12} md={4}>
+                <Typography variant="h4">{t("commun.email")}</Typography>
+              </Grid>
+              <Grid item xs={12} md={8}>
+                <BaseInput
+                  value={email}
+                  clear={() => setEmail(user ? user.email ?? "" : "")}
+                  onChange={(value) => {
+                    setEmail(value);
+                  }}
+                />
+              </Grid>
+              {user && user.email !== email && (
+                <>
+                  <Grid item xs={12}>
+                    <Button
+                      variant="contained"
+                      startIcon={<DoneIcon />}
+                      fullWidth
+                      onClick={() => changeEmail()}
+                      size="small"
+                    >
+                      {t("commun.validate")}
+                    </Button>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Alert severity="info">
+                      {t("pages.parameters.infoemail")}
+                    </Alert>
+                  </Grid>
+                </>
+              )}
+            </Grid>
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container spacing={1} alignItems="center">
+              <Grid item xs={12} md={4}>
+                <Typography variant="h4">{t("commun.avatar")}</Typography>
+              </Grid>
+              <Grid item xs={12} md={8}>
+                <AvatarSelector selected={avatar} onSelect={changeAvatar} />
+              </Grid>
+            </Grid>
+          </Grid>
         </Grid>
-      </Grid>
-    </Box>
+      </Box>
+    </Container>
   );
 };

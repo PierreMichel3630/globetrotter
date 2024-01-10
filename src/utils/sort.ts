@@ -6,6 +6,9 @@ export const sortByLabel = (a: any, b: any) => a.label.localeCompare(b.label);
 export const sortByName = (language: Language, a: any, b: any) =>
   a.name[language.iso].localeCompare(b.name[language.iso]);
 
+export const sortByFirstnameAndLastname = (a: any, b: any) =>
+  `${a.firstname} ${a.lastname}`.localeCompare(`${b.firstname} ${b.lastname}`);
+
 export const sortByUsername = (a: any, b: any) =>
   a.username.localeCompare(b.username);
 

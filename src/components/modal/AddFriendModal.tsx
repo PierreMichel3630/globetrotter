@@ -41,7 +41,7 @@ export const AddFriendModal = ({ open, close, onValid }: Props) => {
 
   const getUsers = async () => {
     const { data } = await searchProfile(search, uuidfriends);
-    setProfiles(data as Array<Profile>);
+    setProfiles(data ? (data as Array<Profile>) : []);
   };
 
   useEffect(() => {

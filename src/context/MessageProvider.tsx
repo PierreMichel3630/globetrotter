@@ -1,5 +1,6 @@
 import { AlertColor } from "@mui/material";
 import { createContext, useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { MessageSnackbar } from "src/components/Snackbar";
 
 type Props = {
@@ -21,6 +22,7 @@ const MessageContext = createContext<{
 export const useMessage = () => useContext(MessageContext);
 
 export const MessageProvider = ({ children }: Props) => {
+  const { t } = useTranslation();
   const [message, setMessage] = useState("");
   const [severity, setSeverity] = useState<AlertColor>("error");
 
@@ -38,7 +40,7 @@ export const MessageProvider = ({ children }: Props) => {
         autoHideDuration={600000}
         open={message !== ""}
         handleClose={() => setMessage("")}
-        message={message}
+        message={navigator.onLine ? message : t("alert.nointernet")}
         severity={severity}
       />
     </MessageContext.Provider>

@@ -1,5 +1,6 @@
 import {
   Button,
+  Container,
   Divider,
   Grid,
   List,
@@ -27,24 +28,20 @@ import PeopleIcon from "@mui/icons-material/People";
 import SettingsIcon from "@mui/icons-material/Settings";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import TranslateIcon from "@mui/icons-material/Translate";
+import PublicIcon from "@mui/icons-material/Public";
+import { Menu } from "src/models/Menu";
 
 export const MenuPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { user, profile, logout } = useAuth();
 
-  const menus = [
+  const menus: Array<Menu> = [
     {
       value: "map",
       label: t("commun.map"),
       icon: <TravelExploreIcon />,
       to: "/map",
-    },
-    {
-      value: "explore",
-      label: t("commun.explore"),
-      icon: <ExploreIcon />,
-      to: "/explore",
     },
     {
       value: "statistics",
@@ -65,22 +62,34 @@ export const MenuPage = () => {
       to: "/friends",
     },
     {
+      value: "explore",
+      label: t("commun.explore"),
+      icon: <ExploreIcon />,
+      to: "/explore",
+    },
+    {
       value: "compare",
       label: t("commun.compare"),
       icon: <CompareArrowsIcon />,
       to: "/compare",
     },
     {
-      value: "setting",
-      label: t("commun.settings"),
-      icon: <SettingsIcon />,
-      to: "/setting",
+      value: "origincountry",
+      label: t("commun.origincountry"),
+      icon: <PublicIcon />,
+      to: "/origincountry",
     },
     {
       value: "language",
       label: t("commun.languages"),
       icon: <TranslateIcon />,
       to: "/language",
+    },
+    {
+      value: "setting",
+      label: t("commun.settings"),
+      icon: <SettingsIcon />,
+      to: "/setting",
     },
   ];
 
@@ -90,69 +99,71 @@ export const MenuPage = () => {
   };
 
   return (
-    <Grid
-      container
-      spacing={1}
-      justifyContent="center"
-      sx={{ textAlign: "center", mt: 1 }}
-    >
-      <Helmet>
-        <title>{`${t("pages.menu.title")} - ${t("appname")}`}</title>
-      </Helmet>
-      {user && profile && (
-        <>
-          <Grid item>
-            <AvatarAccount avatar={profile.avatar} size={90} />
-          </Grid>
-          <Grid item xs={12}>
-            <Typography variant="h1" sx={{ wordWrap: "break-word" }}>
-              {profile.username}
-            </Typography>
-            <Typography
-              variant="body2"
-              sx={{ wordWrap: "break-word", color: Colors.grey }}
-            >
-              {user.email}
-            </Typography>
-          </Grid>
-          <Grid item xs={12}>
-            <Button
-              variant="outlined"
-              startIcon={<LogoutIcon />}
-              sx={{
-                borderRadius: px(50),
-                color: Colors.grey,
-                borderColor: Colors.grey,
-                backgroundColor: Colors.white,
-              }}
-              onClick={disconnect}
-            >
-              {t("commun.logout")}
-            </Button>
-          </Grid>
-        </>
-      )}
-      <Grid item xs={12}>
-        <List>
-          <Divider />
-          {menus.map((menu, index) => (
-            <Fragment key={index}>
-              <ListItem
-                disablePadding
-                component={Link}
-                to={menu.to}
-                sx={{ backgroundColor: Colors.white }}
+    <Container maxWidth="sm">
+      <Grid
+        container
+        spacing={1}
+        justifyContent="center"
+        sx={{ textAlign: "center", mt: 1 }}
+      >
+        <Helmet>
+          <title>{`${t("pages.menu.title")} - ${t("appname")}`}</title>
+        </Helmet>
+        {user && profile && (
+          <>
+            <Grid item>
+              <AvatarAccount avatar={profile.avatar} size={90} />
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="h1" sx={{ wordWrap: "break-word" }}>
+                {`${profile.firstname} ${profile.lastname}`}
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{ wordWrap: "break-word", color: Colors.grey }}
               >
-                <ListItemButton>
-                  <ListItemIcon>{menu.icon}</ListItemIcon>
-                  <ListItemText primary={menu.label} />
-                </ListItemButton>
-              </ListItem>
-              <Divider />
-            </Fragment>
-          ))}
-        </List>
+                {user.email}
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                variant="outlined"
+                startIcon={<LogoutIcon />}
+                sx={{
+                  borderRadius: px(50),
+                  color: Colors.grey,
+                  borderColor: Colors.grey,
+                  backgroundColor: Colors.white,
+                }}
+                onClick={disconnect}
+              >
+                {t("commun.logout")}
+              </Button>
+            </Grid>
+          </>
+        )}
+        <Grid item xs={12}>
+          <List>
+            <Divider />
+            {menus.map((menu, index) => (
+              <Fragment key={index}>
+                <ListItem
+                  disablePadding
+                  component={Link}
+                  to={menu.to}
+                  sx={{ backgroundColor: Colors.white }}
+                >
+                  <ListItemButton>
+                    <ListItemIcon>{menu.icon}</ListItemIcon>
+                    <ListItemText primary={menu.label} />
+                  </ListItemButton>
+                </ListItem>
+                <Divider />
+              </Fragment>
+            ))}
+          </List>
+        </Grid>
       </Grid>
-    </Grid>
+    </Container>
   );
 };

@@ -48,7 +48,7 @@ export const AccountBadge = ({ onClick }: Props) => {
         mr={1}
         color="secondary"
       >
-        {profile.username}
+        {`${profile.firstname} ${profile.lastname}`}
       </Typography>
       <BadgeAccountActive
         anchorOrigin={{

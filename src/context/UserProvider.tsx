@@ -37,7 +37,8 @@ export const UserProvider = ({ children }: Props) => {
     let result: undefined | Language = undefined;
     if (navigator.languages.length > 0) {
       const languageBrower = navigator.languages[0].split(/-|_/)[0];
-      result = LANGUAGES.find((el) => el.iso === languageBrower);
+
+      result = LANGUAGES.find((el) => el.browser === languageBrower);
     }
     return result ?? DEFAULT_LANGUAGE;
   };

@@ -31,6 +31,8 @@ export const ImageRectangularBlock = ({
         style={{
           display: isLoading ? "none" : "block",
           width: width,
+          height: height,
+          objectFit: "cover",
         }}
         onLoad={() => setIsLoading(false)}
       />

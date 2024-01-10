@@ -7,7 +7,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import moment from "moment";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useApp } from "src/context/AppProvider";
 import { CountryTravel } from "src/models/CountryTravel";
 import { sortByStartDateDesc } from "src/utils/sort";
@@ -19,6 +19,7 @@ interface Props {
 }
 export const ListCountries = ({ value }: Props) => {
   const { countries } = useApp();
+  const location = useLocation();
   return (
     <List dense sx={{ p: 0 }}>
       {value.sort(sortByStartDateDesc).map((el, index) => {
@@ -33,7 +34,11 @@ export const ListCountries = ({ value }: Props) => {
               key={index}
               disablePadding
               component={Link}
-              to={`?country=${country.id}`}
+              to={
+                location.pathname.split("/")[1] === "map"
+                  ? `?country=${country.id}`
+                  : `/country/${country.id}`
+              }
             >
               <ListItemButton>
                 {country && (

@@ -130,7 +130,7 @@ export const ExplorePage = () => {
           <Box sx={{ p: 1 }}>
             <Grid container spacing={1}>
               {[...filterCountries].splice(0, maxIndex).map((country) => (
-                <Grid item xs={12} key={country.id}>
+                <Grid item xs={12} sm={6} md={4} lg={3} key={country.id}>
                   <CardCountry country={country} />
                 </Grid>
               ))}

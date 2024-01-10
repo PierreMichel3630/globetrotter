@@ -104,7 +104,7 @@ export const SearchInput = ({
 };
 
 interface PropsBasicSearchInput {
-  label: string;
+  label?: string;
   value: string;
   onChange: (value: string) => void;
   clear: () => void;
@@ -127,8 +127,8 @@ export const BasicSearchInput = ({
   >
     <InputBase
       sx={{ ml: 1, flex: 1 }}
-      placeholder={label}
-      inputProps={{ "aria-label": label }}
+      placeholder={label ?? ""}
+      inputProps={{ "aria-label": label ?? "" }}
       value={value}
       onChange={(event) => onChange(event.target.value)}
     />

@@ -51,7 +51,7 @@ export const CardTravel = ({ travel }: Props) => {
             >
               <AvatarAccount avatar={travel.useruuid.avatar} size={25} />
               <Typography variant="h6" component="span">
-                {travel.useruuid.username}
+                {`${travel.useruuid.firstname} ${travel.useruuid.lastname}`}
               </Typography>
             </Grid>
           )}

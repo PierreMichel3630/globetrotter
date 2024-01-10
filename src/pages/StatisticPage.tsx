@@ -18,11 +18,11 @@ export const StatisticPage = () => {
         <Grid item xs={12}>
           <RecapBlock />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={6} lg={4}>
           <CardContinentStat continent={{ id: 0, name: t("commun.world") }} />
         </Grid>
         {continents.map((continent) => (
-          <Grid item xs={12} key={continent.id}>
+          <Grid item xs={12} sm={6} lg={4} key={continent.id}>
             <CardContinentStat
               continent={{ id: continent.id, name: continent.name }}
             />

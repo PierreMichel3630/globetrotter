@@ -10,49 +10,30 @@ import {
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
-import {
-  deleteFriendById,
-  selectFriend,
-  updateFriend,
-} from "src/api/supabase/friend";
+import { deleteFriendById, updateFriend } from "src/api/supabase/friend";
 import {
   CardInvitationFriend,
   CardRequestFriend,
 } from "src/components/card/CardFriend";
 import { CardProfile } from "src/components/card/CardProfile";
 import { AddFriendModal } from "src/components/modal/AddFriendModal";
-import { CardFriendSkeleton } from "src/components/skeleton/Skeleton";
 import { useAuth } from "src/context/AuthProviderSupabase";
 import { FRIENDSTATUS, Friend, FriendUpdate } from "src/models/Friend";
 
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import { Profile } from "src/models/Profile";
-import { Colors } from "src/style/Colors";
+import { useApp } from "src/context/AppProvider";
 import { useMessage } from "src/context/MessageProvider";
+import { Profile, ProfileUpdate } from "src/models/Profile";
+import { Colors } from "src/style/Colors";
+import moment from "moment";
+import { updateProfil } from "src/api/supabase/profile";
 
 export const FriendPage = () => {
   const { t } = useTranslation();
-  const { user } = useAuth();
+  const { profile, setProfile } = useAuth();
+  const { friends, refreshFriends } = useApp();
   const { setMessage, setSeverity } = useMessage();
-  const LOADINGITEM = 2;
-  const [isLoading, setIsLoading] = useState(true);
-  const [friends, setFriends] = useState<Array<Friend>>([]);
   const [openAddFriend, setOpenAddFriend] = useState(false);
-
-  const getFriends = async () => {
-    if (user !== null) {
-      setIsLoading(true);
-      const { data } = await selectFriend();
-      const friends = data as Array<Friend>;
-      setFriends(friends);
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    setIsLoading(true);
-    getFriends();
-  }, [user]);
 
   const confirmFriend = async (friend: Friend, status: FRIENDSTATUS) => {
     const value: FriendUpdate = {
@@ -70,7 +51,7 @@ export const FriendPage = () => {
           ? t("alert.validatefriendrequest")
           : t("alert.refusefriendrequest")
       );
-      getFriends();
+      refreshFriends();
     }
   };
 
@@ -88,7 +69,7 @@ export const FriendPage = () => {
         } else {
           setSeverity("success");
           setMessage(t("alert.deletefriend"));
-          getFriends();
+          refreshFriends();
         }
       });
     } else {
@@ -99,21 +80,35 @@ export const FriendPage = () => {
 
   const invitations = friends.filter(
     (el) =>
-      user !== null &&
-      user.id === el.user2.id &&
+      profile !== null &&
+      profile.id === el.user2.id &&
       el.status === FRIENDSTATUS.PROGRESS
   );
 
   const requests = friends.filter(
     (el) =>
-      user !== null &&
-      user.id === el.user1.id &&
+      profile !== null &&
+      profile.id === el.user1.id &&
       el.status === FRIENDSTATUS.PROGRESS
   );
 
   const profiles = friends
     .filter((el) => el.status === FRIENDSTATUS.VALID)
-    .map((el) => (user && el.user1.id === user.id ? el.user2 : el.user1));
+    .map((el) => (profile && el.user1.id === profile.id ? el.user2 : el.user1));
+
+  useEffect(() => {
+    const refreshSeen = async () => {
+      if (profile !== null) {
+        const newProfil: ProfileUpdate = {
+          id: profile.id,
+          last_seen_friend: moment().toDate(),
+        };
+        const { data } = await updateProfil(newProfil);
+        if (data) setProfile(data as Profile);
+      }
+    };
+    refreshSeen();
+  }, [profile, setProfile]);
 
   return (
     <Box sx={{ p: 1 }}>
@@ -148,13 +143,7 @@ export const FriendPage = () => {
             <Chip label={t("commun.myinvitation")} size="small" />
           </Divider>
         </Grid>
-        {isLoading ? (
-          Array.from(new Array(LOADINGITEM)).map((_, index) => (
-            <Grid key={index} item xs={12}>
-              <CardFriendSkeleton />
-            </Grid>
-          ))
-        ) : invitations.length > 0 ? (
+        {invitations.length > 0 ? (
           invitations.map((invitation) => (
             <Grid item xs={12} key={invitation.id}>
               <CardInvitationFriend
@@ -174,13 +163,7 @@ export const FriendPage = () => {
             <Chip label={t("commun.myrequests")} size="small" />
           </Divider>
         </Grid>
-        {isLoading ? (
-          Array.from(new Array(LOADINGITEM)).map((_, index) => (
-            <Grid key={index} item xs={12}>
-              <CardFriendSkeleton />
-            </Grid>
-          ))
-        ) : requests.length > 0 ? (
+        {requests.length > 0 ? (
           requests.map((invitation) => (
             <Grid item xs={12} key={invitation.id}>
               <CardRequestFriend friend={invitation} />
@@ -196,13 +179,7 @@ export const FriendPage = () => {
             <Chip label={t("commun.myfriends")} size="small" />
           </Divider>
         </Grid>
-        {isLoading ? (
-          Array.from(new Array(LOADINGITEM)).map((_, index) => (
-            <Grid key={index} item xs={12}>
-              <CardFriendSkeleton />
-            </Grid>
-          ))
-        ) : profiles.length > 0 ? (
+        {profiles.length > 0 ? (
           profiles.map((profile) => (
             <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={profile.id}>
               <CardProfile
@@ -222,7 +199,7 @@ export const FriendPage = () => {
         close={() => setOpenAddFriend(false)}
         onValid={() => {
           setOpenAddFriend(false);
-          getFriends();
+          refreshFriends();
         }}
       />
     </Box>

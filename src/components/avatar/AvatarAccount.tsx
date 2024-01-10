@@ -12,7 +12,6 @@ export const AvatarAccount = ({ avatar, size, style }: Props) => {
   const DEFAULT_SIZE = 30;
 
   const image = isNaN(Number(avatar)) ? avatar : AVATARS[Number(avatar)];
-
   return (
     <Avatar
       alt="Avatar"

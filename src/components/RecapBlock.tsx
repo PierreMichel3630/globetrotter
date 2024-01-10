@@ -92,28 +92,28 @@ export const RecapBlock = () => {
 
   return (
     <Grid container spacing={1}>
-      <Grid item xs={12}>
+      <Grid item xs={12} sm={6}>
         <CardRecap
           title={t("commun.timeintravel")}
           value={timeInTravelLabel}
           icon={planeIcon}
         />
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} sm={6}>
         <CardRecap
           title={t("commun.travels")}
           value={travels.length}
           icon={bagIcon}
         />
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} sm={6}>
         <CardRecap
           title={t("commun.countriesvisited")}
           value={countriesVisited.length}
           icon={logoWorld}
         />
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} sm={6}>
         <CardRecap
           title={t("commun.continentsvisited")}
           value={continents.length}

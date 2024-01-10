@@ -17,7 +17,6 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useNavigate } from "react-router-dom";
 import { signUpWithEmail } from "src/api/supabase";
-import { countUsernameProfile } from "src/api/supabase/profile";
 import { useAuth } from "src/context/AuthProviderSupabase";
 import { useMessage } from "src/context/MessageProvider";
 
@@ -29,7 +28,8 @@ export const RegisterForm = () => {
 
   const initialValue = {
     email: "",
-    username: "",
+    firstname: "",
+    lastname: "",
     password: "",
     submit: null,
   };
@@ -39,12 +39,8 @@ export const RegisterForm = () => {
       .email(t("form.register.formatmail"))
       .max(255)
       .required(t("form.register.requiredmail")),
-    username: Yup.string()
-      .required(t("form.register.requiredusername"))
-      .test("isUnique", t("form.register.uniqueusername"), async (value) => {
-        const res = await countUsernameProfile(value);
-        return res.count === 0;
-      }),
+    firstname: Yup.string().required(t("form.register.requiredfirstname")),
+    lastname: Yup.string().required(t("form.register.requiredlastname")),
     password: Yup.string()
       .min(6, t("form.register.minpassword"))
       .required(t("form.register.requiredpassword")),
@@ -67,7 +63,8 @@ export const RegisterForm = () => {
         const { error } = await signUpWithEmail(
           values.email,
           values.password,
-          values.username,
+          values.firstname,
+          values.lastname,
           1
         );
         if (error) {
@@ -82,7 +79,7 @@ export const RegisterForm = () => {
             setSeverity("error");
             setMessage(t("commun.error"));
           }
-          if (user && session) navigate("/map");
+          if (user && session) navigate("/origincountry");
         }
       } catch (err) {
         setSeverity("error");
@@ -119,27 +116,52 @@ export const RegisterForm = () => {
             )}
           </FormControl>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={6}>
           <FormControl
             fullWidth
-            error={Boolean(formik.touched.username && formik.errors.username)}
+            error={Boolean(formik.touched.firstname && formik.errors.firstname)}
           >
-            <InputLabel htmlFor="register-username-input">
-              {t("form.register.username")}
+            <InputLabel htmlFor="register-firstname-input">
+              {t("form.register.firstname")}
             </InputLabel>
             <OutlinedInput
-              id="register-username-input"
+              id="register-firstname-input"
               type="text"
-              value={formik.values.username}
-              name="username"
+              value={formik.values.firstname}
+              name="firstname"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              label={t("form.register.username")}
+              label={t("form.register.firstname")}
               inputProps={{}}
             />
-            {formik.touched.username && formik.errors.username && (
-              <FormHelperText error id="register-error-username">
-                {formik.errors.username}
+            {formik.touched.firstname && formik.errors.firstname && (
+              <FormHelperText error id="register-error-firstname">
+                {formik.errors.firstname}
+              </FormHelperText>
+            )}
+          </FormControl>
+        </Grid>
+        <Grid item xs={6}>
+          <FormControl
+            fullWidth
+            error={Boolean(formik.touched.lastname && formik.errors.lastname)}
+          >
+            <InputLabel htmlFor="register-lastname-input">
+              {t("form.register.lastname")}
+            </InputLabel>
+            <OutlinedInput
+              id="register-lastname-input"
+              type="text"
+              value={formik.values.lastname}
+              name="lastname"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              label={t("form.register.lastname")}
+              inputProps={{}}
+            />
+            {formik.touched.lastname && formik.errors.lastname && (
+              <FormHelperText error id="register-error-lastname">
+                {formik.errors.lastname}
               </FormHelperText>
             )}
           </FormControl>

@@ -90,8 +90,6 @@ export const TravelForm = ({ travel, onValid }: Props) => {
           const travelUpdate: TravelUpdate = {
             id: travel.id,
             name: values.name,
-            enddate: null,
-            startdate: null,
           };
 
           updateTravel(travelUpdate).then((res) => {
@@ -133,8 +131,6 @@ export const TravelForm = ({ travel, onValid }: Props) => {
         } else {
           const travelInsert: TravelInsert = {
             name: values.name,
-            enddate: null,
-            startdate: null,
           };
           insertTravel(travelInsert).then((res) => {
             const travel = res.data;

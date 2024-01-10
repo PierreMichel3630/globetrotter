@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { percent } from "csx";
+import { percent, viewHeight } from "csx";
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import {
@@ -9,7 +9,7 @@ import {
   Point,
   ZoomableGroup,
 } from "react-simple-maps";
-import mapJson from "src/assets/map/countries-110m.json";
+import mapJson from "src/assets/map/countries-50m.json";
 import { useApp } from "src/context/AppProvider";
 import { useAuth } from "src/context/AuthProviderSupabase";
 import { CountryVisited } from "src/models/country/Country";
@@ -28,6 +28,7 @@ export const Map = ({ countriesVisited, countriesVisitedFriends }: Props) => {
   const { countries, travels, travelsFriends, continents } = useApp();
   const { profile } = useAuth();
   const navigate = useNavigate();
+  const [strokeWidth, setStrokeWidth] = useState(10000);
   const [position, setPosition] = useState<Position>({
     coordinates: [0, 28],
     zoom: 1,
@@ -70,9 +71,26 @@ export const Map = ({ countriesVisited, countriesVisitedFriends }: Props) => {
     }
   }, [travel, country, continent]);
 
+  useEffect(() => {
+    let newStroke = 10000;
+    if (position.zoom >= 5 && position.zoom < 10) {
+      newStroke = 5000;
+    } else if (position.zoom >= 10 && position.zoom < 20) {
+      newStroke = 3000;
+    } else if (position.zoom >= 20 && position.zoom < 40) {
+      newStroke = 1000;
+    } else if (position.zoom >= 40 && position.zoom < 80) {
+      newStroke = 200;
+    } else if (position.zoom >= 80 && position.zoom < 100) {
+      newStroke = 10;
+    } else if (position.zoom >= 100) {
+      newStroke = 1;
+    }
+    setStrokeWidth(newStroke);
+  }, [position.zoom]);
+
   const handleGeographyClick = (geography: { id: number }) => {
     const country = countries.find((el) => el.ccn3 === geography.id);
-    //  const centroid = projection.invert(path.centroid(geography));
     if (country) navigate(`?country=${country.id}`);
   };
 
@@ -99,24 +117,28 @@ export const Map = ({ countriesVisited, countriesVisitedFriends }: Props) => {
     <Box
       sx={{
         width: percent(100),
+        maxHeight: viewHeight(90),
+        overflow: "hidden",
       }}
     >
       <ComposableMap
         projection="geoMercator"
         projectionConfig={{
-          scale: 128,
+          scale: 1500000,
         }}
         style={{
           backgroundColor: Colors.lightgrey,
           height: percent(100),
           width: percent(100),
         }}
+        width={8000000}
+        height={6000000}
         fill="transparent"
         stroke="white"
-        strokeWidth={1}
+        strokeWidth={strokeWidth}
       >
         <ZoomableGroup
-          maxZoom={40}
+          maxZoom={200}
           zoom={position.zoom}
           center={position.coordinates}
           onMoveEnd={handleMoveEnd}
@@ -124,11 +146,12 @@ export const Map = ({ countriesVisited, countriesVisitedFriends }: Props) => {
           <Geographies geography={mapJson}>
             {({ geographies }) => {
               return geographies.map((geo) => {
+                const id = geo.id;
                 const isOriginCountry =
-                  originCountry && originCountry.ccn3 === geo.id;
-                const isVisit = idCountries.includes(geo.id);
-                const isVisitFriends = idCountriesFriends.includes(geo.id);
-                const isSelect = idCountriesSelect.includes(geo.id);
+                  originCountry && originCountry.ccn3 === id;
+                const isVisit = idCountries.includes(id);
+                const isVisitFriends = idCountriesFriends.includes(id);
+                const isSelect = idCountriesSelect.includes(id);
                 let color: string = Colors.grey;
                 if (isSelect) {
                   color = Colors.red;

@@ -99,7 +99,9 @@ export const AccountMenu = ({ user }: Props) => {
                   <AvatarAccount avatar={profile.avatar} size={50} />
                   <div>
                     {profile && (
-                      <Typography variant="h6">{profile.username}</Typography>
+                      <Typography variant="h6">
+                        {`${profile.firstname} ${profile.lastname}`}
+                      </Typography>
                     )}
                     <Typography variant="caption" color="secondary">
                       {user.email}

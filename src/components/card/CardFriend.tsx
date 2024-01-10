@@ -1,5 +1,5 @@
-import { Button, Card, CardContent, Grid, Typography } from "@mui/material";
-import { important, px } from "csx";
+import { Button, Card, Grid, Typography } from "@mui/material";
+import { px } from "csx";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
 import { Friend } from "src/models/Friend";
@@ -31,7 +31,7 @@ export const CardInvitationFriend = ({
         </Grid>
         <Grid item xs={9}>
           <Typography variant="h2" sx={{ wordWrap: "break-word" }}>
-            {friend.user1.username}
+            {`${friend.user1.firstname} ${friend.user1.lastname}`}
           </Typography>
           <Typography
             variant="caption"
@@ -81,7 +81,9 @@ export const CardRequestFriend = ({ friend }: PropsCardRequestFriend) => {
           <AvatarAccount avatar={friend.user2.avatar} size={60} />
         </Grid>
         <Grid item xs={9} sx={{ wordWrap: "break-word" }}>
-          <Typography variant="h2">{friend.user2.username}</Typography>
+          <Typography variant="h2">
+            {`${friend.user2.firstname} ${friend.user2.lastname}`}
+          </Typography>
           <Typography
             variant="caption"
             sx={{ fontSize: 10, wordWrap: "break-word" }}
