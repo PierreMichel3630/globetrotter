@@ -1,6 +1,6 @@
-# BasketStats
+# Itinéraire de ma vie
 
-Globetrotter est une map interative vous permettant de répertorier tous vos voyages, avoir des statistiques dessus, les partager ou comparer avec vos amis.
+Itinéraire de ma vie est une map interative vous permettant de répertorier tous vos voyages, avoir des statistiques dessus, les partager ou comparer avec vos amis.
 Disponible sur https://intinerairedemavie.web.app
 
 ## Technique
