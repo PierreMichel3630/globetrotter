@@ -5,13 +5,14 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Typography,
 } from "@mui/material";
 import moment from "moment";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useApp } from "src/context/AppProvider";
 import { CountryTravel } from "src/models/CountryTravel";
 import { sortByStartDateDesc } from "src/utils/sort";
-import { GetLabelDiffDate } from "./LabelDiffDate";
+import { LabelDiffDate } from "./LabelDiffDate";
 import { JsonLanguageBlock } from "./typography/JsonLanguageBlock";
 
 interface Props {
@@ -20,6 +21,11 @@ interface Props {
 export const ListCountries = ({ value }: Props) => {
   const { countries } = useApp();
   const location = useLocation();
+  const navigate = useNavigate();
+  const onClickCountry = (id: number) => {
+    const isMap = location.pathname.split("/")[1] === "map";
+    navigate(isMap ? `?country=${id}` : `/country/${id}`);
+  };
   return (
     <List dense sx={{ p: 0 }}>
       {value.sort(sortByStartDateDesc).map((el, index) => {
@@ -33,12 +39,10 @@ export const ListCountries = ({ value }: Props) => {
             <ListItem
               key={index}
               disablePadding
-              component={Link}
-              to={
-                location.pathname.split("/")[1] === "map"
-                  ? `?country=${country.id}`
-                  : `/country/${country.id}`
-              }
+              onClick={(event) => {
+                event.preventDefault();
+                onClickCountry(country.id);
+              }}
             >
               <ListItemButton>
                 {country && (
@@ -54,10 +58,15 @@ export const ListCountries = ({ value }: Props) => {
                       ""
                     )
                   }
-                  secondary={`${labelStart} - ${labelEnd} ${GetLabelDiffDate(
-                    start,
-                    end
-                  )}`}
+                  secondary={
+                    <>
+                      <Typography
+                        variant="body2"
+                        component="span"
+                      >{`${labelStart} - ${labelEnd} `}</Typography>
+                      <LabelDiffDate startdate={start} enddate={end} />
+                    </>
+                  }
                 />
               </ListItemButton>
             </ListItem>

@@ -64,7 +64,7 @@ export const ReportPage = () => {
             <Divider>{t("commun.inprogress")}</Divider>
           </Grid>
           {reportsProgress.map((el) => (
-            <Grid item xs={12}>
+            <Grid item xs={12} key={el.id}>
               <CardReport report={el} />
             </Grid>
           ))}
@@ -72,7 +72,7 @@ export const ReportPage = () => {
             <Divider>{t("commun.corrected")}</Divider>
           </Grid>
           {reportsCorrected.map((el) => (
-            <Grid item xs={12}>
+            <Grid item xs={12} key={el.id}>
               <CardReport report={el} />
             </Grid>
           ))}
@@ -80,7 +80,7 @@ export const ReportPage = () => {
             <Divider>{t("commun.abandon")}</Divider>
           </Grid>
           {reportsAbandon.map((el) => (
-            <Grid item xs={12}>
+            <Grid item xs={12} key={el.id}>
               <CardReport report={el} />
             </Grid>
           ))}

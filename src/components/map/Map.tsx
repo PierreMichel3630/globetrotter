@@ -72,17 +72,19 @@ export const Map = ({ countriesVisited, countriesVisitedFriends }: Props) => {
   }, [travel, country, continent]);
 
   useEffect(() => {
-    let newStroke = 10000;
-    if (position.zoom >= 5 && position.zoom < 10) {
-      newStroke = 5000;
+    let newStroke = 100;
+    if (position.zoom >= 3 && position.zoom < 5) {
+      newStroke = 70;
+    } else if (position.zoom >= 5 && position.zoom < 10) {
+      newStroke = 50;
     } else if (position.zoom >= 10 && position.zoom < 20) {
-      newStroke = 3000;
+      newStroke = 30;
     } else if (position.zoom >= 20 && position.zoom < 40) {
-      newStroke = 1000;
-    } else if (position.zoom >= 40 && position.zoom < 80) {
-      newStroke = 200;
-    } else if (position.zoom >= 80 && position.zoom < 100) {
       newStroke = 10;
+    } else if (position.zoom >= 40 && position.zoom < 80) {
+      newStroke = 5;
+    } else if (position.zoom >= 80 && position.zoom < 100) {
+      newStroke = 2;
     } else if (position.zoom >= 100) {
       newStroke = 1;
     }
@@ -124,15 +126,15 @@ export const Map = ({ countriesVisited, countriesVisitedFriends }: Props) => {
       <ComposableMap
         projection="geoMercator"
         projectionConfig={{
-          scale: 1500000,
+          scale: 15000,
         }}
         style={{
           backgroundColor: Colors.lightgrey,
           height: percent(100),
           width: percent(100),
         }}
-        width={8000000}
-        height={6000000}
+        width={80000}
+        height={60000}
         fill="transparent"
         stroke="white"
         strokeWidth={strokeWidth}

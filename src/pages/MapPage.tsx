@@ -5,7 +5,7 @@ import { Map } from "src/components/map/Map";
 
 import { CountryBlock } from "src/components/CountryBlock";
 
-import { px, viewHeight } from "csx";
+import { px } from "csx";
 import moment from "moment";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -20,8 +20,8 @@ import { useAuth } from "src/context/AuthProviderSupabase";
 import { useUser } from "src/context/UserProvider";
 import { Profile, ProfileUpdate } from "src/models/Profile";
 import { Colors } from "src/style/Colors";
-import { getScoreSearch, searchString } from "src/utils/string";
 import { getBreakpoint } from "src/utils/mediaQuery";
+import { getScoreSearch, searchString } from "src/utils/string";
 
 export const MapPage = () => {
   const { t } = useTranslation();

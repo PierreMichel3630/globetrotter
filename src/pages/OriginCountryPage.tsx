@@ -29,10 +29,12 @@ import { sortByName } from "src/utils/sort";
 import { useUser } from "src/context/UserProvider";
 import { BasicSearchInput } from "src/components/Input";
 import { searchString } from "src/utils/string";
+import { useNavigate } from "react-router-dom";
 
 export const OriginCountryPage = () => {
   const { t } = useTranslation();
   const { language } = useUser();
+  const navigate = useNavigate();
   const { profile, setProfile } = useAuth();
   const { countries } = useApp();
   const { setMessage, setSeverity } = useMessage();
@@ -52,6 +54,7 @@ export const OriginCountryPage = () => {
         setSeverity("success");
         setMessage(t("alert.updatecountrysuccess"));
         setProfile(data as Profile);
+        setTimeout(() => navigate("/"), 2000);
       }
     } else {
       setSeverity("error");

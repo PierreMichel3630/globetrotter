@@ -63,19 +63,3 @@ export const LabelDiffArrayDate = ({ values }: PropsArray) => {
     </Typography>
   );
 };
-
-export const GetLabelDiffDate = (startdate: Moment, enddate: Moment) => {
-  const { t } = useTranslation();
-  const diffDate = enddate.add(1, "day").diff(startdate);
-  const duration = moment.duration(diffDate);
-  const years = duration.years();
-  const month = duration.months();
-  const day = duration.days();
-  return `(${years > 0 ? t("commun.year", { count: years }) : ""} ${
-    month > 0
-      ? t("commun.month", {
-          count: month,
-        })
-      : ""
-  } ${day > 0 ? t("commun.day", { count: day }) : ""})`;
-};

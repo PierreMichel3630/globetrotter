@@ -83,7 +83,6 @@ export const ReportForm = ({ onValid }: Props) => {
       }
     },
   });
-  console.log(formik.errors);
 
   return (
     <form onSubmit={formik.handleSubmit}>

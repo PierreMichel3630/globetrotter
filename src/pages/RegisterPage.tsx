@@ -48,7 +48,7 @@ export const RegisterPage = () => {
               <img src={logo} width={50} />
             </Link>
           </Grid>
-          <Grid item xs={12} sx={{ mb: 3 }}>
+          {/*<Grid item xs={12} sx={{ mb: 3 }}>
             <Typography variant="h2">
               {t("form.register.createaccount")}
             </Typography>
@@ -63,7 +63,7 @@ export const RegisterPage = () => {
             <Divider>
               <Chip label={t("commun.or")} />
             </Divider>
-          </Grid>
+          </Grid>*/}
           <Grid item xs={12}>
             <Typography variant="h4">
               {t("form.register.createaccountemail")}

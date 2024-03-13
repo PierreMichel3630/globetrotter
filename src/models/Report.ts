@@ -1,4 +1,5 @@
 export interface Report {
+  id: number;
   type: string;
   message: string;
   status: "PROGRESS" | "CORRECTED" | "ABANDON";

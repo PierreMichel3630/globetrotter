@@ -98,8 +98,9 @@ export const Carrousel = ({ images }: Props) => {
                   backgroundColor: "rgba(0,0,0,0.8)",
                 },
               }}
+              onClick={goNext}
             >
-              <KeyboardArrowRightIcon fontSize="small" onClick={goNext} />
+              <KeyboardArrowRightIcon fontSize="small" />
             </IconButton>
           </Box>
         </Box>
