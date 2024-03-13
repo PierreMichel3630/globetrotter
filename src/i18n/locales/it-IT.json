@@ -15,7 +15,7 @@
     "getstarted": "Iniziare",
     "backhome": "Pagina iniziale",
     "welcome": "Benvenuto",
-    "welcomemessage": "Itinerario della mia vita è una mappa interattiva che ti permette di elencare tutti i tuoi viaggi, averne statistiche, condividerli o confrontarli con i tuoi amici.",
+    "welcomemessage": "Itinerario della mia vita è una mappa interattiva 100% gratuito che ti permette di elencare tutti i tuoi viaggi, averne statistiche, condividerli o confrontarli con i tuoi amici.",
     "all": "Tutto",
     "addtravel": "Aggiungi un viaggio",
     "addcountry": "Aggiungi un paese",
@@ -114,7 +114,8 @@
     "day_other": "{{count}} giorni",
     "travel_one": "{{count}} viaggio",
     "travel_many": "{{count}} viaggio",
-    "travel_other": "{{count}} viaggio"
+    "travel_other": "{{count}} viaggio",
+    "testaccount": "Prova con un account di prova"
   },
   "filter": {
     "travel": "Viaggio",

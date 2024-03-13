@@ -24,7 +24,7 @@ import { Colors } from "src/style/Colors";
 export const NoLoginPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { user } = useAuth();
+  const { user, login } = useAuth();
   const { language, setLanguage, languages } = useUser();
 
   const screenshots = [
@@ -66,7 +66,7 @@ export const NoLoginPage = () => {
             <Typography variant="body1">
               {t("commun.welcomemessage")}
             </Typography>
-            <Typography variant="h6">{t("commun.getstarted")}</Typography>
+            <Typography variant="h4">{t("commun.getstarted")}</Typography>
           </Grid>
           <Grid item xs={12} sm={6}>
             <Button
@@ -86,6 +86,22 @@ export const NoLoginPage = () => {
               onClick={() => navigate("register")}
             >
               <Typography variant="body1">{t("commun.register")}</Typography>
+            </Button>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Button
+              fullWidth
+              variant="outlined"
+              startIcon={<AccountCircleIcon />}
+              color="warning"
+              onClick={async () => {
+                const {
+                  data: { user, session },
+                } = await login("test@test.test", "12345678");
+                if (user && session) navigate("/map");
+              }}
+            >
+              <Typography variant="body1">{t("commun.testaccount")}</Typography>
             </Button>
           </Grid>
           <Grid item xs={12}>

@@ -15,7 +15,7 @@
     "getstarted": "Lancez-vous",
     "backhome": "Retour Accueil",
     "welcome": "Bienvenue",
-    "welcomemessage": "Itinéraire de ma vie est une map interative vous permettant de répertorier tous vos voyages, avoir des statistiques dessus, les partager ou comparer avec vos amis.",
+    "welcomemessage": "Itinéraire de ma vie est une map interative 100% gratuite vous permettant de répertorier tous vos voyages, avoir des statistiques dessus, les partager ou comparer avec vos amis.",
     "all": "Tous",
     "addtravel": "Ajouter un voyage",
     "addcountry": "Ajouter un pays",
@@ -109,7 +109,8 @@
     "abandon": "Abandonné",
     "corrected": "Corrigé",
     "response": "réponse",
-    "addreport": "Signaler un problème"
+    "addreport": "Signaler un problème",
+    "testaccount": "Essayer avec un compte de Test"
   },
   "filter": {
     "travel": "Voyage",

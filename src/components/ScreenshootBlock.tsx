@@ -12,8 +12,9 @@ interface Props {
 export const ScreenshootBlock = ({ screenshots }: Props) => {
   return (
     <Box sx={{ display: "flex", overflowX: "auto", gap: 1, p: 1 }}>
-      {screenshots.map((screenshot) => (
+      {screenshots.map((screenshot, index) => (
         <Box
+          key={index}
           sx={{
             p: 1,
             backgroundColor: "white",

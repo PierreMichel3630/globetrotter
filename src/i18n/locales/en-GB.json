@@ -15,7 +15,7 @@
     "getstarted": "Get started",
     "backhome": "Home page",
     "welcome": "Welcome",
-    "welcomemessage": "Itinerary of my life is an interactive map allowing you to list all your trips, have statistics on them, share them or compare them with your friends.",
+    "welcomemessage": "Itinerary of my life is an interactive map 100% free allowing you to list all your trips, have statistics on them, share them or compare them with your friends.",
     "all": "All",
     "addtravel": "Add a trip",
     "addcountry": "Add a country",
@@ -109,7 +109,8 @@
     "travel_one": "{{count}} journey",
     "travel_other": "{{count}} travel",
     "travelcount_one": "{{count}} Journey",
-    "travelcount_other": "{{count}} Travel"
+    "travelcount_other": "{{count}} Travel",
+    "testaccount": "Try with test account"
   },
   "filter": {
     "travel": "Journey",
